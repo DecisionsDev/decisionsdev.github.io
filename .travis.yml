@@ -4,6 +4,10 @@ language: ruby
 rvm:
   - 2.3.1
 
+branches:
+  only:
+    - source
+
 before_install:
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
