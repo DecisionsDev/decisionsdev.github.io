@@ -3,6 +3,9 @@ username: odmdev
 repo:     odmdev.github.io
 branch:   source
 
+GIT_NAME: "GITHUB_NAME"
+GIT_EMAIL: "GITHUB_EMAIL"
+
 # Jekyll source / destination
 source:      .
 destination: _site
