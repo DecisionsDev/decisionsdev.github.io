@@ -1,0 +1,9 @@
+# GitHub
+username: odmdev
+repo:     odmdev.github.io
+branch:   dev
+
+# Jekyll source / destination
+source:      .
+destination: _site
+

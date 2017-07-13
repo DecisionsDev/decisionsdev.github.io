@@ -1,0 +1,26 @@
+
+language: ruby
+
+rvm:
+  - 2.3.1
+
+before_install:
+  - cp config.json.sample config.json
+  - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
+  # we use '@' for second sed because '/' are used in var GITHUB_REPOS.
+
+install:
+  - bundle install
+
+script: bundle exec rake site:deploy --quiet
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    branch: master
+
+env:
+  global:
+    secure: "xoz/aQQhQuHN2fLKR6gmDy4SVrKBXOyk6EH/PJuKqEZac27xG8uvmJwoGqAonEZ5CMxgXu0e/LHkzOE1owairYR0n95GgVRxtl1et2dO///c0C431zuSFrEcVA7gzcWzSBcVzCw72j7FZ+I8FhuqWGb+xSVMidAp3tuhMebGXLPhI4iugcrahqx0ftSPKm2R7N6tWikkxL1Qx3zzP70ozxhKUqrtf4YBkTGlm7oTfkgdJLxpmh8Y4NQd8aIlQgNbgTLthSLug+4UaluO46zvtWDM+da8+vfyE0KLk3yc97LS5B6RDVq66Rt59s4lXXMXliFYUaCJNLxVZk2KSbNpz/n77zpZlGqF740pA/FBWdgUyqdCoImcm/5xYD3p2iVr8aBDYWh2M+UGwnOw/nMVn8FIGTFzfLcN/dE9x77nLHSfew0dqfTawLUORxnhd9j+zyeWYPODGNThdydS/aY12TWvQ6raV9cE9CucMuYtBWbD9ZMD1ABdijT2SGrUveGFzxZ23tFXEDjlJaSeG5woYDAxo1f2kcclIf3NNsiZ0EKGlazRAmdwzXJ8SqwMvYuPxHuB/PD+zpu8UiWhPTcFyeU4DDAbdriFGprC1bugkx+0ztwlI/e+fgGXh0pK2+E8N1qUNMVxBCAisrtDRyfpwaiRMbHEqSilaQlQExJUjIg="

@@ -1,0 +1,379 @@
+/**
+ * Copyright 2017 IBM Corp.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
+
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video
+    {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline
+}
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section
+    {
+    display: block
+}
+ol,ul {
+    list-style: none
+}
+blockquote,q {
+    quotes: none
+}
+blockquote:before,blockquote:after,q:before,q:after {
+    content: '';
+    content: none
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+html {
+    font-size: 100%;
+    line-height: 1.5
+}
+body {
+    color: #333;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: none
+}
+strong,b {
+    font-weight: bold
+}
+em,i {
+    font-style: italic
+}
+pre,tt {
+    font-family: monospace;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all
+}
+code {
+    font-family: monospace;
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word
+}
+.pn-pcon {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+    padding: 0 1.25rem
+}
+.pn-columns:before,.pn-columns:after
+    {
+    content: " ";
+    display: table
+}
+.pn-columns:after {
+    clear: both
+}
+.pn-columns {
+    *zoom: 1
+}
+@media only screen and (min-width: 768px) {
+    .pn-pcon {
+        max-width: 960px
+    }
+    .pn-columns {
+        margin: 0 -10px;
+        margin: 0 -0.625rem
+    }
+    .pn-columns>div {
+        float: left;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box
+    }
+    .pn-columns>div {
+        padding: 0 10px;
+        padding: 0 0.625rem
+    }
+    .pn-col-6-2 {
+        width: 33.33333333%
+    }
+    .pn-col-6-4 {
+        width: 66.66667%
+    }
+}
+
+/**
+ * FROM style_002.css
+ */
+html, body {
+    overflow-x: hidden;
+}
+.flag {
+    display: block;
+}
+.flag-img, .pn-nav-home {
+    white-space: initial;
+}
+.flag-img {
+    text-align: left;
+}
+@media screen and (min-width: 768px) {
+    .flag {
+        display: table;
+    }
+}
+a, a:visited,{
+    color: #008ABF;
+}
+a:hover, a:active, a:focus {
+    color: #00649d;
+}
+h2 {
+    font-size: 28px;
+}
+.pn-columns {
+    padding: 0;
+}
+.pn-page-title {
+    color: #325c80;
+}
+.pn-repo-item {
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    overflow: hidden;
+    max-height: 70em; /* way too large; will get overridden in JS ... or maybe it's a feature? */
+    /* don't apply margin/padding here so that the max-height animation has the most impact */
+}
+.pn-repo-header,
+.pn-repo-footer {
+    margin-top: 2em;
+}
+.pn-repo-content {
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+.pn-repo-item+.pn-repo-item {
+    border-top: 1px solid #e5e5e5;
+}
+
+
+/**
+ * FROM github.css
+ */
+html, body {
+    height: 100%;
+}
+body {
+    overflow-y: scroll;
+}
+.container {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+#githubCategories {
+    display: inline-table;
+}
+.githubFilter {
+    display: inline-block;
+    horizontal-align: left;
+    color: #00715F;
+    border: 2px solid #00715F;
+    font-size: 11px;
+    font-weight: bold;
+    height: 15px;
+    width: 200px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    background-color: #FFF;
+    border: 2px solid #00715F;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+.githubFilter:hover {
+    cursor: pointer;
+    background-color: #00649d;
+    color:#fff;
+}
+.githubFilterActive {
+    cursor: pointer;
+    background-color: #00715F;
+    color:#fff;
+    display: inline-block;
+    border: 2px solid #00715F;
+    font-size: 11px;
+    font-weight: bold;
+    height: 15px;
+    width: 200px;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    word-wrap: break-word;
+    border: 2px solid #00715F;
+    background-image: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+#sort {
+    cursor:pointer;
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+#gitRepoFilter {
+    margin-bottom:15px;
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: transparent;
+    background-image: linear-gradient(#FFF 0px, #FFF 35px, #EEE 150px, #FFF 185px);
+    background-origin: padding-box;
+    background-position: 0% 0%;
+    background-repeat: repeat;
+    background-size: 100% 185px;
+    border-bottom-color: #00715F;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-image-outset: 0 0 0 0;
+    border-image-repeat: stretch stretch;
+    border-image-slice: 100% 100% 100% 100%;
+    border-image-source: none;
+    border-image-width: 1 1 1 1;
+    border-left-color: #00715F;
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-right-color: #00715F;
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-top-color: #00715F;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-style: solid;
+    border-top-width: 2px;
+    box-shadow: none;
+    box-sizing: border-box;
+    color: #999;
+    floatleftfont-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: 14px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-variant-alternates: normal;
+    font-variant-caps: normal;
+    font-variant-east-asian: normal;
+    font-variant-ligatures: normal;
+    font-variant-numeric: normal;
+    font-variant-position: normal;
+    font-weight: 200;
+    height: 32px;
+    line-height: 14px;
+    padding-bottom: 7px;
+    padding-left: 14px;
+    padding-right: 30px;
+    padding-top: 7px;
+    transition-delay: 0s;
+    transition-duration: 0.2s;
+    transition-property: #FFF;
+    transition-timing-function: cubic-bezier(0, 0, 1, 1);
+    width: 225px;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+}
+
+/**
+ * FROM custom.css
+ */
+.links-top-menu a,
+.links-top-menu a:visited {
+    color: #3c6fa9;
+}
+.links-top-menu a:hover,
+.links-top-menu a:focus {
+    color: #3c6fa9;
+}
+.link-home a,
+.link-home a:visited {
+    color: #3c6fa9;
+}
+.link-home a:hover,
+.link-home a:focus {
+    color: #3c6fa9;
+}
+.pn-top-menu {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial, sans-serif;
+    font-weight: 200;
+    border-top-color: #ffffff;
+    background: #ffffff; /* Old browsers */
+    background: -webkit-linear-gradient(top, #ffffff 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%); /* W3C */
+    border-bottom-color: #ffffff;
+}
+.pn-nav-home {
+    line-height: 2;
+    white-space: nowrap;
+}
+.pn-nav-home {
+    display: block;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    margin-right: 2.75em;
+    margin-left: 2.2em;
+}
+.pn-logo-image {
+    margin: 0;
+    padding: 0;
+    display: block;
+    max-width: none !important;
+    height: auto !important;
+}
+
+a {
+    text-decoration:none;
+    color: #00715F;
+}
+
+.teal {
+    color: #00715F;
+}
+
+.teal-background {
+    background-color: #00715F;
+}

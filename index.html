@@ -1,0 +1,111 @@
+<!--
+    Copyright 2017 IBM Corp.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<html ng-app="app">
+<head>
+
+    <title>ODMDev Open Source Community</title>
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+
+</head>
+
+<body ng-controller="MainController" class="home page page-id-361 page-template-default" >
+<div class="container">
+
+    <div id="pnext-top-menu" class="pn-top-menu links-top-menu" role="navigation" aria-label="Main navigation">
+        <div class="flag">
+            <span class="link-home flag-img">
+                <a rel="home" class="pn-nav-home" href="https://developer.ibm.com/odm/" style="text-align: center;">
+                    <img scale="0" class="pn-logo-image" src="images/logo.png" alt="ODMDev">
+                    <span class="teal">ODM Dev</span>
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="pn-pcon" style="margin-bottom: 40px;">
+    <!-- Margin bottom to prevent footer hide content -->
+        <section id="post-715" class="post-715 page type-page status-publish hentry">
+            <h1 class="pn-page-title">Repositories</h1>
+            <div id="githubCategories" style="margin-top:10px;">
+                <form>
+                    <input ng-model="searchRepos" id="gitRepoFilter" type="text" placeholder="Filter Repositories" autofocus>
+                </form>
+                <div ng-click="click('')" ng-class="{gitHubFilterActive: myFilter=='', githubFilter: myFilter!=''}">
+                    ALL Repositories
+                </div>
+                <div ng-repeat="filter in arrayOfFilters track by $index" ng-click="click(filter)"
+                ng-class="{githubFilterActive: myFilter==filter, githubFilter: myFilter!=filter}" ng-bind="filter"
+                ng-if="filter != ''" >
+                </div>
+            </div>
+            <div id="pn-repo-listing" class="pn-repo-listing" >
+                <div class="pn-repo-item" data-tag="all">
+                    <div class="pn-columns" style="margin-top:30px;">
+                        <div class="pn-col-6-4"><header class="pn-repo-header"></header><div class="pn-repo-content"></div></div>
+                        <div class="pn-col-6-2">
+                            <a id="sort" role="button" ng-click="changeOrder()">Last Updated <span ng-show="reverseSort">&#x25B2;</span>
+                                <span ng-show="!reverseSort">&#x25BC;</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div  ng-repeat="arrayOfFiltersAndData in masterArrayOfFiltersAndData | filter: {tags: myFilter} | filter: searchRepos | orderBy: sortType:reverseSort" class="pn-repo-item" data-tag="all">
+                        <div class="pn-columns">
+                            <div class="pn-col-6-4">
+                                <header class="pn-repo-header">
+                                    <h3><a ng-bind="arrayOfFiltersAndData.repositoryData.name" ng-href="{{arrayOfFiltersAndData.repositoryData.html_url}}"></a></h3>
+                                </header>
+                                <div class="pn-repo-content">
+                                    <p ng-bind="arrayOfFiltersAndData.repositoryData.description"></p>
+                                </div>
+                            </div>
+                            <div class="pn-col-6-2">
+                                <div class="pn-repo-footer">
+                                    <footer ng-bind="arrayOfFiltersAndData.repositoryData.pushed_at | date : medium" class="pn-post-meta pn-asset-meta">
+                                    </footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+<div id="footer" style="position: fixed; bottom: 0; width: 100%; text-align: center; padding-bottom: 5px; background-color: white;">
+    <hr style="margin-top: 0;" />
+    <span>
+        Problem with this page? Please report an issue
+        <a target="_blank" href="https://github.com/ODMDev/odmdev.github.io/issues">here</a>.
+    </span>
+</div>
+
+</body>
+
+<script src="js/app.js"></script>
+<script src="js/controllers/MainController.js"></script>
+<script src="js/services/github.js"></script>
+<script src="js/services/config.js"></script>
+
+</html>
