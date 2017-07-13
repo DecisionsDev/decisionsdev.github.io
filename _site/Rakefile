@@ -218,7 +218,7 @@ namespace :site do
     Dir.chdir(CONFIG["destination"]) do
       sh "git add --all ."
       sh "git commit -m \"Updating to #{USERNAME}/#{REPO}@#{sha}.\""
-      sh "git push --quiet origin #{DESTINATION_BRANCH}"
+      sh "git push --force --quiet origin #{DESTINATION_BRANCH}"
       puts "Pushed updated branch #{DESTINATION_BRANCH} to GitHub Pages"
     end
   end
