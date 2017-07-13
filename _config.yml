@@ -1,7 +1,7 @@
 # GitHub
 username: odmdev
 repo:     odmdev.github.io
-branch:   dev
+branch:   source
 
 # Jekyll source / destination
 source:      .
