@@ -219,6 +219,7 @@ namespace :site do
       sh "git config user.name"
       sh "git config user.email"
       sh "git remote -v"
+      sh "cd .."
       sh "git add --all ."
       sh "git commit -m \"Updating to #{CONFIG["GIT_NAME"]}/#{REPO}@#{sha}.\""
       sh "git push --quiet origin #{DESTINATION_BRANCH}"
