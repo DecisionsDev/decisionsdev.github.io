@@ -18,7 +18,7 @@ before_install:
 install:
   - bundle install
 
-script: bundle exec rake site:deploy --quiet
+script: bundle exec rake site:deploy --trace
 
 deploy:
   provider: pages
