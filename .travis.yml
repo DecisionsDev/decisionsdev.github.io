@@ -13,6 +13,8 @@ before_install:
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
   - git checkout -B source
+  - git remote rm origin
+  - git remote add origin https://$GITHUB_TOKEN@github.com:ODMDev/odmdev.github.io.git
   # we use '@' for sed because '/' are used in var GITHUB_REPOS.
 
 install:
@@ -27,6 +29,6 @@ deploy:
   on:
     branch: master
 
-env:
-  global:
-    secure: "j/ZRgjReHAPvclefTfZw8PoXZ8YbZ9ZPhlY9OJfgKDsPi2WLMLaAxKddGB1jTs3IMAIa+zW/cH51+pMzuWp1DaMlKkRXa4VN0Q1ODmHJ+xIDv5MAIa3f/HPVcFr7Z0FgwsqHx8FgbXKEko0BrYpCU45o2ox24gDOo41uc1R5DhVHLLTJ3u0g7/yb3mAeeVx0OfW3BLrNjPFmVy1xlTPTBK3ADHZK4IhGCgDkD4J3kmmPvQ28/nM0QKtcUecixrYN+M5HdGhMyc+1DBqxA4ko7KQwCWrr3p6ntiIZBer3Cb63j0kRuVt37UHKFX5Z1nfRbViN4QxhWhvA8wRb2Hpnpiu0XGeG3Nsn9KuopvRDt9TN9G35UXgWi6YLERZpfr8PRPN2r/d+HHXo8OLUDEI4fn+YzEP5dimDUQh9CQq8nO0f4+ztAGn0qor9xXbvNVnsavgf/Zwa5dSEVTHScGFLxS4E7EgicNQ8jjdw9CEmmjRQDLFWwg5axWZeSbktlZivcK703UhEbBH8v7zhN3vREnv2/cntrJb0JAfSTUf6n1XOJJs5zegWgdaUWpxivoVqLqQssV27eqCQReC5AGIfKXd2QNV1yPgn2E0GCJPC68bFDKQ09hh6BRRv9rdjdlpSGXMevcnz1NTzJ76omvC6yxyGFU035YyaEi2FSMpczw0="
+#env:
+#  global:
+#    secure: "j/ZRgjReHAPvclefTfZw8PoXZ8YbZ9ZPhlY9OJfgKDsPi2WLMLaAxKddGB1jTs3IMAIa+zW/cH51+pMzuWp1DaMlKkRXa4VN0Q1ODmHJ+xIDv5MAIa3f/HPVcFr7Z0FgwsqHx8FgbXKEko0BrYpCU45o2ox24gDOo41uc1R5DhVHLLTJ3u0g7/yb3mAeeVx0OfW3BLrNjPFmVy1xlTPTBK3ADHZK4IhGCgDkD4J3kmmPvQ28/nM0QKtcUecixrYN+M5HdGhMyc+1DBqxA4ko7KQwCWrr3p6ntiIZBer3Cb63j0kRuVt37UHKFX5Z1nfRbViN4QxhWhvA8wRb2Hpnpiu0XGeG3Nsn9KuopvRDt9TN9G35UXgWi6YLERZpfr8PRPN2r/d+HHXo8OLUDEI4fn+YzEP5dimDUQh9CQq8nO0f4+ztAGn0qor9xXbvNVnsavgf/Zwa5dSEVTHScGFLxS4E7EgicNQ8jjdw9CEmmjRQDLFWwg5axWZeSbktlZivcK703UhEbBH8v7zhN3vREnv2/cntrJb0JAfSTUf6n1XOJJs5zegWgdaUWpxivoVqLqQssV27eqCQReC5AGIfKXd2QNV1yPgn2E0GCJPC68bFDKQ09hh6BRRv9rdjdlpSGXMevcnz1NTzJ76omvC6yxyGFU035YyaEi2FSMpczw0="
