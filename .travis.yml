@@ -1,5 +1,6 @@
 
 language: ruby
+cache: bundler
 
 rvm:
   - 2.3.1
@@ -10,6 +11,7 @@ branches:
 
 before_install:
   - git pull --all
+  - git branch -a
   - git checkout -B master  origin/master
   - git pull
   - cp config.json.sample config.json
