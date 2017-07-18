@@ -12,7 +12,8 @@ branches:
 before_install:
   - git config --global user.email "$GITHUB_EMAIL"
   - git config --global user.name "$GITHUB_NAME"
-  - git pull origin master --force
+  - git reset --hard
+  - git pull origin master
   - git checkout -B master
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
