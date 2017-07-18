@@ -15,7 +15,9 @@
  **/
 
 angular.module('app')
-.controller('MainController', ['$scope', 'github', 'config', '$location', function($scope, github, config, $location) {
+.controller('MainController',
+    ['$scope', 'github', 'config', '$location', '$http', '$document',
+    function($scope, github, config, $location, $http, $document) {
 
     var github_token;
     var repoLocation;
@@ -23,7 +25,17 @@ angular.module('app')
     config.get(function(data) {
         //github_token = data.github_token;
         repoLocation = data.github_repos_url;
-        getAllGitHubData();
+        check_rate_limit(function(rate_limit_is_exceeded) {
+            if (rate_limit_is_exceeded) {
+                var x = $document[0].getElementById("snackbar");
+                x.className = "show";
+                setTimeout(function(){
+                    x.className = x.className.replace("show", "");
+                }, 3000);
+            }else {
+                getAllGitHubData();
+            }
+        });
     })
 
     var repos = [];
@@ -175,6 +187,14 @@ angular.module('app')
                 generateTags();
                 pushToArray();
             }
+        });
+    }
+
+    check_rate_limit = function(callback) {
+        $http.get("https://api.github.com/rate_limit").then(function(res) {
+            var data = res.data.resources.core;
+            // return true if rate_limit is exceeded
+            callback(0 >= data.remaining);
         });
     }
 

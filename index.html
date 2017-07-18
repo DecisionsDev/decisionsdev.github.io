@@ -25,9 +25,6 @@
 
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
-
 </head>
 
 <body ng-controller="MainController" class="home page page-id-361 page-template-default" >
@@ -91,6 +88,11 @@
         </section>
     </div>
 
+    <div id="snackbar">
+        It seems that we have reached the limit of calling the GitHub API.<br />
+        Please try again later.
+    </div>
+
 </div>
 
 <div id="footer" style="position: fixed; bottom: 0; width: 100%; text-align: center; padding-bottom: 5px; background-color: white;">
@@ -102,6 +104,11 @@
 </div>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/controllers/MainController.js"></script>
