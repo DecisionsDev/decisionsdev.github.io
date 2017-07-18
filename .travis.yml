@@ -9,7 +9,7 @@ branches:
     - source
 
 before_install:
-  - git pull --a
+  - git pull --all
   - git checkout -B master
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
