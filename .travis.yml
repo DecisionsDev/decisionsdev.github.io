@@ -19,6 +19,7 @@ before_install:
   - git pull
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
+  - cp config.json _site/config.json
   - git checkout -B source
   - git remote rm origin
   - git remote add origin https://$GITHUB_TOKEN@github.com/ODMDev/odmdev.github.io.git
