@@ -10,6 +10,7 @@ branches:
 
 before_install:
   - git checkout -B master
+  - git pull
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
   - git checkout -B source
