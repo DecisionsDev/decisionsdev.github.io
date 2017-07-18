@@ -10,6 +10,7 @@ branches:
     - source
 
 before_install:
+  - git fetch --unshallow --tags
   - git pull --all
   - git branch -a
   - git checkout -B master  origin/master
