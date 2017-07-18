@@ -10,11 +10,7 @@ branches:
     - source
 
 before_install:
-  - git fetch --unshallow --tags
-  - git pull --all
-  - git branch -a
-  - git checkout -B master  origin/master
-  - git pull
+  - git pull origin master
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
   - git checkout -B source
