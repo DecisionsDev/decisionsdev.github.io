@@ -10,10 +10,12 @@ branches:
     - source
 
 before_install:
+  - git clone https://github.com/ODMDev/odmdev.github.io.git ODMDEV.GITHUB.DIR/
+  - cd ODMDEV.GITHUB.DIR/
   - git config --global user.email "$GITHUB_EMAIL"
   - git config --global user.name "$GITHUB_NAME"
   - git fetch
-  - git checkout --track -B master origin/master
+  - git checkout -B master
   - git pull
   - cp config.json.sample config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
