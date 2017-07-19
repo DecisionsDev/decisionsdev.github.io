@@ -1,4 +1,5 @@
 {
     "github_repos_url": "GITHUB_REPOS_URL",
     "repo_separator": "REPO_SEPARATOR"
+    "topic_separator": "TOPIC_SEPARATOR"
 }

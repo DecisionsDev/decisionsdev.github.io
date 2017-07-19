@@ -30,13 +30,16 @@ angular.module('app')
         repo_separator  = data.repo_separator || ".";
         topic_separator = data.topic_separator || "-";
 
-        check_rate_limit(function(rate_limit_is_exceeded) {
+        check_rate_limit(function(rate_limit_is_exceeded, date) {
             if (rate_limit_is_exceeded) {
-                var x = $document[0].getElementById("snackbar");
-                x.className = "show";
+                var reset = $document[0].getElementById("rate_limit_reset");
+                reset.innerHTML = date;
+
+                var snackbar = $document[0].getElementById("snackbar");
+                snackbar.className = "show";
                 setTimeout(function(){
-                    x.className = x.className.replace("show", "");
-                }, 3000);
+                    snackbar.className = snackbar.className.replace("show", "");
+                }, 5000);
             }else {
                 getAllGitHubData();
             }
@@ -218,7 +221,7 @@ angular.module('app')
         $http.get(url).then(function(res) {
             var data = res.data.resources.core;
             // return true if rate_limit is exceeded
-            callback(0 >= data.remaining);
+            callback(0 >= data.remaining, new Date(data.reset));
         });
     }
 
