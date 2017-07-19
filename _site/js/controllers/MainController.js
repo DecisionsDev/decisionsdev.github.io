@@ -15,15 +15,35 @@
  **/
 
 angular.module('app')
-.controller('MainController', ['$scope', 'github', 'config', '$location', function($scope, github, config, $location) {
+.controller('MainController',
+    ['$scope', 'github', 'config', '$location', '$http', '$document',
+    function($scope, github, config, $location, $http, $document) {
 
-    var github_token;
+    var github_token = null;
     var repoLocation;
+    var repo_separator;
+    var topic_separator;
 
     config.get(function(data) {
-        //github_token = data.github_token;
-        repoLocation = data.github_repos_url;
-        getAllGitHubData();
+        github_token    = data.github_token;
+        repoLocation    = data.github_repos_url;
+        repo_separator  = data.repo_separator || ".";
+        topic_separator = data.topic_separator || "-";
+
+        check_rate_limit(function(rate_limit_is_exceeded, date) {
+            if (rate_limit_is_exceeded) {
+                var reset = $document[0].getElementById("rate_limit_reset");
+                reset.innerHTML = date;
+
+                var snackbar = $document[0].getElementById("snackbar");
+                snackbar.className = "show";
+                setTimeout(function(){
+                    snackbar.className = snackbar.className.replace("show", "");
+                }, 5000);
+            }else {
+                getAllGitHubData();
+            }
+        });
     })
 
     var repos = [];
@@ -77,7 +97,7 @@ angular.module('app')
             var repo = repos[i];
 
             //get the prefix
-            var firstPeriodLocation = repo.name.indexOf(".");
+            var firstPeriodLocation = repo.name.indexOf(repo_separator);
             var prefix = repo.name.substr(0, firstPeriodLocation);
 
             //change the prefixes to more user readable names
@@ -123,11 +143,23 @@ angular.module('app')
 
             angular.forEach(repo.topics, function(topic, topic_idx) {
                 //push to array containing all the tags
-                arrayOfTags[index] = topic;
+                var split = topic.split(topic_separator);
+                var prefix = "";
+
+                switch (split[0]) {
+                    case "odmdev":
+                        prefix = split.slice(1, split.length).join(topic_separator);
+                        break;
+                    default: // other than "ODM", or nothing
+                        prefix = ""; // DO not display topic if not prefixed 'odmdev'
+                        break;
+                }
+
+                arrayOfTags[index] = prefix;
 
                 //push the tag to the array of filters, only if unique
-                if ($scope.arrayOfFilters.indexOf(topic) == -1) {
-                    $scope.arrayOfFilters.push(topic);
+                if ($scope.arrayOfFilters.indexOf(prefix) == -1) {
+                    $scope.arrayOfFilters.push(prefix);
                 }
             });
             arrayOfWords = [];
@@ -155,6 +187,9 @@ angular.module('app')
     //getting the data
     getAllGitHubData = function() {
         url = repoLocation + "?per_page=100&page=" + pageNumber;
+        if (null != github_token)
+            url += "&access_token="+github_token;
+
         github.getGitHubData(url, function(response) {
             repos = repos.concat(response.data);
             if (location.search == null){
@@ -175,6 +210,18 @@ angular.module('app')
                 generateTags();
                 pushToArray();
             }
+        });
+    }
+
+    check_rate_limit = function(callback) {
+        var url = "https://api.github.com/rate_limit";
+        if (null != github_token) {
+            url += "?access_token="+github_token;
+        }
+        $http.get(url).then(function(res) {
+            var data = res.data.resources.core;
+            // return true if rate_limit is exceeded
+            callback(0 >= data.remaining, new Date(data.reset));
         });
     }
 

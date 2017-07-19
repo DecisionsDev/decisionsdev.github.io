@@ -25,22 +25,24 @@
 
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
-
 </head>
 
 <body ng-controller="MainController" class="home page page-id-361 page-template-default" >
 <div class="container">
 
     <div id="pnext-top-menu" class="pn-top-menu links-top-menu" role="navigation" aria-label="Main navigation">
-        <div class="flag">
+        <div class="flag" style="display:inline-block;">
             <span class="link-home flag-img">
                 <a rel="home" class="pn-nav-home" href="https://developer.ibm.com/odm/" style="text-align: center;">
                     <img scale="0" class="pn-logo-image" src="images/logo.png" alt="ODMDev">
                     <span class="teal">ODM Dev</span>
                 </a>
             </span>
+        </div>
+        <div style="display:inline-block; float:right; margin-top: 5px;">
+                If you want to create a project for ODM Dev, check the template
+                <a target="_blank" href="https://github.com/ODMDev/sample-template_repository">here</a>
+                &nbsp;&nbsp;&nbsp;
         </div>
     </div>
     <div class="pn-pcon" style="margin-bottom: 40px;">
@@ -91,6 +93,11 @@
         </section>
     </div>
 
+    <div id="snackbar">
+        It seems that we have reached the limit of calling the GitHub API.<br />
+        Please try again later (<span id=rate_limit_reset></span>).
+    </div>
+
 </div>
 
 <div id="footer" style="position: fixed; bottom: 0; width: 100%; text-align: center; padding-bottom: 5px; background-color: white;">
@@ -102,6 +109,11 @@
 </div>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
 
 <script src="js/app.js"></script>
 <script src="js/controllers/MainController.js"></script>

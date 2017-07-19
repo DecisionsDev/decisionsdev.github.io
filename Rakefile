@@ -221,9 +221,10 @@ namespace :site do
       sh "git config user.name"
       sh "git config user.email"
       sh "git remote -v"
-      sh "echo date +\"%m-%d-%Y %T\" > .last_build " # prevent empty commit error
+      sh "echo #{Time.now.inspect} > .last_build " # prevent empty commit error
+      sh "git add ../config.json"
       sh "git add --all ."
-      sh "git commit -m \"Updating to #{CONFIG["GIT_NAME"]}/#{REPO}.\"" # @#{sha}
+      sh "git commit -m \"Updating to #{USERNAME}/#{REPO}.\"" # @#{sha}
       sh "git push --quiet origin #{DESTINATION_BRANCH}"
       puts "Pushed updated branch #{DESTINATION_BRANCH} to GitHub Pages"
     end
