@@ -21,12 +21,14 @@ angular.module('app')
 
     var github_token = null;
     var repoLocation;
-    var repo_separator = ".";
+    var repo_separator;
+    var topic_separator;
 
     config.get(function(data) {
-        github_token = data.github_token;
-        repoLocation = data.github_repos_url;
-        repo_separator = data.repo_separator;
+        github_token    = data.github_token;
+        repoLocation    = data.github_repos_url;
+        repo_separator  = data.repo_separator || ".";
+        topic_separator = data.topic_separator || "-";
 
         check_rate_limit(function(rate_limit_is_exceeded) {
             if (rate_limit_is_exceeded) {
@@ -92,7 +94,7 @@ angular.module('app')
             var repo = repos[i];
 
             //get the prefix
-            var firstPeriodLocation = repo.name.indexOf(".");
+            var firstPeriodLocation = repo.name.indexOf(repo_separator);
             var prefix = repo.name.substr(0, firstPeriodLocation);
 
             //change the prefixes to more user readable names
@@ -138,11 +140,23 @@ angular.module('app')
 
             angular.forEach(repo.topics, function(topic, topic_idx) {
                 //push to array containing all the tags
-                arrayOfTags[index] = topic;
+                var split = topic.split(topic_separator);
+                var prefix = "";
+
+                switch (split[0]) {
+                    case "odmdev":
+                        prefix = split.slice(1, split.length).join(topic_separator);
+                        break;
+                    default: // other than "ODM", or nothing
+                        prefix = ""; // DO not display topic if not prefixed 'odmdev'
+                        break;
+                }
+
+                arrayOfTags[index] = prefix;
 
                 //push the tag to the array of filters, only if unique
-                if ($scope.arrayOfFilters.indexOf(topic) == -1) {
-                    $scope.arrayOfFilters.push(topic);
+                if ($scope.arrayOfFilters.indexOf(prefix) == -1) {
+                    $scope.arrayOfFilters.push(prefix);
                 }
             });
             arrayOfWords = [];
