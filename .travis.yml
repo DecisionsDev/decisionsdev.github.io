@@ -20,12 +20,14 @@ before_install:
   - git checkout -B master
   - git merge source # Update master from source
   - cp config.json.sample config.json
-  - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS@" config.json
+  - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS_URL@" config.json
+  - sed -ri "s@REPO_SEPARATOR@-@" config.json
+  - sed -ri "s@TOPIC_SEPARATOR@'@" config.json
   - cp config.json _site/config.json
   - git checkout -B source
   - git remote rm origin
   - git remote add origin https://$GITHUB_TOKEN@github.com/ODMDev/odmdev.github.io.git
-  # we use '@' for sed because '/' are used in var GITHUB_REPOS.
+  # we use '@' for sed because '/' are used in var GITHUB_REPOS_URL.
 
 install:
   - bundle install
