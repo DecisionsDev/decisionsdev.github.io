@@ -19,12 +19,15 @@ angular.module('app')
     ['$scope', 'github', 'config', '$location', '$http', '$document',
     function($scope, github, config, $location, $http, $document) {
 
-    var github_token;
+    var github_token = null;
     var repoLocation;
+    var repo_separator = ".";
 
     config.get(function(data) {
-        //github_token = data.github_token;
+        github_token = data.github_token;
         repoLocation = data.github_repos_url;
+        repo_separator = data.repo_separator;
+
         check_rate_limit(function(rate_limit_is_exceeded) {
             if (rate_limit_is_exceeded) {
                 var x = $document[0].getElementById("snackbar");
@@ -167,6 +170,9 @@ angular.module('app')
     //getting the data
     getAllGitHubData = function() {
         url = repoLocation + "?per_page=100&page=" + pageNumber;
+        if (null != github_token)
+            url += "&access_token="+github_token;
+
         github.getGitHubData(url, function(response) {
             repos = repos.concat(response.data);
             if (location.search == null){
@@ -191,7 +197,11 @@ angular.module('app')
     }
 
     check_rate_limit = function(callback) {
-        $http.get("https://api.github.com/rate_limit").then(function(res) {
+        var url = "https://api.github.com/rate_limit";
+        if (null != github_token) {
+            url += "?access_token="+github_token;
+        }
+        $http.get(url).then(function(res) {
             var data = res.data.resources.core;
             // return true if rate_limit is exceeded
             callback(0 >= data.remaining);
