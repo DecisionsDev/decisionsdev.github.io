@@ -25,7 +25,7 @@ angular.module('app')
     var topic_separator;
 
     config.get(function(data) {
-        github_token    = data.github_token;
+        github_token    = window.atob(data.github_token); // decode base64 encrypted github_token
         repoLocation    = data.github_repos_url;
         repo_separator  = data.repo_separator || ".";
         topic_separator = data.topic_separator || "-";

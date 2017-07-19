@@ -13,7 +13,10 @@
 - The configuration is not pushed in the repo. So make sure to make the config each time you clone.
 - To make the application works, you should fill the `config.json` file.
 - First execute `cp config.json.sample config.json`
-- `github_token`: Generate a GitHub Personal access tokens [github.com/settings/tokens](https://github.com/settings/tokens).
+- `github_token`:
+    - Generate a GitHub Personal access tokens [github.com/settings/tokens](https://github.com/settings/tokens).
+    - > echo -n "[[YOUR_GITHUB_TOKEN]]" | base64
+    - Github revoke all token that are commited, so we encrypt in base64 as a workaround
 - `github_repos_url`: Give the link of your user/org like below:
     - `https://api.github.com/users/<USER_NAME>/repos`
     - `https://api.github.com/orgs/<ORG_NAME>/repos`
