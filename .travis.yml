@@ -20,6 +20,7 @@ before_install:
   - git checkout -B master
   - git merge source # Update master from source
   - cp config.json.sample config.json
+  - sed -ri "s@GITHUB_TOKEN@$GITHUB_TOKEN_ENCODED@" config.json
   - sed -ri "s@GITHUB_REPOS_URL@$GITHUB_REPOS_URL@" config.json
   - sed -ri "s@REPO_SEPARATOR@-@" config.json
   - sed -ri "s@TOPIC_SEPARATOR@'@" config.json
