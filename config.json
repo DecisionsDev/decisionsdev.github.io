@@ -1,5 +1,5 @@
 {
-    "github_repos_url": "",
-    "repo_separator": "REPO_SEPARATOR",
-    "topic_separator": "TOPIC_SEPARATOR"
+    "github_repos_url": "https://api.github.com/orgs/ODMDev/repos",
+    "repo_separator": "-",
+    "topic_separator": "'"
 }
