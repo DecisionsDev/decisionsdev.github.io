@@ -28,7 +28,7 @@ before_install:
   - sed -ri "s@ORG_URL@$ORG_URL@" config.json
   - sed -ri "s@ORG_PREFIX@$ORG_PREFIX@" config.json
   - sed -ri "s@REPO_SEPARATOR@-@" config.json
-  - sed -ri "s@TOPIC_SEPARATOR@'@" config.json
+  - sed -ri "s@TOPIC_SEPARATOR@-@" config.json
   - cp config.json _site/config.json
   - git checkout -B source
   - git remote rm origin
