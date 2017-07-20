@@ -1,7 +1,8 @@
 {
     "org": {
         "name": "ODM",
-        "url": "https://developer.ibm.com/odm/"
+        "url": "https://developer.ibm.com/odm/",
+        "prefix": "odmdev"
     },
     "github": {
         "token": "NzVlYmRmNjE4OGUyMTkzOTIwN2ZkNDQ2YzlhZGM3MDVjMGZkM2M0MQ==",
