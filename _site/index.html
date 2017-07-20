@@ -17,7 +17,7 @@
 <html ng-app="app">
 <head>
 
-    <title>ODMDev Open Source Community</title>
+    <title>Open Source Community</title>
     <link rel="shortcut icon" href="images/favicon.ico">
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,15 +33,15 @@
     <div id="pnext-top-menu" class="pn-top-menu links-top-menu" role="navigation" aria-label="Main navigation">
         <div class="flag" style="display:inline-block;">
             <span class="link-home flag-img">
-                <a rel="home" class="pn-nav-home" href="https://developer.ibm.com/odm/" style="text-align: center;">
-                    <img scale="0" class="pn-logo-image" src="images/logo.png" alt="ODMDev">
-                    <span class="teal">ODM Dev</span>
+                <a rel="home" class="bind_org_url pn-nav-home" href="[[ORG_URL]]" style="text-align: center;">
+                    <img scale="0" class="pn-logo-image" src="images/logo.png">
+                    <span class="teal bind_org_name">[[ORG_NAME]]</span>
                 </a>
             </span>
         </div>
         <div style="display:inline-block; float:right; margin-top: 5px;">
-                If you want to create a project for ODM Dev, check the template
-                <a target="_blank" href="https://github.com/ODMDev/sample-template_repository">here</a>
+                If you want to create a project for <span class="bind_org_name">[[ORG_NAME]]</span>, check the template
+                <a class="bind_template_url" target="_blank" href="[[TEMPLATE_URL]]">here</a>
                 &nbsp;&nbsp;&nbsp;
         </div>
     </div>
@@ -104,14 +104,14 @@
     <hr style="margin-top: 0;" />
     <span>
         Problem with this page? Please report an issue
-        <a target="_blank" href="https://github.com/ODMDev/odmdev.github.io/issues">here</a>.
+        <a class="bind_issues_url" target="_blank" href="[[ISSUE_URL]]">here</a>.
     </span>
 </div>
 
 </body>
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"
+  integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
 

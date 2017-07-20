@@ -1,6 +1,10 @@
 {
+    "org_name": "ORG_NAME",
+    "org_url": "ORG_URL",
     "github_token": "GITHUB_TOKEN",
     "github_repos_url": "GITHUB_REPOS_URL",
+    "github_issues_url": "GITHUB_ISSUES_URL",
+    "github_template_url": "GITHUB_TEMPLATE_URL",
     "repo_separator": "REPO_SEPARATOR",
     "topic_separator": "TOPIC_SEPARATOR"
 }
