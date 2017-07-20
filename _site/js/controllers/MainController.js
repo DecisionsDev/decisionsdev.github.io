@@ -25,10 +25,10 @@ angular.module('app')
     var topic_separator;
 
     config.get(function(data) {
-        github_token    = window.atob(data.github_token); // decode base64 encrypted github_token
-        repoLocation    = data.github_repos_url;
-        repo_separator  = data.repo_separator || ".";
-        topic_separator = data.topic_separator || "-";
+        github_token    = window.atob(data.github.token); // decode base64 encrypted github_token
+        repoLocation    = data.github.url.repos;
+        repo_separator  = data.separator.repo || ".";
+        topic_separator = data.separator.topic || "-";
         update_html_with_config(data);
 
         check_rate_limit(function(rate_limit_is_exceeded, date) {
@@ -227,23 +227,23 @@ angular.module('app')
     }
 
     update_html_with_config = function(data) {
-        $document[0].title = data.org_name + " Open Source Community";
+        $document[0].title = data.org.name + " Open Source Community";
 
         var org_name_list = $document[0].getElementsByClassName("bind_org_name");
         for (var i = 0, len = org_name_list.length; i < len; i++)
-            org_name_list[i].innerHTML = data.org_name;
+            org_name_list[i].innerHTML = data.org.name;
 
         var org_url_list = $document[0].getElementsByClassName("bind_org_url");
         for (var i = 0, len = org_url_list.length; i < len; i++)
-            org_url_list[i].href = data.org_url;
+            org_url_list[i].href = data.org.url;
 
         var template_url_list = $document[0].getElementsByClassName("bind_template_url");
         for (var i = 0, len = template_url_list.length; i < len; i++)
-            template_url_list[i].href = data.github_template_url;
+            template_url_list[i].href = data.github.url.template;
 
         var issues_url_list = $document[0].getElementsByClassName("bind_issues_url");
         for (var i = 0, len = issues_url_list.length; i < len; i++)
-            issues_url_list[i].href = data.github_issues_url;
+            issues_url_list[i].href = data.github.url.issues;
 
     }
 
