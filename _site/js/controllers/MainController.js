@@ -29,6 +29,7 @@ angular.module('app')
         repoLocation    = data.github_repos_url;
         repo_separator  = data.repo_separator || ".";
         topic_separator = data.topic_separator || "-";
+        update_html_with_config(data);
 
         check_rate_limit(function(rate_limit_is_exceeded, date) {
             if (rate_limit_is_exceeded) {
@@ -225,6 +226,25 @@ angular.module('app')
         });
     }
 
+    update_html_with_config = function(data) {
+        $document[0].title = data.org_name + " Open Source Community";
 
+        var org_name_list = $document[0].getElementsByClassName("bind_org_name");
+        for (var i = 0, len = org_name_list.length; i < len; i++)
+            org_name_list[i].innerHTML = data.org_name;
+
+        var org_url_list = $document[0].getElementsByClassName("bind_org_url");
+        for (var i = 0, len = org_url_list.length; i < len; i++)
+            org_url_list[i].href = data.org_url;
+
+        var template_url_list = $document[0].getElementsByClassName("bind_template_url");
+        for (var i = 0, len = template_url_list.length; i < len; i++)
+            template_url_list[i].href = data.github_template_url;
+
+        var issues_url_list = $document[0].getElementsByClassName("bind_issues_url");
+        for (var i = 0, len = issues_url_list.length; i < len; i++)
+            issues_url_list[i].href = data.github_issues_url;
+
+    }
 
 }]);

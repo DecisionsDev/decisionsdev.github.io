@@ -1,5 +1,5 @@
 # GitHub Pages for [ODMDev.github.io](https://odmdev.github.io)
-![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=source)
+[![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=master)](https://travis-ci.org/ODMDev/odmdev.github.io)
 
 ## Features
 - This pages displayes all repositories from [github.com/ODMDev](https://github.com/ODMDev)
@@ -15,7 +15,7 @@
 - First execute `cp config.json.sample config.json`
 - `github_token`:
     - Generate a GitHub Personal access tokens [github.com/settings/tokens](https://github.com/settings/tokens).
-    - > echo -n "[[YOUR_GITHUB_TOKEN]]" | base64
+    - `echo -n "[[YOUR_GITHUB_TOKEN]]" | base64`
     - Github revoke all token that are commited, so we encrypt in base64 as a workaround
 - `github_repos_url`: Give the link of your user/org like below:
     - `https://api.github.com/users/<USER_NAME>/repos`
