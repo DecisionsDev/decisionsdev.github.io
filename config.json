@@ -1,6 +1,10 @@
 {
+    "org_name": "ODM",
+    "org_url": "https://developer.ibm.com/odm/",
     "github_token": "NzVlYmRmNjE4OGUyMTkzOTIwN2ZkNDQ2YzlhZGM3MDVjMGZkM2M0MQ==",
     "github_repos_url": "https://api.github.com/orgs/ODMDev/repos",
+    "github_issues_url": "https://github.com/ODMDev/odmdev.github.io/issues",
+    "github_template_url": "https://github.com/ODMDev/sample-template_repository",
     "repo_separator": "-",
     "topic_separator": "'"
 }
