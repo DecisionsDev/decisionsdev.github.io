@@ -20,6 +20,7 @@ angular.module('app')
     function($scope, github, config, $location, $http, $document) {
 
     var github_token = null;
+    var org_prefix;
     var repoLocation;
     var repo_separator;
     var topic_separator;
@@ -27,6 +28,7 @@ angular.module('app')
     config.get(function(data) {
         github_token    = window.atob(data.github.token); // decode base64 encrypted github_token
         repoLocation    = data.github.url.repos;
+        org_prefix      = data.org_prefix || "";
         repo_separator  = data.separator.repo || ".";
         topic_separator = data.separator.topic || "-";
         update_html_with_config(data);
@@ -104,7 +106,7 @@ angular.module('app')
             //change the prefixes to more user readable names
             switch (prefix) {
                 case "":
-                case "odmdev":
+                case org_prefix:
                     prefix = ""
                     break;
                 case "sample":
@@ -148,7 +150,7 @@ angular.module('app')
                 var prefix = "";
 
                 switch (split[0]) {
-                    case "odmdev":
+                    case org_prefix:
                         prefix = split.slice(1, split.length).join(topic_separator);
                         break;
                     default: // other than "ODM", or nothing

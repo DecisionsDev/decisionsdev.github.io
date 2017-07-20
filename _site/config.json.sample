@@ -1,7 +1,8 @@
 {
     "org": {
         "name": "ORG_NAME",
-        "url": "ORG_URL"
+        "url": "ORG_URL",
+        "prefix": "ORG_PREFIX"
     },
     "github": {
         "token": "GITHUB_TOKEN",
