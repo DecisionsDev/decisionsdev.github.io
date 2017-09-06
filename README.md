@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=master)](https://travis-ci.org/ODMDev/odmdev.github.io)
 
 ## Features
-- This pages displayes all repositories from [github.com/ODMDev](https://github.com/ODMDev)
+- This pages displays all repositories from [github.com/ODMDev](https://github.com/ODMDev)
 - It allows the user to use a custom filter in the 'Filter Repositories' box.
 - It suggests a number of filters based on the prefix ie. selecting the 'Samples' filter box will filter the repositories to only show the repositories prefixed by 'sample'. These filter boxes have to be defined in the code, more details below.
 - It also suggests filters based on TOPICS assigned to the repos. As more TOPICS are used, the app will automatically add a filter box for it.
