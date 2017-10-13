@@ -1,5 +1,12 @@
 # GitHub Pages for [ODMDev.github.io](https://odmdev.github.io)
-[![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=master)](https://travis-ci.org/ODMDev/odmdev.github.io)
+[![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=source)](https://travis-ci.org/ODMDev/odmdev.github.io)
+<p align="center">
+  <a href="https://join.slack.com/t/odmdev/shared_invite/enQtMjU0NzIwMjM1MTg0LTQyYTMzNGQ4NzJkMDYxMDU5MDRmYTM4MjcxN2RiMzNmZWZmY2UzYzRhMjk0N2FmZjU2YzJlMTRmN2FhZDY4NmQ">
+        Follow us on slack
+        <br>
+        <img src="https://a.slack-edge.com/436da/marketing/img/meta/favicon-32.png">
+  </a>
+</p>
 
 ## Features
 - This pages displays all repositories from [github.com/ODMDev](https://github.com/ODMDev)
