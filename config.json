@@ -1,15 +1,15 @@
 {
     "org": {
-        "name": "ODMDev",
-        "url": "https://developer.ibm.com/odm/",
-        "prefix": "odmdev"
+        "name": "DecisionsDev",
+        "url": "https://community.ibm.com/community/user/automation/communities/community-home?communitykey=c0005a22-520b-4181-bfad-feffd8bdc022",
+        "prefix": "decisionsdev"
     },
     "github": {
         "token": "NzVlYmRmNjE4OGUyMTkzOTIwN2ZkNDQ2YzlhZGM3MDVjMGZkM2M0MQ==",
         "url": {
-            "repos": "https://api.github.com/orgs/ODMDev/repos",
-            "issues": "https://github.com/ODMDev/odmdev.github.io/issues",
-            "template": "https://github.com/ODMDev/sample-template_repository"
+            "repos": "https://api.github.com/orgs/DecisionsDev/repos",
+            "issues": "https://github.com/DecisionsDev/odmdev.github.io/issues",
+            "template": "https://github.com/DecisionsDev/sample-template_repository"
         }
     },
     "separator": {
