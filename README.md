@@ -1,5 +1,5 @@
-# GitHub Pages for [ODMDev.github.io](https://odmdev.github.io)
-[![Build Status](https://travis-ci.org/DecisionsDev/odmdev.github.io.svg?branch=source)](https://travis-ci.org/DecisionsDev/odmdev.github.io)
+# GitHub Pages for [decsisionsdev.github.io](https://decsisionsdev.github.io)
+[![Build Status](https://travis-ci.org/DecisionsDev/decsisionsdev.github.io.svg?branch=source)](https://travis-ci.org/DecisionsDev/decsisionsdev.github.io)
 <p align="center">
   <a href="https://join.slack.com/t/odmdev/shared_invite/enQtMjU0NzIwMjM1MTg0LTQyYTMzNGQ4NzJkMDYxMDU5MDRmYTM4MjcxN2RiMzNmZWZmY2UzYzRhMjk0N2FmZjU2YzJlMTRmN2FhZDY4NmQ">
         Follow us on slack
