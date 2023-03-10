@@ -10,7 +10,7 @@ branches:
     - source
 
 before_install:
-  - git clone https://github.com/ODMDev/odmdev.github.io.git ODMDEV.GITHUB.DIR/
+  - git clone https://github.com/DecisionsDev/decisionsdev.github.io.git ODMDEV.GITHUB.DIR/
   - cd ODMDEV.GITHUB.DIR/
   - git config --global user.email "$GITHUB_EMAIL"
   - git config --global user.name "$GITHUB_NAME"
@@ -32,7 +32,7 @@ before_install:
   - cp config.json _site/config.json
   - git checkout -B source
   - git remote rm origin
-  - git remote add origin https://$GITHUB_TOKEN@github.com/ODMDev/odmdev.github.io.git
+  - git remote add origin https://$GITHUB_TOKEN@github.com/DecisionsDev/decisionsdev.github.io.git
   # we use '@' for sed because '/' are used in var GITHUB_REPOS_URL.
 
 install:

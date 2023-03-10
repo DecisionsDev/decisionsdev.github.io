@@ -1,8 +1,15 @@
 # GitHub Pages for [ODMDev.github.io](https://odmdev.github.io)
-[![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=master)](https://travis-ci.org/ODMDev/odmdev.github.io)
+[![Build Status](https://travis-ci.org/ODMDev/odmdev.github.io.svg?branch=source)](https://travis-ci.org/ODMDev/odmdev.github.io)
+<p align="center">
+  <a href="https://join.slack.com/t/odmdev/shared_invite/enQtMjU0NzIwMjM1MTg0LTQyYTMzNGQ4NzJkMDYxMDU5MDRmYTM4MjcxN2RiMzNmZWZmY2UzYzRhMjk0N2FmZjU2YzJlMTRmN2FhZDY4NmQ">
+        Follow us on slack
+        <br>
+        <img src="https://a.slack-edge.com/436da/marketing/img/meta/favicon-32.png">
+  </a>
+</p>
 
 ## Features
-- This pages displayes all repositories from [github.com/ODMDev](https://github.com/ODMDev)
+- This pages displays all repositories from [github.com/ODMDev](https://github.com/ODMDev)
 - It allows the user to use a custom filter in the 'Filter Repositories' box.
 - It suggests a number of filters based on the prefix ie. selecting the 'Samples' filter box will filter the repositories to only show the repositories prefixed by 'sample'. These filter boxes have to be defined in the code, more details below.
 - It also suggests filters based on TOPICS assigned to the repos. As more TOPICS are used, the app will automatically add a filter box for it.
