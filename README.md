@@ -1,5 +1,5 @@
-# GitHub Pages for [decsisionsdev.github.io](https://decsisionsdev.github.io)
-[![Build Status](https://travis-ci.org/DecisionsDev/decsisionsdev.github.io.svg?branch=source)](https://travis-ci.org/DecisionsDev/decsisionsdev.github.io)
+# GitHub Pages for [decisionsdev.github.io](https://decisionsdev.github.io)
+[![Build Status](https://travis-ci.org/DecisionsDev/decisionsdev.github.io.svg?branch=source)](https://travis-ci.org/DecisionsDev/decisionsdev.github.io)
 <p align="center">
   <a href="https://join.slack.com/t/odmdev/shared_invite/zt-1qykoafbm-uM9LQrNLzzphvbrEf8xSBw">
         Follow us on slack
@@ -39,7 +39,7 @@
 ## The Controller
 The [GitHub API paginates](https://developer.github.com/v3/#pagination) its responses to HTTP requests. The maximum number of repos displayed per page is 100. Therefore we need to make multiple requesets in order to obtain all the repositores. This is performed in the `getAllGitHubData()` function, by parsing the HTTP response header to see if it refers to a following page. Once there are no more pages, we call the three functions, `generateFilters`, `generateTags` and `pushToArray`.
 
-The primary functions within the controller deal with obtaining, parsing and formatting the list of repositories from the github organisation at [github.com/ODMDev](https://github.com/ODMDev)
+The primary functions within the controller deal with obtaining, parsing and formatting the list of repositories from the github organisation at [github.com/ODMDev](https://github.com/DecisionsDev)
 
 
 ## Deployment
