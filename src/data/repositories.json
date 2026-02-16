@@ -1,0 +1,526 @@
+[
+  {
+    "name": "odm-ondocker",
+    "description": "This repository allows to deploy an IBM Operational Decision Manager topology with Docker Compose",
+    "topics": [
+      "artificial-intelligence",
+      "business-autom",
+      "business-rules",
+      "docker",
+      "docker-compose",
+      "docker-image",
+      "dockerfiles",
+      "ibm",
+      "ibm-odm",
+      "java",
+      "microservices",
+      "odm",
+      "odmdev-docker",
+      "rpa",
+      "rules-engine"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-ondocker"
+  },
+  {
+    "name": "odm-docker-kubernetes",
+    "description": "IBM Operational Decision Manager on Kubernetes",
+    "topics": [
+      "docker",
+      "ibmodm",
+      "kubernetes",
+      "odmdev-docker"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-docker-kubernetes"
+  },
+  {
+    "name": "decisionsdev.github.io",
+    "description": "GitHub Pages for decisions.github.io ",
+    "topics": [
+      "odmdev-web"
+    ],
+    "url": "https://github.com/DecisionsDev/decisionsdev.github.io"
+  },
+  {
+    "name": "sample-template_repository",
+    "description": "This is a template repository if you want to create a project under ODM Dev organization",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/sample-template_repository"
+  },
+  {
+    "name": "sample-blockchain-vehicle-lifecycle",
+    "description": "This sample illustrates how IBM ODM can be used with HyperLedger Fabric and Composer to implement rule-based Smart Contracts",
+    "topics": [
+      "ibmodm",
+      "odmdev-blockchain"
+    ],
+    "url": "https://github.com/DecisionsDev/sample-blockchain-vehicle-lifecycle"
+  },
+  {
+    "name": "odm-decision-forms",
+    "description": "A React-based UI to init and run Hosted Transparent Decision Services",
+    "topics": [
+      "artificial-intelligence",
+      "business-automation",
+      "decision",
+      "ibm",
+      "ibm-odm",
+      "odm",
+      "react",
+      "rpa"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-decision-forms"
+  },
+  {
+    "name": "odm-rpa-invoicing-sample",
+    "description": "Sample demo of an IBM RPA and IBM ODM integration",
+    "topics": [
+      "ibm-odm",
+      "ibm-rpa",
+      "odm",
+      "rpa"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-rpa-invoicing-sample"
+  },
+  {
+    "name": "odm-rpa-decisionbot-tutorial",
+    "description": "A step-by-step tutorial to create an IBM ODM Decision Bot for IBM RPA with Automation Anywhere",
+    "topics": [
+      "automation-anywhere",
+      "decision",
+      "ibm",
+      "ibmodm",
+      "odm",
+      "rpa",
+      "rules"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-rpa-decisionbot-tutorial"
+  },
+  {
+    "name": "odm-dsi-monitoring",
+    "description": "Simple CLI to monitor DSI servers",
+    "topics": [
+      "business-rules",
+      "dsi",
+      "ibm",
+      "ibm-odm",
+      "monitoring",
+      "odm"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-dsi-monitoring"
+  },
+  {
+    "name": "odm-dsi-docker-kubernetes",
+    "description": "IBM Operational Decision Manager Insights on Kubernetes",
+    "topics": [
+      "docker",
+      "dsi",
+      "ibmodm",
+      "kubernetes",
+      "odmdev-docker"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-dsi-docker-kubernetes"
+  },
+  {
+    "name": "decisions-on-spark",
+    "description": "Execute IBM ODM Decision Services on Apache Spark",
+    "topics": [
+      "apache-spark",
+      "big-data",
+      "business-rules",
+      "business-rules-engine",
+      "decisions",
+      "ibm-odm",
+      "java",
+      "odm",
+      "rule-engine",
+      "spark"
+    ],
+    "url": "https://github.com/DecisionsDev/decisions-on-spark"
+  },
+  {
+    "name": "decisions-uml-diagrammer",
+    "description": "A repository to produce UML diagrams from Business Object Models",
+    "topics": [
+      "business-rules-engine",
+      "ibm",
+      "ibm-odm",
+      "odm",
+      "uml"
+    ],
+    "url": "https://github.com/DecisionsDev/decisions-uml-diagrammer"
+  },
+  {
+    "name": "odm-on-cloud-getting-started",
+    "description": null,
+    "topics": [
+      "artificial-intelligence",
+      "business-rules",
+      "business-rules-engine",
+      "ibm",
+      "ibmodm",
+      "odm",
+      "saas",
+      "tutorial"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-on-cloud-getting-started"
+  },
+  {
+    "name": "decisions-ruleapp-rest-loader",
+    "description": "Execute an IBM ODM Decision Service downloaded from a remote Rule Execution Server Console",
+    "topics": [
+      "artificial-intelligence",
+      "business-rules",
+      "contribution",
+      "execute-rulesets",
+      "ibm",
+      "ibm-odm",
+      "odm",
+      "rpa",
+      "ruleapp",
+      "rules-engine"
+    ],
+    "url": "https://github.com/DecisionsDev/decisions-ruleapp-rest-loader"
+  },
+  {
+    "name": "decisions-ruleapp-embedded",
+    "description": "Execute an IBM ODM Decision Service bundled into your JSE application",
+    "topics": [
+      "artificial-intelligence",
+      "business-rules",
+      "business-rules-engine",
+      "contribution",
+      "ibm",
+      "ibm-odm",
+      "odm",
+      "rpa",
+      "rules-engine"
+    ],
+    "url": "https://github.com/DecisionsDev/decisions-ruleapp-embedded"
+  },
+  {
+    "name": "odm-transformation-advisor",
+    "description": "The ODM Transformation Advisor (OTA) scans your ODM projects for the use of deprecated features, or features that are incompatible with the ODMoC SaaS or containerized ODM platform. The OTA can also be used to validate that your projects are following a set of (configurable and extensible) rule project implementation best practices. It can be integrated in your DevOps toolchain to perform Continuous Code Quality Inspection (CCQI) of your rule projects.",
+    "topics": [
+      "business-rules",
+      "code-quality",
+      "code-review",
+      "decision-center",
+      "decision-engine",
+      "decision-management",
+      "ibm",
+      "migration",
+      "odm",
+      "operational-decision-management",
+      "operational-decision-manager",
+      "rules",
+      "saas"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-transformation-advisor"
+  },
+  {
+    "name": "odm-dsi-situation-examples",
+    "description": "Examples of new \"situation\" feature of DSI ",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-dsi-situation-examples"
+  },
+  {
+    "name": "odm-for-container-getting-started",
+    "description": null,
+    "topics": [
+      "artificial-intelligence",
+      "business-rules",
+      "business-rules-engine",
+      "docker-image",
+      "getting-started",
+      "ibm",
+      "ibm-odm",
+      "odm",
+      "tutorial"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-for-container-getting-started"
+  },
+  {
+    "name": "decisions-on-kafka",
+    "description": "Sample showing how to use IBM ODM in Message-driven Architecture with Kafka ",
+    "topics": [
+      "artificial-intelligence",
+      "business-rules",
+      "business-rules-engine",
+      "contribution",
+      "events",
+      "ibm",
+      "ibm-odm",
+      "java",
+      "jse",
+      "kafka",
+      "messaging",
+      "odm",
+      "sample"
+    ],
+    "url": "https://github.com/DecisionsDev/decisions-on-kafka"
+  },
+  {
+    "name": "decisions-bai-gettingstarted",
+    "description": "Describes the steps to start using the ODM events emitter",
+    "topics": [
+      "business-aut",
+      "business-rules",
+      "getting-started",
+      "ibm-odm",
+      "odm",
+      "rules-engine",
+      "tutorial"
+    ],
+    "url": "https://github.com/DecisionsDev/decisions-bai-gettingstarted"
+  },
+  {
+    "name": "decisions-bai-sample-dashboards",
+    "description": "Sample: Business Automation Insights decision event emission to Kibana dashboards",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decisions-bai-sample-dashboards"
+  },
+  {
+    "name": "decision-engine-observer-sample",
+    "description": null,
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decision-engine-observer-sample"
+  },
+  {
+    "name": "decision-microservice",
+    "description": "A devops chains that allow to generate a microservice docker image from a Rule Project",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decision-microservice"
+  },
+  {
+    "name": "odm-res-report",
+    "description": "How to report the assets managed by IBM Rule Execution Server",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-res-report"
+  },
+  {
+    "name": "decisions-on-ml",
+    "description": "Decision automation on machine learning",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decisions-on-ml"
+  },
+  {
+    "name": "decisions-in-faas",
+    "description": "Decision automation in Function as a Service platforms",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decisions-in-faas"
+  },
+  {
+    "name": "odm-libs-in-maven",
+    "description": "Deploy IBM Operational Decision Manager libs into a Maven repository",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-libs-in-maven"
+  },
+  {
+    "name": "decisions-metering",
+    "description": null,
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decisions-metering"
+  },
+  {
+    "name": "decision-center-api-samples",
+    "description": "IBM ODM Decision Center API samples",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decision-center-api-samples"
+  },
+  {
+    "name": "odm-tools-dc-ruleapp-extractor",
+    "description": "IBM ODM Tool to extract a RuleApplication from Decision Center programmatically",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-tools-dc-ruleapp-extractor"
+  },
+  {
+    "name": "odm-tools-dc-xom-extractor",
+    "description": "IBM ODM Tools for extracting the eXecution Object Model out of Decision Center",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-tools-dc-xom-extractor"
+  },
+  {
+    "name": "decisions-on-graalvm",
+    "description": null,
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decisions-on-graalvm"
+  },
+  {
+    "name": "dc-query-extension",
+    "description": "Enables to write a query to find artifacts that are locked in Decision Center",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/dc-query-extension"
+  },
+  {
+    "name": "dc-lightweight-domain",
+    "description": "Enables to use domains in Decision Center without importing the domains content into the BOM",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/dc-lightweight-domain"
+  },
+  {
+    "name": ".github",
+    "description": null,
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/.github"
+  },
+  {
+    "name": "odm-embedded-jse-exec",
+    "description": "Executing a RuleApp in a standalone Java app with ODM",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-embedded-jse-exec"
+  },
+  {
+    "name": "ads-micro-decision-service",
+    "description": "A DevOps chain to deploy a decision service modeled in ADS as a lightweight micro-service in Kubernetes ",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/ads-micro-decision-service"
+  },
+  {
+    "name": "decisions-analytics",
+    "description": "Decision Automation Analytics",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decisions-analytics"
+  },
+  {
+    "name": "simulatte",
+    "description": "Simulations for Decision Automation",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/simulatte"
+  },
+  {
+    "name": "odm-for-developers",
+    "description": "Official IBM Operational Decision Manager for Developers image.",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-for-developers"
+  },
+  {
+    "name": "llm-odm",
+    "description": "This repository explain how to integrate ODM with Large Language Model",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/llm-odm"
+  },
+  {
+    "name": "rule-based-llms",
+    "description": "This repo illustrates how to combine LLMs and rule-based services to generate answers grounded on business policies",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/rule-based-llms"
+  },
+  {
+    "name": "dba-gitops-catalog",
+    "description": null,
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/dba-gitops-catalog"
+  },
+  {
+    "name": "odm-container-samples",
+    "description": "ODM for Kubernetes samples",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-container-samples"
+  },
+  {
+    "name": "policy-corpus",
+    "description": "A corpus of business policies",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/policy-corpus"
+  },
+  {
+    "name": "Decision-Automation-Interchange-Format",
+    "description": "Decision Automation Interchange Format",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/Decision-Automation-Interchange-Format"
+  },
+  {
+    "name": "ads-web-service-call",
+    "description": "External library sample showing how to call a web service from within rules",
+    "topics": [
+      "ads",
+      "business-automation",
+      "business-rules",
+      "decisions",
+      "ibm",
+      "ibm-ads",
+      "java",
+      "rule-engine"
+    ],
+    "url": "https://github.com/DecisionsDev/ads-web-service-call"
+  },
+  {
+    "name": "odm-database-export",
+    "description": null,
+    "topics": [
+      "decisioncenter",
+      "odm",
+      "tools"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-database-export"
+  },
+  {
+    "name": "ibm-decision-intelligence-mcp-server",
+    "description": "MCP Server for IBM Decision Intelligence to extend AI experience with decisioning capabilities",
+    "topics": [
+      "ai",
+      "decision",
+      "ibm",
+      "ibm-watson",
+      "llm",
+      "mcp",
+      "rules"
+    ],
+    "url": "https://github.com/DecisionsDev/ibm-decision-intelligence-mcp-server"
+  },
+  {
+    "name": "ibm-odm-decision-mcp-server",
+    "description": "An MCP Server enabling integration with IBM Decision Server Runtime to retrieve and invoke decision services.",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/ibm-odm-decision-mcp-server"
+  },
+  {
+    "name": "decision-assistant-hub",
+    "description": "Decision Assistant Hub",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/decision-assistant-hub"
+  },
+  {
+    "name": "odm-on-jboss-installation",
+    "description": "Template to create instance of JBoss EAP 8 running ODM 9.5",
+    "topics": [
+      "dc",
+      "jboss-eap",
+      "odm",
+      "rule-execution",
+      "server"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-on-jboss-installation"
+  },
+  {
+    "name": "odm-asynchronous-trace-dw",
+    "description": "Capture decision warehouse trace asynchronously",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/odm-asynchronous-trace-dw"
+  },
+  {
+    "name": "ibm-decision-intelligence-runtime-samples",
+    "description": "This repository contains code samples related to the Decision Runtime of the IBM Decision Intelligence product.",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/ibm-decision-intelligence-runtime-samples"
+  },
+  {
+    "name": "ibm-odm-management-mcp-server",
+    "description": "The MCP Server for ODM Management",
+    "topics": [],
+    "url": "https://github.com/DecisionsDev/ibm-odm-management-mcp-server"
+  },
+  {
+    "name": "odm-dc-rest-api-sample",
+    "description": "Web application to demonstrate usage of DC rest API for deployment",
+    "topics": [
+      "comp-decisioncenter",
+      "decisioncenter",
+      "odm",
+      "product-odm",
+      "sample",
+      "type-sample"
+    ],
+    "url": "https://github.com/DecisionsDev/odm-dc-rest-api-sample"
+  }
+]

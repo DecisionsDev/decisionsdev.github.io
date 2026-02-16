@@ -1,0 +1,37 @@
+---
+title: All Repositories
+description: Browse all DecisionsDev repositories with filtering by product, component, and type
+---
+
+import RepositoryBrowser from '../components/RepositoryBrowser';
+import * as styles from './repositories.module.scss';
+
+<div className={styles.pageHeader}>
+
+<RepositoryBrowser />
+
+### About Repository Topics
+
+We use a structured topic system to organize our repositories:
+
+- **product-xxx**: Indicates which IBM product the repository relates to (e.g., `product-odm`, `product-decision-intelligence`, `product-bai`)
+- **comp-xxx**: Indicates which component of the product (e.g., `comp-decisioncenter`, `comp-ruleexecutionserver`)
+- **type-xxx**: Indicates the type of repository (e.g., `type-sample`, `type-tool`, `type-tutorial`)
+
+### Contributing
+
+If you maintain a repository in the DecisionsDev organization, please add structured topics to help users find your work:
+
+```bash
+# Example: Add topics to your repository
+gh repo edit owner/repo --add-topic product-odm
+gh repo edit owner/repo --add-topic comp-decisioncenter
+gh repo edit owner/repo --add-topic type-sample
+```
+
+### Resources
+
+- [GitHub Organization](https://github.com/DecisionsDev)
+- [Contributing Guidelines](https://github.com/DecisionsDev/.github)
+
+</div>

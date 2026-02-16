@@ -1,0 +1,34 @@
+# GitHub Pages Configuration for DecisionsDev
+
+# Site settings
+title: DecisionsDev
+description: IBM Decision Open Source Projects
+url: "https://decisionsdev.github.io"
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+theme: null
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# GitHub metadata
+repository: DecisionsDev/DecisionsDev.github.io
+
+# Social links (optional)
+github_username: DecisionsDev
+
+# SEO settings
+lang: en
+author: IBM Corporation
+
+# Google Analytics (optional - add your tracking ID)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Made with Bob

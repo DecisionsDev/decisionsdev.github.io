@@ -1,0 +1,135 @@
+---
+title: Deployment Tools
+description: Tools and utilities for deploying IBM ODM applications
+---
+
+## Overview
+
+Modern deployment tools and automation utilities for IBM Operational Decision Manager. These tools provide intuitive interfaces, automation capabilities, and integration with modern DevOps practices.
+
+## Featured Projects
+
+### ODM Decision Center Deployment Tool
+
+A comprehensive web-based deployment tool for IBM Decision Center.
+
+#### Key Features
+
+- **Modern Web Interface**: Clean, professional UI using IBM Carbon Design System
+- **Step-by-Step Workflow**: Guided 5-step process for deployments
+- **Automatic Baseline Detection**: Intelligently selects Release or Branch based on decision service configuration
+- **RuleApp Archive Download**: Direct download of compiled RuleApp JAR files
+- **Script Generation**: Generate reusable PowerShell or Bash scripts for automation
+- **No Installation Required**: Standalone executables for Windows, Linux, and macOS
+
+#### Quick Start
+
+```bash
+# Download the executable for your platform
+# Windows: dist/ibm-dc-deploy-win.exe
+# Linux: dist/ibm-dc-deploy-linux
+# macOS: dist/ibm-dc-deploy-macos
+
+# Run the executable
+./ibm-dc-deploy-linux
+
+# Open browser to http://localhost:3000
+```
+
+#### Technologies
+
+- Node.js
+- REST API
+- IBM Carbon Design System
+- Cross-platform executables
+
+[View on GitHub](https://github.com/DecisionsDev/odm-dc-rest-api-sample)
+
+## Use Cases
+
+### Manual Deployments
+
+Use the web UI for interactive, guided deployments with visual feedback.
+
+### Automated Deployments
+
+Generate scripts for CI/CD pipelines and scheduled deployments.
+
+### Archive Management
+
+Download and manage RuleApp JAR files for deployment to Rule Execution Server.
+
+## Getting Started
+
+### Installation
+
+No installation required! Download the pre-built executable for your platform:
+
+#### Windows
+
+Download `ibm-dc-deploy-win.exe` and run it directly.
+
+#### Linux
+
+Download `ibm-dc-deploy-linux`, make it executable, and run:
+```bash
+chmod +x ibm-dc-deploy-linux
+./ibm-dc-deploy-linux
+```
+
+#### macOS
+
+Download `ibm-dc-deploy-macos`, make it executable, and run:
+```bash
+chmod +x ibm-dc-deploy-macos
+./ibm-dc-deploy-macos
+```
+
+### Configuration
+
+The tool requires access to your IBM Decision Center instance:
+
+1. **Server URL**: The URL of your Decision Center server
+2. **Protocol**: HTTP or HTTPS
+3. **Port**: The port number (typically 9060 or 9443)
+4. **Credentials**: Username and password with deployment permissions
+
+### Usage
+
+Follow the 5-step workflow in the web interface:
+
+1. **Connect**: Enter your Decision Center server details
+2. **Select Decision Service**: Choose the decision service to deploy
+3. **Select Baseline**: Choose Branch/Release/Activity
+4. **Select Deployment**: Choose the deployment configuration
+5. **Deploy & Export**: Build and download the RuleApp archive
+
+### Troubleshooting
+
+#### 404 Error on Windows
+
+Ensure the executable and `deploy-ui.html` are in the same directory.
+
+#### Port Already in Use
+
+Stop any other application using port 3000 or modify the port in the configuration.
+
+#### Connection Refused
+
+Verify the Decision Center server URL, port, and protocol (HTTP vs HTTPS).
+
+## Contributing
+
+We welcome contributions! Please see our [contributing guidelines](https://github.com/DecisionsDev/odm-dc-rest-api-sample/blob/main/CONTRIBUTING.md).
+
+## Support
+
+For issues and questions:
+- [GitHub Issues](https://github.com/DecisionsDev/odm-dc-rest-api-sample/issues)
+- [IBM Community](https://community.ibm.com/)
+
+## Related Resources
+
+- [REST API Samples](https://github.com/DecisionsDev/odm-dc-rest-api-sample)
+- [IBM ODM Documentation](https://www.ibm.com/docs/en/odm)
+- [IBM ODM Product Page](https://www.ibm.com/products/operational-decision-manager)

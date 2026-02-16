@@ -1,0 +1,32 @@
+{
+  "name": "decisionsdevelopment-github-io",
+  "version": "1.0.0",
+  "description": "DecisionsDev organization website showcasing IBM ODM projects",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "deploy": "gatsby build && gh-pages -d public"
+  },
+  "keywords": [
+    "gatsby",
+    "carbon",
+    "ibm",
+    "odm",
+    "decision-manager"
+  ],
+  "author": "IBM Corporation",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "gatsby": "^5.13.0",
+    "gatsby-theme-carbon": "^4.3.36",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.1.0"
+  }
+}

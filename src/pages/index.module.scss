@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap');
+
+.imageCardRow {
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.productCard {
+  :global(.cds--image-card) {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+  
+  :global(.cds--image-card__title) {
+    font-family: 'Fredoka', 'IBM Plex Sans', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    letter-spacing: 0.5px;
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    padding: 0.75rem 1rem !important;
+    text-align: center !important;
+  }
+}
+
+// Made with Bob

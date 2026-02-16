@@ -1,0 +1,13 @@
+.pageHeader {
+  :global(.cds--grid .cds--row:first-of-type) {
+    min-height: 8rem !important;
+    display: flex;
+    align-items: center;
+  }
+  
+  :global(.cds--grid .cds--row:first-of-type h1) {
+    margin: 0;
+  }
+}
+
+// Made with Bob

@@ -1,0 +1,25 @@
+- title: Home
+  pages:
+    - path: /
+
+- title: Repositories
+  pages:
+    - title: All
+      path: /repositories
+    - title: Operational Decision Manager (ODM)
+      path: /repositories#odm
+    - title: Decision Intelligence
+      path: /repositories#decision-intelligence
+    - title: Business Automations Insight (BAI)
+      path: /repositories#bai
+    - title: Cloud Pak for Business Automation (CP4BA)
+      path: /repositories#cp4ba
+
+- title: Resources
+  pages:
+    - title: GitHub Organization
+      path: https://github.com/DecisionsDev
+    - title: Topics Guide
+      path: https://github.com/DecisionsDev/decisionsdev.github.io/blob/main/TOPICS_GUIDE.md
+
+# Made with Bob
