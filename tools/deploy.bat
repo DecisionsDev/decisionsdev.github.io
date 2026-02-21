@@ -35,6 +35,16 @@ if errorlevel 1 (
 echo ✅ Clean complete
 echo.
 
+REM Fetch and categorize repositories
+echo 📚 Fetching and categorizing repositories...
+call npm run build:repos
+if errorlevel 1 (
+    echo ❌ Repository fetch failed
+    exit /b 1
+)
+echo ✅ Repositories updated
+echo.
+
 REM Build the site
 echo 🔨 Building Gatsby site...
 call npm run build

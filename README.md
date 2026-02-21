@@ -50,6 +50,7 @@ DecisionsDev.github.io/
 │   ├── TOPICS_GUIDE.md            # Topics guide
 │   └── topics-report.md           # Topics report
 ├── tools/                         # Utility scripts
+│   ├── build-repositories.js      # Build repositories.json with categorization
 │   ├── fetch-repos.js             # Fetch repositories from GitHub
 │   ├── generate-topics-report.js  # Generate topics report
 │   ├── add-topics-to-repos.js     # Add topics to repositories
@@ -69,7 +70,10 @@ DecisionsDev.github.io/
 # Start development server
 npm run dev
 
-# Build for production
+# Fetch and categorize repositories from GitHub
+npm run build:repos
+
+# Build for production (includes build:repos)
 npm run build
 
 # Serve production build locally
@@ -240,16 +244,23 @@ The site will be live at `https://decisionsdevelopment.github.io/`
 
 The `tools/` directory contains utility scripts for managing the repository:
 
+- **build-repositories.js** - Fetch repos from GitHub and apply categorization (creates repositories.json)
 - **fetch-repos.js** - Fetch repository data from GitHub API
 - **generate-topics-report.js** - Generate a report of repository topics
 - **add-topics-to-repos.js** - Automatically add structured topics to repositories
-- **topic-analyzer.js** - Analyze repository topics
+- **topic-analyzer.js** - Analyze repository topics and suggest categories
 - **deploy.sh** / **deploy.bat** - Deployment scripts for Linux/Mac and Windows
 
 ### Using the Tools
 
 ```bash
-# Fetch latest repository data
+# Build repositories.json with categorization (recommended)
+npm run build:repos
+
+# Or run directly
+node tools/build-repositories.js
+
+# Fetch latest repository data (raw)
 node tools/fetch-repos.js > src/data/repositories.json
 
 # Generate topics report
@@ -263,12 +274,43 @@ node tools/add-topics-to-repos.js --dry-run
 tools\deploy.bat   # Windows
 ```
 
+### Repository Categorization
+
+The `build-repositories.js` script automatically categorizes repositories based on their names and descriptions:
+
+- **Products**: `odm`, `decision-intelligence`, `bai`, `cp4ba`
+- **Components**: `decisioncenter`, `ruleexecutionserver`, `container`, `ai`, etc.
+- **Types**: `sample`, `tool`, `tutorial`, `documentation`, `integration`, etc.
+
+The script:
+1. Fetches all repositories from the DecisionsDev GitHub organization
+2. Analyzes each repository using `topic-analyzer.js`
+3. Adds a `categories` field with clean names (without prefixes)
+4. Preserves original GitHub `topics` for backward compatibility
+5. Writes the result to `src/data/repositories.json`
+
+Example output structure:
+```json
+{
+  "name": "odm-ondocker",
+  "description": "Deploy ODM with Docker Compose",
+  "topics": ["docker", "ibm-odm", "odm"],
+  "categories": {
+    "products": ["odm"],
+    "components": ["container"],
+    "types": ["sample"]
+  },
+  "url": "https://github.com/DecisionsDev/odm-ondocker"
+}
+```
+
 ## 📖 Documentation
 
 The `docs/` directory contains detailed documentation:
 
 - **[SETUP.md](docs/SETUP.md)** - Complete setup guide
 - **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Deployment instructions
+- **[CATEGORIZATION.md](docs/CATEGORIZATION.md)** - Repository categorization system
 - **[TOPICS_GUIDE.md](docs/TOPICS_GUIDE.md)** - Guide for repository topics
 - **[README-TOPICS-SCRIPT.md](docs/README-TOPICS-SCRIPT.md)** - Topics script documentation
 

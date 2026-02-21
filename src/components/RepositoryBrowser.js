@@ -3,11 +3,12 @@ import repositories from '../data/repositories.json';
 
 // Define product tabs as a constant outside component
 const productTabs = [
-  { id: 'all', shortLabel: 'All', label: 'All', topic: null },
-  { id: 'odm', shortLabel: 'ODM', label: 'Operational Decision Manager', topic: 'product-odm' },
-  { id: 'decision-intelligence', shortLabel: 'DI', label: 'Decision Intelligence', topic: 'product-decision-intelligence' },
-  { id: 'bai', shortLabel: 'BAI', label: 'Business Automation Insight', topic: 'product-bai' },
-  { id: 'cp4ba', shortLabel: 'CP4BA', label: 'Cloud Pak for Business Automation', topic: 'product-cp4ba' }
+  { id: 'all', shortLabel: 'All', label: 'All', category: null },
+  { id: 'odm', shortLabel: 'ODM', label: 'Operational Decision Manager', category: 'odm' },
+  { id: 'decision-intelligence', shortLabel: 'DI', label: 'Decision Intelligence', category: 'decision-intelligence' },
+  { id: 'bai', shortLabel: 'BAI', label: 'Business Automation Insight', category: 'bai' },
+  { id: 'cp4ba', shortLabel: 'CP4BA', label: 'Cloud Pak for Business Automation', category: 'cp4ba' },
+  { id: 'other', shortLabel: 'Other', label: 'Other', category: 'other' }
 ];
 
 const RepositoryBrowser = () => {
@@ -67,16 +68,16 @@ const RepositoryBrowser = () => {
     window.location.hash = tabId === 'all' ? '' : tabId;
   };
 
-  // Extract unique filter values
+  // Extract unique filter values from categories
   const filters = useMemo(() => {
     const components = new Set();
     const types = new Set();
 
     repositories.forEach(repo => {
-      repo.topics.forEach(topic => {
-        if (topic.startsWith('comp-')) components.add(topic);
-        if (topic.startsWith('type-')) types.add(topic);
-      });
+      if (repo.categories) {
+        repo.categories.components.forEach(comp => components.add(comp));
+        repo.categories.types.forEach(type => types.add(type));
+      }
     });
 
     return {
@@ -89,9 +90,24 @@ const RepositoryBrowser = () => {
   const filteredRepos = useMemo(() => {
     return repositories.filter(repo => {
       const activeProduct = productTabs.find(tab => tab.id === activeTab);
-      const matchesProduct = activeTab === 'all' || repo.topics.includes(activeProduct.topic);
-      const matchesComponent = componentFilter === 'all' || repo.topics.includes(componentFilter);
-      const matchesType = typeFilter === 'all' || repo.topics.includes(typeFilter);
+      
+      // Handle product filtering with categories
+      let matchesProduct = false;
+      if (activeTab === 'all') {
+        matchesProduct = true;
+      } else if (activeTab === 'other') {
+        // "Other" tab shows repos without any product categorization
+        matchesProduct = !repo.categories || repo.categories.products.length === 0;
+      } else if (repo.categories && repo.categories.products) {
+        matchesProduct = repo.categories.products.includes(activeProduct.category);
+      }
+      
+      // Handle component and type filtering with categories
+      const matchesComponent = componentFilter === 'all' ||
+        (repo.categories && repo.categories.components.includes(componentFilter));
+      const matchesType = typeFilter === 'all' ||
+        (repo.categories && repo.categories.types.includes(typeFilter));
+      
       const matchesSearch = searchTerm === '' ||
         repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (repo.description && repo.description.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -107,16 +123,23 @@ const RepositoryBrowser = () => {
     productTabs.forEach(tab => {
       if (tab.id === 'all') {
         counts[tab.id] = repositories.length;
+      } else if (tab.id === 'other') {
+        // Count repos without any product categorization
+        counts[tab.id] = repositories.filter(repo =>
+          !repo.categories || repo.categories.products.length === 0
+        ).length;
       } else {
-        counts[tab.id] = repositories.filter(repo => repo.topics.includes(tab.topic)).length;
+        counts[tab.id] = repositories.filter(repo =>
+          repo.categories && repo.categories.products.includes(tab.category)
+        ).length;
       }
     });
     return counts;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const formatTopicLabel = (topic) => {
-    return topic.replace(/^(product|comp|type)-/, '').replace(/-/g, ' ').toUpperCase();
+  const formatCategoryLabel = (category) => {
+    return category.replace(/-/g, ' ').toUpperCase();
   };
 
   return (
@@ -206,7 +229,7 @@ const RepositoryBrowser = () => {
             <option value="all">All Components</option>
             {filters.components.map(component => (
               <option key={component} value={component}>
-                {formatTopicLabel(component)}
+                {formatCategoryLabel(component)}
               </option>
             ))}
           </select>
@@ -229,7 +252,7 @@ const RepositoryBrowser = () => {
             <option value="all">All Types</option>
             {filters.types.map(type => (
               <option key={type} value={type}>
-                {formatTopicLabel(type)}
+                {formatCategoryLabel(type)}
               </option>
             ))}
           </select>

@@ -29,6 +29,12 @@ npm run clean
 echo "✅ Clean complete"
 echo ""
 
+# Fetch and categorize repositories
+echo "📚 Fetching and categorizing repositories..."
+npm run build:repos
+echo "✅ Repositories updated"
+echo ""
+
 # Build the site
 echo "🔨 Building Gatsby site..."
 npm run build
