@@ -7,10 +7,13 @@ module.exports = {
   },
   pathPrefix: '/',
   plugins: [
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
       resolve: 'gatsby-theme-carbon',
       options: {
-        iconPath: './src/images/favicon.svg',
+        iconPath: './src/images/github-avatar.png',
         theme: {
           homepage: 'dark',
           interior: 'g10',

@@ -3,11 +3,11 @@ import repositories from '../data/repositories.json';
 
 // Define product tabs as a constant outside component
 const productTabs = [
-  { id: 'all', label: 'All', topic: null },
-  { id: 'odm', label: 'Operational Decision Manager', topic: 'product-odm' },
-  { id: 'decision-intelligence', label: 'Decision Intelligence', topic: 'product-decision-intelligence' },
-  { id: 'bai', label: 'Business Automation insight', topic: 'product-bai' },
-  { id: 'cp4ba', label: 'Cloud Pak for Business Automation', topic: 'product-cp4ba' }
+  { id: 'all', shortLabel: 'All', label: 'All', topic: null },
+  { id: 'odm', shortLabel: 'ODM', label: 'Operational Decision Manager', topic: 'product-odm' },
+  { id: 'decision-intelligence', shortLabel: 'DI', label: 'Decision Intelligence', topic: 'product-decision-intelligence' },
+  { id: 'bai', shortLabel: 'BAI', label: 'Business Automation Insight', topic: 'product-bai' },
+  { id: 'cp4ba', shortLabel: 'CP4BA', label: 'Cloud Pak for Business Automation', topic: 'product-cp4ba' }
 ];
 
 const RepositoryBrowser = () => {
@@ -131,6 +131,7 @@ const RepositoryBrowser = () => {
         {productTabs.map(tab => (
           <button
             key={tab.id}
+            title={tab.label}
             onClick={() => handleTabChange(tab.id)}
             style={{
               padding: '1rem 2rem',
@@ -155,7 +156,7 @@ const RepositoryBrowser = () => {
               }
             }}
           >
-            {tab.label} ({productCounts[tab.id] || 0})
+            {tab.shortLabel} ({productCounts[tab.id] || 0})
           </button>
         ))}
       </div>

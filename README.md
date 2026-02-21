@@ -40,7 +40,22 @@ DecisionsDev.github.io/
 │   │   ├── rest-api.mdx           # REST API samples page
 │   │   └── docker.mdx             # Docker resources page
 │   ├── images/                    # Image assets
+│   ├── components/                # React components
+│   ├── data/                      # Data files (repositories.json, nav-items.yaml)
 │   └── gatsby-theme-carbon/       # Theme customizations
+├── docs/                          # Documentation files
+│   ├── SETUP.md                   # Setup guide
+│   ├── DEPLOYMENT.md              # Deployment guide
+│   ├── README-TOPICS-SCRIPT.md    # Topics script documentation
+│   ├── TOPICS_GUIDE.md            # Topics guide
+│   └── topics-report.md           # Topics report
+├── tools/                         # Utility scripts
+│   ├── fetch-repos.js             # Fetch repositories from GitHub
+│   ├── generate-topics-report.js  # Generate topics report
+│   ├── add-topics-to-repos.js     # Add topics to repositories
+│   ├── topic-analyzer.js          # Analyze repository topics
+│   ├── deploy.sh                  # Deployment script (Linux/Mac)
+│   └── deploy.bat                 # Deployment script (Windows)
 ├── gatsby-config.js               # Gatsby configuration
 ├── package.json                   # Dependencies
 └── README.md                      # This file
@@ -220,6 +235,42 @@ jobs:
 4. Save
 
 The site will be live at `https://decisionsdevelopment.github.io/`
+
+## 🛠️ Tools
+
+The `tools/` directory contains utility scripts for managing the repository:
+
+- **fetch-repos.js** - Fetch repository data from GitHub API
+- **generate-topics-report.js** - Generate a report of repository topics
+- **add-topics-to-repos.js** - Automatically add structured topics to repositories
+- **topic-analyzer.js** - Analyze repository topics
+- **deploy.sh** / **deploy.bat** - Deployment scripts for Linux/Mac and Windows
+
+### Using the Tools
+
+```bash
+# Fetch latest repository data
+node tools/fetch-repos.js > src/data/repositories.json
+
+# Generate topics report
+node tools/generate-topics-report.js
+
+# Add topics to repositories (dry-run)
+node tools/add-topics-to-repos.js --dry-run
+
+# Deploy the site
+./tools/deploy.sh  # Linux/Mac
+tools\deploy.bat   # Windows
+```
+
+## 📖 Documentation
+
+The `docs/` directory contains detailed documentation:
+
+- **[SETUP.md](docs/SETUP.md)** - Complete setup guide
+- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Deployment instructions
+- **[TOPICS_GUIDE.md](docs/TOPICS_GUIDE.md)** - Guide for repository topics
+- **[README-TOPICS-SCRIPT.md](docs/README-TOPICS-SCRIPT.md)** - Topics script documentation
 
 ## 📚 Resources
 
