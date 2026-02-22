@@ -10,24 +10,40 @@ import * as styles from './repositories.module.scss';
 
 <RepositoryBrowser />
 
-### About Repository Topics
+### How to Use This Page
 
-We use a structured topic system to organize our repositories:
+**Filter by Topics**: Use the filters above to find repositories by:
+- **Product**: `odm`, `decision-intelligence`, `bai`, `cp4ba`
+- **Technology**: `docker`, `kubernetes`, `java`, `business-rules`, `rpa`
+- **Type**: `tutorial`, `sample`, `integration`, `tools`
 
-- **product-xxx**: Indicates which IBM product the repository relates to (e.g., `product-odm`, `product-decision-intelligence`, `product-bai`)
-- **comp-xxx**: Indicates which component of the product (e.g., `comp-decisioncenter`, `comp-ruleexecutionserver`)
-- **type-xxx**: Indicates the type of repository (e.g., `type-sample`, `type-tool`, `type-tutorial`)
+**Search**: Use the search box to find repositories by name or description
 
-### Contributing
+**Browse**: Scroll through all repositories or click on a product card to see related projects
 
-If you maintain a repository in the DecisionsDev organization, please add structured topics to help users find your work:
+### Understanding Topics
 
-```bash
-# Example: Add topics to your repository
-gh repo edit owner/repo --add-topic product-odm
-gh repo edit owner/repo --add-topic comp-decisioncenter
-gh repo edit owner/repo --add-topic type-sample
-```
+Each repository is tagged with 3-7 topics that describe:
+- **What product** it relates to (e.g., `odm`, `decision-intelligence`)
+- **What technologies** it uses (e.g., `docker`, `java`, `kafka`)
+- **What type** of resource it is (e.g., `tutorial`, `sample`, `integration`)
+
+Common topics you'll see:
+- `odm` - IBM Operational Decision Manager (most popular)
+- `docker` - Container-based deployments
+- `tutorial` - Step-by-step learning resources
+- `business-rules` - Business rules engines
+- `rpa` - Robotic Process Automation integrations
+
+### For Contributors
+
+If you maintain a repository in DecisionsDev, please add relevant topics:
+
+1. **Use existing topics** - Check what topics are already in use
+2. **Choose 3-7 topics** - Select the most relevant ones
+3. **Add via GitHub UI** - Click the gear icon ⚙️ next to "About" on your repository page
+
+See our [Topics Guide](https://github.com/DecisionsDev/decisionsdev.github.io/blob/main/docs/TOPICS_GUIDE.md) for detailed guidance.
 
 ### Resources
 

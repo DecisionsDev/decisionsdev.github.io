@@ -6,100 +6,71 @@
 // Topic mapping rules
 const TOPIC_RULES = {
   products: {
-    'product-odm': {
+    'odm': {
       keywords: ['odm', 'operational decision manager', 'decision manager', 'ibm-odm', 'ibmodm'],
       priority: 10
     },
-    'product-decision-intelligence': {
+    'decision-intelligence': {
       keywords: ['ads', 'automation decision services', 'ibm-ads', 'di', 'decision intelligence', 'decision-intelligence'],
       priority: 10
     },
-    'product-bai': {
-      keywords: ['bai', 'business automation insights', 'insights'],
+    'bai': {
+      keywords: ['business automation insights', 'business-automation-insights', 'ibm-bai'],
       priority: 10
     },
-    'product-cp4ba': {
+    'cp4ba': {
       keywords: ['cp4ba', 'cloud pak', 'business automation'],
       priority: 5
     }
   },
   components: {
-    'comp-decisioncenter': {
+    'decisioncenter': {
       keywords: ['decision center', 'decisioncenter', 'dc-', '-dc-', 'decision-center'],
       priority: 8
     },
-    'comp-ruleexecutionserver': {
+    'ruleexecutionserver': {
       keywords: ['rule execution server', 'ruleapp', 'ruleset', 'execution', 'runtime', 'micro-decision', 'res-'],
       priority: 8
     },
-    'comp-dsi': {
-      keywords: ['dsi', 'decision server insights', 'insights', 'situation'],
+    'dsi': {
+      keywords: ['dsi', 'decision server insights', 'situation'],
       priority: 8
     },
-    'comp-container': {
+    'container': {
       keywords: ['docker', 'dockerfile', 'container', 'ondocker', 'kubernetes', 'k8s', 'helm', 'openshift'],
       priority: 7
     },
-    'comp-ai': {
-      keywords: ['ai', 'mcp', 'llm', 'artificial intelligence', 'machine learning', 'ml'],
+    'ai': {
+      keywords: ['artificial intelligence', 'machine learning', 'llm', 'mcp', 'ai-integration', 'ai-ml'],
       priority: 7
     },
-    'comp-designer': {
+    'designer': {
       keywords: ['designer', 'modeling', 'authoring'],
       priority: 6
     },
-    'comp-analytics': {
+    'analytics': {
       keywords: ['analytics', 'dashboard', 'kibana', 'monitoring'],
       priority: 6
     },
-    'comp-events': {
+    'events': {
       keywords: ['event', 'kafka', 'messaging', 'stream'],
       priority: 6
-    }
-  },
-  types: {
-    'type-sample': {
-      keywords: ['sample', 'example', 'demo', 'showcase'],
-      priority: 9
-    },
-    'type-tool': {
-      keywords: ['tool', 'utility', 'cli', 'extractor', 'loader', 'report'],
-      priority: 9
-    },
-    'type-tutorial': {
-      keywords: ['tutorial', 'getting-started', 'gettingstarted', 'step-by-step'],
-      priority: 9
-    },
-    'type-documentation': {
-      keywords: ['documentation', 'docs', 'guide'],
-      priority: 9
-    },
-    'type-deployment': {
-      keywords: ['deployment', 'install', 'setup', 'configuration'],
-      priority: 8
-    },
-    'type-integration': {
-      keywords: ['integration', 'connector', 'adapter', 'bridge', 'mcp'],
-      priority: 8
-    },
-    'type-library': {
-      keywords: ['library', 'libs', 'sdk', 'api'],
-      priority: 8
     }
   }
 };
 
 /**
- * Analyze repository name and description to suggest topics
- * @param {Object} repo - Repository object with name and description
+ * Analyze repository name, description, and topics to suggest topics
+ * @param {Object} repo - Repository object with name, description, and topics
  * @returns {Object} Suggestions object with products, components, types, and confidence scores
  */
 function analyzeRepository(repo) {
-  const text = `${repo.name} ${repo.description || ''}`.toLowerCase();
+  // Include repository name, description, and existing topics in the analysis
+  const topicsText = Array.isArray(repo.topics) ? repo.topics.join(' ') : '';
+  const text = `${repo.name} ${repo.description || ''} ${topicsText}`.toLowerCase();
   const suggestions = {
     products: [],
     components: [],
-    types: [],
     confidence: {}
   };
 
@@ -128,35 +99,35 @@ function analyzeRepository(repo) {
   }
 
   // Apply product inference rules
-  // Rule 1: If Decision Center, Rule Execution Server, or Container → must be ODM
-  if (suggestions.components.includes('comp-decisioncenter') || 
-      suggestions.components.includes('comp-ruleexecutionserver') ||
-      suggestions.components.includes('comp-container')) {
-    if (!suggestions.products.includes('product-odm')) {
-      suggestions.products.push('product-odm');
-      suggestions.confidence['product-odm'] = {
-        score: 10,
-        matches: ['inferred from ODM components']
-      };
-    }
+  // Rule 1: If Decision Center, Rule Execution Server, or Container → must be ODM (only if no product selected)
+  if (suggestions.products.length === 0 &&
+      (suggestions.components.includes('decisioncenter') ||
+       suggestions.components.includes('ruleexecutionserver') ||
+       suggestions.components.includes('container'))) {
+    suggestions.products.push('odm');
+    suggestions.confidence['odm'] = {
+      score: 10,
+      matches: ['inferred from ODM components']
+    };
   }
 
   // Rule 2: Check for decision-assistant → Decision Intelligence
   if (text.includes('decision-assistant') || text.includes('decision assistant')) {
-    if (!suggestions.products.includes('product-decision-intelligence')) {
-      suggestions.products.push('product-decision-intelligence');
-      suggestions.confidence['product-decision-intelligence'] = {
+    if (!suggestions.products.includes('decision-intelligence')) {
+      suggestions.products.push('decision-intelligence');
+      suggestions.confidence['decision-intelligence'] = {
         score: 10,
         matches: ['decision-assistant']
       };
     }
   }
 
-  // Rule 3: Check for decision-engine → ODM
-  if (text.includes('decision-engine') || text.includes('decision engine')) {
-    if (!suggestions.products.includes('product-odm')) {
-      suggestions.products.push('product-odm');
-      suggestions.confidence['product-odm'] = {
+  // Rule 3: Check for decision-engine → ODM (but not if Decision Intelligence is already detected)
+  if ((text.includes('decision-engine') || text.includes('decision engine')) &&
+      !suggestions.products.includes('decision-intelligence')) {
+    if (!suggestions.products.includes('odm')) {
+      suggestions.products.push('odm');
+      suggestions.confidence['odm'] = {
         score: 10,
         matches: ['decision-engine']
       };
@@ -164,22 +135,13 @@ function analyzeRepository(repo) {
   }
 
   // Rule 4: If Decision Intelligence → exclude ODM-specific components
-  if (suggestions.products.includes('product-decision-intelligence')) {
+  if (suggestions.products.includes('decision-intelligence')) {
     suggestions.components = suggestions.components.filter(
-      c => c !== 'comp-decisioncenter' && c !== 'comp-ruleexecutionserver'
+      c => c !== 'decisioncenter' && c !== 'ruleexecutionserver'
     );
     // Remove confidence entries for excluded components
-    delete suggestions.confidence['comp-decisioncenter'];
-    delete suggestions.confidence['comp-ruleexecutionserver'];
-  }
-
-  // Rule 5: Default type is sample if no type is specified
-  if (suggestions.types.length === 0 && (suggestions.products.length > 0 || suggestions.components.length > 0)) {
-    suggestions.types.push('type-sample');
-    suggestions.confidence['type-sample'] = {
-      score: 5,
-      matches: ['default type']
-    };
+    delete suggestions.confidence['decisioncenter'];
+    delete suggestions.confidence['ruleexecutionserver'];
   }
 
   return suggestions;

@@ -16,6 +16,12 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const ORG_NAME = 'DecisionsDev';
 const OUTPUT_PATH = path.join(__dirname, '../src/data/repositories.json');
 
+// Repositories to exclude from the build
+// .github: Special GitHub organization profile repository, not a project repository
+// decisionsdev.github.io: This website repository itself
+// sample-template_repository: Template repository, not a real project
+const EXCLUDED_REPOS = ['.github', 'decisionsdev.github.io', 'sample-template_repository'];
+
 /**
  * Strip prefixes from topic names to get clean category names
  * @param {string} topic - Topic with prefix (e.g., 'product-odm')
@@ -82,15 +88,16 @@ function fetchRepositories() {
  * @returns {Array} Processed repositories with categories
  */
 function processRepositories(repos) {
-  return repos.map(repo => {
+  return repos
+    .filter(repo => !EXCLUDED_REPOS.includes(repo.name)) // Exclude repositories in EXCLUDED_REPOS list
+    .map(repo => {
     // Analyze repository to get suggested categories
     const analysis = analyzeRepository(repo);
 
     // Build categories object with clean names
     const categories = {
       products: analysis.products.map(stripPrefix),
-      components: analysis.components.map(stripPrefix),
-      types: analysis.types.map(stripPrefix)
+      components: analysis.components.map(stripPrefix)
     };
 
     // Return repository with both original topics and new categories
@@ -99,7 +106,10 @@ function processRepositories(repos) {
       description: repo.description,
       topics: repo.topics || [], // Preserve original GitHub topics
       categories: categories,     // Add structured categories with clean names
-      url: repo.html_url
+      url: repo.html_url,
+      stars: repo.stargazers_count || 0,  // Add star count
+      forks: repo.forks_count || 0,        // Add fork count
+      updated_at: repo.updated_at          // Add last updated date
     };
   });
 }
@@ -132,14 +142,12 @@ async function main() {
     const stats = {
       withProducts: processedRepos.filter(r => r.categories.products.length > 0).length,
       withComponents: processedRepos.filter(r => r.categories.components.length > 0).length,
-      withTypes: processedRepos.filter(r => r.categories.types.length > 0).length,
       withoutProducts: processedRepos.filter(r => r.categories.products.length === 0).length
     };
 
     console.log('\nCategorization Summary:');
     console.log(`  Repositories with products: ${stats.withProducts}`);
     console.log(`  Repositories with components: ${stats.withComponents}`);
-    console.log(`  Repositories with types: ${stats.withTypes}`);
     console.log(`  Repositories without products (will appear in "Other"): ${stats.withoutProducts}`);
 
   } catch (error) {

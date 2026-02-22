@@ -244,11 +244,18 @@ The site will be live at `https://decisionsdevelopment.github.io/`
 
 The `tools/` directory contains utility scripts for managing the repository:
 
+### Repository Management
 - **build-repositories.js** - Fetch repos from GitHub and apply categorization (creates repositories.json)
 - **fetch-repos.js** - Fetch repository data from GitHub API
-- **generate-topics-report.js** - Generate a report of repository topics
-- **add-topics-to-repos.js** - Automatically add structured topics to repositories
 - **topic-analyzer.js** - Analyze repository topics and suggest categories
+
+### Topic Management
+- **list-all-topics.js** - List all topics used across DecisionsDev repositories
+- **remove-topics-from-repos.js** - Remove or replace topics in repositories
+- **add-topics-to-repos.js** - Automatically add structured topics to repositories
+- **generate-topics-report.js** - Generate a report of repository topics
+
+### Deployment
 - **deploy.sh** / **deploy.bat** - Deployment scripts for Linux/Mac and Windows
 
 ### Using the Tools
@@ -257,17 +264,21 @@ The `tools/` directory contains utility scripts for managing the repository:
 # Build repositories.json with categorization (recommended)
 npm run build:repos
 
-# Or run directly
-node tools/build-repositories.js
+# List all topics used in the organization
+node tools/list-all-topics.js
+node tools/list-all-topics.js --verbose  # Show which repos use each topic
+node tools/list-all-topics.js --pattern "product-*"  # Filter by pattern
 
-# Fetch latest repository data (raw)
-node tools/fetch-repos.js > src/data/repositories.json
+# Remove topics from repositories
+node tools/remove-topics-from-repos.js --topics old-topic --dry-run
+node tools/remove-topics-from-repos.js --topics old-topic --apply
+
+# Replace topics (only where they exist)
+node tools/remove-topics-from-repos.js --topics old-topic --replace new-topic --dry-run
+node tools/remove-topics-from-repos.js --pattern "odmdev-*" --replace odm --apply
 
 # Generate topics report
 node tools/generate-topics-report.js
-
-# Add topics to repositories (dry-run)
-node tools/add-topics-to-repos.js --dry-run
 
 # Deploy the site
 ./tools/deploy.sh  # Linux/Mac
@@ -350,6 +361,23 @@ The `docs/` directory contains detailed documentation:
 - Add links to relevant repositories
 - Use proper Markdown formatting
 - Test all links
+
+### Adding Topics to Your Repository
+
+When contributing a new repository to DecisionsDev, please add relevant topics:
+
+1. **Use existing topics** - Run `node tools/list-all-topics.js` to see all topics currently in use
+2. **Select the most relevant** - Choose 3-7 topics that best describe your repository
+3. **Follow the pattern** - Use lowercase, hyphenated names (e.g., `decision-center`, not `DecisionCenter`)
+4. **Common topics include**:
+   - **Products**: `odm`, `decision-intelligence`, `bai`, `cp4ba`
+   - **Technologies**: `docker`, `kubernetes`, `java`, `react`, `kafka`
+   - **Types**: `tutorial`, `sample`, `integration`, `rpa`
+   - **Components**: `decision-center`, `dsi`, `analytics`
+
+**Example**: For an ODM Docker tutorial, use: `odm`, `docker`, `tutorial`, `business-rules`
+
+See [TOPICS_GUIDE.md](docs/TOPICS_GUIDE.md) for detailed guidance.
 
 ### Code Style
 

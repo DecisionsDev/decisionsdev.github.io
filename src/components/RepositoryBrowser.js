@@ -1,5 +1,8 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import repositories from '../data/repositories.json';
+
+// GitHub token from environment (optional, for higher rate limits)
+const GITHUB_TOKEN = process.env.GATSBY_GITHUB_TOKEN;
 
 // Define product tabs as a constant outside component
 const productTabs = [
@@ -14,8 +17,12 @@ const productTabs = [
 const RepositoryBrowser = () => {
   const [activeTab, setActiveTab] = useState('all');
   const [componentFilter, setComponentFilter] = useState('all');
-  const [typeFilter, setTypeFilter] = useState('all');
+  const [topicFilter, setTopicFilter] = useState([]); // Changed to array for multiple selection
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortByStars, setSortByStars] = useState(false); // Toggle for star sorting
+  const [expandedRepo, setExpandedRepo] = useState(null); // Track which repo is expanded
+  const [readmeCache, setReadmeCache] = useState({}); // Cache README content
+  const [loadingReadme, setLoadingReadme] = useState(null); // Track loading state
 
   // Handle URL hash changes for navigation
   useEffect(() => {
@@ -25,13 +32,13 @@ const RepositoryBrowser = () => {
         setActiveTab(hash);
         // Reset filters when changing tabs
         setComponentFilter('all');
-        setTypeFilter('all');
+        setTopicFilter([]);
         setSearchTerm('');
       } else if (!hash) {
         setActiveTab('all');
         // Reset filters when going to all
         setComponentFilter('all');
-        setTypeFilter('all');
+        setTopicFilter([]);
         setSearchTerm('');
       }
     };
@@ -68,27 +75,59 @@ const RepositoryBrowser = () => {
     window.location.hash = tabId === 'all' ? '' : tabId;
   };
 
-  // Extract unique filter values from categories
+  // Extract unique filter values from categories and topics based on current filters
   const filters = useMemo(() => {
     const components = new Set();
-    const types = new Set();
+    const topics = new Set();
 
-    repositories.forEach(repo => {
+    // Filter repositories based on active product tab and current filters
+    const activeProduct = productTabs.find(tab => tab.id === activeTab);
+    const dynamicFilteredRepos = repositories.filter(repo => {
+      // Product filter
+      let matchesProduct = false;
+      if (activeTab === 'all') {
+        matchesProduct = true;
+      } else if (activeTab === 'other') {
+        matchesProduct = !repo.categories || repo.categories.products.length === 0;
+      } else if (repo.categories && repo.categories.products) {
+        matchesProduct = repo.categories.products.includes(activeProduct.category);
+      }
+
+      // Component filter (only apply if not 'all')
+      const matchesComponent = componentFilter === 'all' ||
+        (repo.categories && repo.categories.components.includes(componentFilter));
+
+      // Topic filter (only apply if array is not empty) - must have ALL selected topics
+      const matchesTopic = topicFilter.length === 0 ||
+        (repo.topics && topicFilter.every(topic => repo.topics.includes(topic)));
+
+      // Search filter
+      const matchesSearch = searchTerm === '' ||
+        repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (repo.description && repo.description.toLowerCase().includes(searchTerm.toLowerCase()));
+
+      return matchesProduct && matchesComponent && matchesTopic && matchesSearch;
+    });
+
+    // Extract components and topics from dynamically filtered repositories
+    dynamicFilteredRepos.forEach(repo => {
       if (repo.categories) {
         repo.categories.components.forEach(comp => components.add(comp));
-        repo.categories.types.forEach(type => types.add(type));
+      }
+      if (repo.topics) {
+        repo.topics.forEach(topic => topics.add(topic));
       }
     });
 
     return {
       components: Array.from(components).sort(),
-      types: Array.from(types).sort()
+      topics: Array.from(topics).sort()
     };
-  }, []);
+  }, [activeTab, componentFilter, topicFilter, searchTerm]);
 
-  // Filter repositories
+  // Filter and sort repositories
   const filteredRepos = useMemo(() => {
-    return repositories.filter(repo => {
+    const filtered = repositories.filter(repo => {
       const activeProduct = productTabs.find(tab => tab.id === activeTab);
       
       // Handle product filtering with categories
@@ -102,20 +141,34 @@ const RepositoryBrowser = () => {
         matchesProduct = repo.categories.products.includes(activeProduct.category);
       }
       
-      // Handle component and type filtering with categories
+      // Handle component and topic filtering
       const matchesComponent = componentFilter === 'all' ||
         (repo.categories && repo.categories.components.includes(componentFilter));
-      const matchesType = typeFilter === 'all' ||
-        (repo.categories && repo.categories.types.includes(typeFilter));
+      const matchesTopic = topicFilter.length === 0 ||
+        (repo.topics && topicFilter.every(topic => repo.topics.includes(topic)));
       
       const matchesSearch = searchTerm === '' ||
         repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         (repo.description && repo.description.toLowerCase().includes(searchTerm.toLowerCase()));
 
-      return matchesProduct && matchesComponent && matchesType && matchesSearch;
+      return matchesProduct && matchesComponent && matchesTopic && matchesSearch;
     });
+
+    // Sort repositories
+    const sorted = [...filtered].sort((a, b) => {
+      if (sortByStars) {
+        // Sort by stars (descending), then by name
+        const starDiff = (b.stars || 0) - (a.stars || 0);
+        return starDiff !== 0 ? starDiff : a.name.localeCompare(b.name);
+      } else {
+        // Sort alphabetically
+        return a.name.localeCompare(b.name);
+      }
+    });
+
+    return sorted;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, componentFilter, typeFilter, searchTerm]);
+  }, [activeTab, componentFilter, topicFilter, searchTerm, sortByStars]);
 
   // Count repos per product
   const productCounts = useMemo(() => {
@@ -139,7 +192,84 @@ const RepositoryBrowser = () => {
   }, []);
 
   const formatCategoryLabel = (category) => {
-    return category.replace(/-/g, ' ').toUpperCase();
+    return category.replace(/-/g, ' ');
+  };
+
+  // Fetch README content from GitHub (HTML version for better rendering)
+  const fetchReadme = useCallback(async (repoName) => {
+    // Check cache first
+    if (readmeCache[repoName]) {
+      return readmeCache[repoName];
+    }
+
+    setLoadingReadme(repoName);
+    
+    try {
+      const headers = {
+        'Accept': 'application/vnd.github.v3.html' // Get HTML version
+      };
+      
+      if (GITHUB_TOKEN) {
+        headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+      }
+
+      const response = await fetch(
+        `https://api.github.com/repos/DecisionsDev/${repoName}/readme`,
+        { headers }
+      );
+
+      if (response.ok) {
+        const htmlContent = await response.text();
+        
+        // Create a temporary div to parse HTML and get text content
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+        
+        // Get first several elements or up to 2500 characters
+        const elements = tempDiv.querySelectorAll('p, h1, h2, h3, h4, ul, ol, pre, blockquote, table');
+        let preview = '';
+        let charCount = 0;
+        const maxChars = 2500;
+        const maxElements = 15;
+        
+        for (let i = 0; i < Math.min(elements.length, maxElements) && charCount < maxChars; i++) {
+          const element = elements[i];
+          preview += element.outerHTML;
+          charCount += element.textContent.length;
+        }
+        
+        if (charCount >= maxChars || elements.length > maxElements) {
+          preview += '<p style="color: #666; font-style: italic;">...</p>';
+        }
+        
+        setReadmeCache(prev => ({
+          ...prev,
+          [repoName]: preview
+        }));
+        
+        setLoadingReadme(null);
+        return preview;
+      } else {
+        setLoadingReadme(null);
+        return '<p style="color: #666;">README not available</p>';
+      }
+    } catch (error) {
+      console.error('Error fetching README:', error);
+      setLoadingReadme(null);
+      return '<p style="color: #666;">Error loading README</p>';
+    }
+  }, [readmeCache]);
+
+  // Toggle README preview
+  const toggleReadme = async (repoName) => {
+    if (expandedRepo === repoName) {
+      setExpandedRepo(null);
+    } else {
+      setExpandedRepo(repoName);
+      if (!readmeCache[repoName]) {
+        await fetchReadme(repoName);
+      }
+    }
   };
 
   return (
@@ -235,34 +365,116 @@ const RepositoryBrowser = () => {
           </select>
         </div>
 
-        <div>
-          <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: 'bold' }}>
-            Type
-          </label>
-          <select
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
+      </div>
+
+      {/* Topic badges filter */}
+      <div style={{ marginBottom: '2rem' }}>
+        <label style={{ display: 'block', marginBottom: '0.75rem', fontWeight: 'bold', fontSize: '1rem' }}>
+          Topics {topicFilter.length > 0 && <span style={{ color: '#666', fontWeight: 'normal' }}>({topicFilter.length} selected)</span>}
+        </label>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <button
+            onClick={() => setTopicFilter([])}
             style={{
-              width: '100%',
-              padding: '0.5rem',
-              border: '1px solid #ccc',
-              borderRadius: '4px'
+              padding: '0.5rem 1rem',
+              border: topicFilter.length === 0 ? '2px solid #0f62fe' : '1px solid #ccc',
+              backgroundColor: topicFilter.length === 0 ? '#0f62fe' : '#fff',
+              color: topicFilter.length === 0 ? '#fff' : '#333',
+              borderRadius: '20px',
+              fontSize: '0.875rem',
+              fontWeight: topicFilter.length === 0 ? 'bold' : 'normal',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+            onMouseEnter={(e) => {
+              if (topicFilter.length !== 0) {
+                e.currentTarget.style.backgroundColor = '#f4f4f4';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (topicFilter.length !== 0) {
+                e.currentTarget.style.backgroundColor = '#fff';
+              }
             }}
           >
-            <option value="all">All Types</option>
-            {filters.types.map(type => (
-              <option key={type} value={type}>
-                {formatCategoryLabel(type)}
-              </option>
-            ))}
-          </select>
+            All Topics
+          </button>
+          {filters.topics.map(topic => {
+            const isSelected = topicFilter.includes(topic);
+            return (
+              <button
+                key={topic}
+                onClick={() => {
+                  if (isSelected) {
+                    setTopicFilter(topicFilter.filter(t => t !== topic));
+                  } else {
+                    setTopicFilter([...topicFilter, topic]);
+                  }
+                }}
+                style={{
+                  padding: '0.5rem 1rem',
+                  border: isSelected ? '2px solid #24a148' : '1px solid #ccc',
+                  backgroundColor: isSelected ? '#24a148' : '#fff',
+                  color: isSelected ? '#fff' : '#333',
+                  borderRadius: '20px',
+                  fontSize: '0.875rem',
+                  fontWeight: isSelected ? 'bold' : 'normal',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  if (!isSelected) {
+                    e.currentTarget.style.backgroundColor = '#f4f4f4';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isSelected) {
+                    e.currentTarget.style.backgroundColor = '#fff';
+                  }
+                }}
+              >
+                {formatCategoryLabel(topic)}
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Results count */}
-      <p style={{ marginBottom: '1rem', color: '#666' }}>
-        Showing {filteredRepos.length} of {repositories.length} repositories
-      </p>
+      {/* Results count and sort toggle */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+        <p style={{ margin: 0, color: '#666' }}>
+          Showing {filteredRepos.length} of {repositories.length} repositories
+        </p>
+        <button
+          onClick={() => setSortByStars(!sortByStars)}
+          style={{
+            padding: '0.5rem 1rem',
+            border: '1px solid #0f62fe',
+            backgroundColor: sortByStars ? '#0f62fe' : '#fff',
+            color: sortByStars ? '#fff' : '#0f62fe',
+            borderRadius: '4px',
+            fontSize: '0.875rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            transition: 'all 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}
+          onMouseEnter={(e) => {
+            if (!sortByStars) {
+              e.currentTarget.style.backgroundColor = '#f4f4f4';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!sortByStars) {
+              e.currentTarget.style.backgroundColor = '#fff';
+            }
+          }}
+        >
+          {sortByStars ? '⭐ Sorted by Stars' : '🔤 Sorted A-Z'}
+        </button>
+      </div>
 
       {/* Repository list */}
       <div style={{ display: 'grid', gap: '1.5rem' }}>
@@ -274,8 +486,7 @@ const RepositoryBrowser = () => {
               borderRadius: '8px',
               padding: '1.5rem',
               backgroundColor: '#fff',
-              transition: 'box-shadow 0.2s',
-              cursor: 'pointer'
+              transition: 'box-shadow 0.2s'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
@@ -284,16 +495,47 @@ const RepositoryBrowser = () => {
               e.currentTarget.style.boxShadow = 'none';
             }}
           >
-            <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>
-              <a
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: '#0f62fe', textDecoration: 'none' }}
-              >
-                {repo.name}
-              </a>
-            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem', cursor: 'pointer' }}
+                 onClick={() => toggleReadme(repo.name)}>
+              <h3 style={{ margin: 0, flex: 1 }}>
+                <span style={{ color: '#0f62fe' }}>
+                  {repo.name}
+                </span>
+                <span style={{ marginLeft: '0.5rem', fontSize: '0.875rem', color: '#666' }}>
+                  {expandedRepo === repo.name ? '▼' : '▶'}
+                </span>
+              </h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {repo.stars > 0 && (
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    color: '#666',
+                    fontSize: '0.875rem'
+                  }}>
+                    <span style={{ fontSize: '1rem' }}>⭐</span>
+                    <span>{repo.stars}</span>
+                  </div>
+                )}
+                <a
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{
+                    color: '#0f62fe',
+                    textDecoration: 'none',
+                    fontSize: '0.875rem',
+                    padding: '0.25rem 0.5rem',
+                    border: '1px solid #0f62fe',
+                    borderRadius: '4px'
+                  }}
+                >
+                  View on GitHub →
+                </a>
+              </div>
+            </div>
             
             {repo.description && (
               <p style={{ color: '#666', marginBottom: '1rem' }}>
@@ -301,23 +543,91 @@ const RepositoryBrowser = () => {
               </p>
             )}
 
+            {/* README Preview */}
+            {expandedRepo === repo.name && (
+              <div style={{
+                marginTop: '1rem',
+                padding: '1.5rem',
+                backgroundColor: '#fff',
+                border: '1px solid #e0e0e0',
+                borderLeft: '4px solid #0f62fe',
+                borderRadius: '4px',
+                maxHeight: '600px',
+                overflowY: 'auto'
+              }}>
+                {loadingReadme === repo.name ? (
+                  <p style={{ color: '#666', fontStyle: 'italic', margin: 0 }}>Loading README preview...</p>
+                ) : readmeCache[repo.name] ? (
+                  <div>
+                    <div style={{ marginBottom: '1rem' }}>
+                      <h4 style={{
+                        margin: 0,
+                        marginBottom: '1rem',
+                        color: '#333',
+                        fontSize: '1rem',
+                        fontWeight: 'bold',
+                        paddingBottom: '0.5rem',
+                        borderBottom: '2px solid #e0e0e0'
+                      }}>
+                        README Preview
+                      </h4>
+                    </div>
+                    <div
+                      style={{
+                        fontSize: '0.9rem',
+                        lineHeight: '1.6',
+                        color: '#333'
+                      }}
+                      dangerouslySetInnerHTML={{ __html: readmeCache[repo.name] }}
+                    />
+                    <div style={{
+                      marginTop: '1.5rem',
+                      paddingTop: '1rem',
+                      borderTop: '1px solid #e0e0e0'
+                    }}>
+                      <a
+                        href={`${repo.url}#readme`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          color: '#0f62fe',
+                          fontSize: '0.875rem',
+                          fontWeight: 'bold',
+                          textDecoration: 'none'
+                        }}
+                      >
+                        Read full README on GitHub →
+                      </a>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+            )}
+
             {repo.topics.length > 0 && (
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                 {repo.topics.map(topic => {
-                  const isStructured = topic.startsWith('product-') || 
-                                      topic.startsWith('comp-') || 
-                                      topic.startsWith('type-');
+                  // Structured topics (without prefixes)
+                  const structuredTopics = [
+                    // Products
+                    'odm', 'decision-intelligence', 'bai', 'cp4ba',
+                    // Components
+                    'decisioncenter', 'ruleexecutionserver', 'dsi', 'container', 'ai', 'designer', 'analytics', 'events'
+                  ];
+                  const isStructured = structuredTopics.includes(topic);
+                  const isSelected = topicFilter.includes(topic);
                   return (
                     <span
                       key={topic}
                       style={{
                         display: 'inline-block',
                         padding: '0.25rem 0.75rem',
-                        backgroundColor: isStructured ? '#0f62fe' : '#e0e0e0',
-                        color: isStructured ? '#fff' : '#333',
+                        backgroundColor: isSelected ? '#24a148' : (isStructured ? '#0f62fe' : '#e0e0e0'),
+                        color: (isSelected || isStructured) ? '#fff' : '#333',
                         borderRadius: '12px',
                         fontSize: '0.875rem',
-                        fontWeight: isStructured ? 'bold' : 'normal'
+                        fontWeight: (isSelected || isStructured) ? 'bold' : 'normal',
+                        border: isSelected ? '2px solid #1e8e3e' : 'none'
                       }}
                     >
                       {topic}

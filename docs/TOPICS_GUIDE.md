@@ -1,130 +1,222 @@
-# Repository Topics Guide
+# Repository Topics Guide for Contributors
 
-## Adding Structured Topics to DecisionsDev Repositories
+## Overview
 
-This guide explains how to add structured topics to repositories in the DecisionsDev organization.
+This guide helps contributors select appropriate topics for their DecisionsDev repositories. Topics improve discoverability and help organize the DecisionsDev ecosystem.
 
-## Topic Structure
+## 🎯 Quick Start for Contributors
 
-We use three types of structured topics:
+### Step 1: Discover Existing Topics
 
-1. **product-xxx**: Which IBM product (e.g., `product-odm`, `product-ads`, `product-bai`)
-2. **comp-xxx**: Which component (e.g., `comp-decisioncenter`, `comp-ruleexecutionserver`, `comp-dsi`)
-3. **type-xxx**: Repository type (e.g., `type-sample`, `type-tool`, `type-tutorial`, `type-documentation`)
-
-## Example: odm-dc-rest-api-sample
-
-This repository already has the correct structure:
-
-```
-Topics: product-odm, comp-decisioncenter, type-sample, decisioncenter, odm, sample
-```
-
-### How to Add Topics via GitHub CLI
+Before adding topics to your repository, see what topics are already in use:
 
 ```bash
-# Navigate to your repository
-cd odm-dc-rest-api-sample
+# List all topics currently used in DecisionsDev
+node tools/list-all-topics.js
 
-# Add product topic
-gh repo edit DecisionsDev/odm-dc-rest-api-sample --add-topic product-odm
+# See which repositories use each topic
+node tools/list-all-topics.js --verbose
 
-# Add component topic
-gh repo edit DecisionsDev/odm-dc-rest-api-sample --add-topic comp-decisioncenter
-
-# Add type topic
-gh repo edit DecisionsDev/odm-dc-rest-api-sample --add-topic type-sample
+# Filter by pattern
+node tools/list-all-topics.js --pattern "product-*"
 ```
 
-### How to Add Topics via GitHub Web UI
+### Step 2: Select Relevant Topics
+
+**Choose 3-7 topics** that best describe your repository:
+
+1. **Reuse existing topics** whenever possible for consistency
+2. **Select the most relevant** - quality over quantity
+3. **Use lowercase with hyphens** (e.g., `decision-center`, not `DecisionCenter`)
+4. **Avoid redundancy** - don't add both `odm` and `ibm-odm` (use `odm`)
+
+### Step 3: Add Topics to Your Repository
+
+#### Via GitHub Web UI (Easiest)
 
 1. Go to your repository on GitHub
 2. Click the gear icon ⚙️ next to "About" on the right sidebar
-3. In the "Topics" field, add: `product-odm`, `comp-decisioncenter`, `type-sample`
+3. In the "Topics" field, add your selected topics
 4. Click "Save changes"
 
-## Recommended Topics for Common Scenarios
+#### Via GitHub CLI
 
-### ODM Docker/Kubernetes Projects
-```
-product-odm
-comp-docker
-type-deployment
-```
-
-### ODM Decision Center Tools
-```
-product-odm
-comp-decisioncenter
-type-tool
+```bash
+# Add topics one at a time
+gh repo edit DecisionsDev/your-repo-name --add-topic odm
+gh repo edit DecisionsDev/your-repo-name --add-topic docker
+gh repo edit DecisionsDev/your-repo-name --add-topic tutorial
 ```
 
-### ODM Samples
+## 📋 Most Common Topics
+
+Based on current usage across DecisionsDev repositories:
+
+### Products (25+ repos)
+- **`odm`** - IBM Operational Decision Manager (most used)
+- **`ibm`** - IBM products in general
+- **`decision-intelligence`** - IBM Decision Intelligence
+- **`bai`** - Business Automation Insights
+- **`cp4ba`** - Cloud Pak for Business Automation
+
+### Technologies (10+ repos)
+- **`business-rules`** - Business rules engines
+- **`artificial-intelligence`** - AI/ML integrations
+- **`docker`** - Docker containers
+- **`kubernetes`** - Kubernetes orchestration
+- **`java`** - Java applications
+- **`rpa`** - Robotic Process Automation
+
+### Types (5+ repos)
+- **`tutorial`** - Step-by-step guides
+- **`sample`** - Code samples
+- **`integration`** - Integration examples
+- **`tools`** - Utilities and tools
+
+## 🎨 Topic Selection Examples
+
+### Example 1: ODM Docker Tutorial
+**Repository**: A tutorial showing how to deploy ODM with Docker
+
+**Good topics**:
 ```
-product-odm
-comp-ruleexecutionserver
-type-sample
+odm, docker, tutorial, business-rules
 ```
 
-### ADS Projects
+**Why**: Uses existing popular topics, clearly describes content
+
+**Avoid**:
 ```
-product-ads
-comp-runtime
-type-sample
+ibm-odm, odmdev-docker, docker-image, dockerfiles, microservices
+```
+**Why**: Too many topics, includes deprecated prefixes, too specific
+
+### Example 2: Decision Center REST API Sample
+**Repository**: Sample code for Decision Center REST API
+
+**Good topics**:
+```
+odm, decision-center, sample, api, java
 ```
 
-### BAI Projects
+**Why**: Clear, uses existing topics, describes technology stack
+
+**Avoid**:
 ```
-product-bai
-comp-analytics
-type-integration
+decisioncenter, dc, rest-api, ibmodm, operational-decision-manager
+```
+**Why**: Inconsistent naming, abbreviations, redundant
+
+### Example 3: RPA Integration
+**Repository**: Integration between ODM and RPA tools
+
+**Good topics**:
+```
+odm, rpa, integration, automation-anywhere
 ```
 
-## Product Values
+**Why**: Describes both products and purpose
 
-- `product-odm` - IBM Operational Decision Manager
-- `product-ads` - IBM Automation Decision Services
-- `product-bai` - IBM Business Automation Insights
-- `product-cp4ba` - IBM Cloud Pak for Business Automation
+## 🔍 Topic Categories
 
-## Component Values
+### Products
+Use ONE product topic that best describes your repository:
+- `odm` - Operational Decision Manager
+- `decision-intelligence` - Decision Intelligence (formerly ADS)
+- `bai` - Business Automation Insights
+- `cp4ba` - Cloud Pak for Business Automation
 
-### ODM Components
-- `comp-decisioncenter` - Decision Center
-- `comp-ruleexecutionserver` - Rule Execution Server
-- `comp-dsi` - Decision Server Insights
-- `comp-docker` - Docker/Container related
-- `comp-kubernetes` - Kubernetes related
+### Technologies
+Add 2-3 technology topics:
+- `docker`, `kubernetes` - Containers
+- `java`, `react` - Programming languages
+- `kafka` - Messaging
+- `analytics` - Analytics/dashboards
 
-### ADS Components
-- `comp-runtime` - ADS Runtime
-- `comp-designer` - ADS Designer
+### Purpose
+Add 1-2 purpose topics:
+- `tutorial` - Learning resources
+- `sample` - Example code
+- `integration` - Integration examples
+- `tools` - Utilities
 
-### BAI Components
-- `comp-analytics` - Analytics/Dashboards
-- `comp-events` - Event processing
+### Domain
+Add relevant domain topics:
+- `business-rules` - Rules engines
+- `artificial-intelligence` - AI/ML
+- `rpa` - Robotic Process Automation
+- `business-automation` - Business automation
 
-## Type Values
+## ⚠️ Topics to Avoid
 
-- `type-sample` - Code samples and examples
-- `type-tool` - Utilities and tools
-- `type-tutorial` - Step-by-step tutorials
-- `type-documentation` - Documentation repositories
-- `type-deployment` - Deployment configurations
-- `type-integration` - Integration examples
-- `type-library` - Reusable libraries
+### Deprecated Prefixes
+❌ Don't use: `product-*`, `comp-*`, `type-*`, `odmdev-*`
+✅ Use instead: Clean names without prefixes
 
-## Benefits
+### Redundant Topics
+❌ Don't use both: `ibm-odm` AND `odm`
+✅ Use: `odm` (simpler is better)
 
-1. **Better Discovery**: Users can find repositories by product, component, or type
-2. **Automatic Organization**: The website automatically groups repositories
-3. **Filtering**: Users can filter repositories by multiple criteria
-4. **Consistency**: Standardized naming helps maintain organization
+### Inconsistent Naming
+❌ Don't use: `decisioncenter`, `decision-center`, `dc`
+✅ Use: `decision-center` (check existing usage first)
 
-## Migration Plan
+### Too Many Topics
+❌ Don't add: 10+ topics
+✅ Add: 3-7 most relevant topics
 
-We recommend adding these structured topics to all repositories gradually:
+## 🛠️ Topic Management Tools
 
-1. Start with the most popular repositories
-2. Add topics during regular maintenance
-3. Update documentation to reference the new structure
+### For Repository Owners
+
+If you need to clean up or standardize topics:
+
+```bash
+# Remove old topics
+node tools/remove-topics-from-repos.js --topics old-topic --dry-run
+
+# Replace topics (only where they exist)
+node tools/remove-topics-from-repos.js --topics ibm-odm --replace odm --dry-run
+
+# Apply changes (after reviewing dry-run)
+node tools/remove-topics-from-repos.js --topics ibm-odm --replace odm --apply
+```
+
+### For Organization Admins
+
+```bash
+# List all topics with usage counts
+node tools/list-all-topics.js --sort-count
+
+# Find topics matching a pattern
+node tools/list-all-topics.js --pattern "odmdev-*"
+
+# Generate a topics report
+node tools/generate-topics-report.js
+```
+
+## 📊 Benefits of Good Topics
+
+1. **Discoverability** - Users find your repository more easily
+2. **Organization** - Repositories are automatically categorized
+3. **Filtering** - Users can filter by product, technology, or type
+4. **Consistency** - Standardized topics improve the ecosystem
+5. **Analytics** - Better insights into the DecisionsDev portfolio
+
+## 🤝 Getting Help
+
+Not sure which topics to use?
+
+1. **Check similar repositories**: `node tools/list-all-topics.js --verbose`
+2. **Ask in discussions**: Open a GitHub discussion
+3. **Review the report**: `node tools/generate-topics-report.js`
+
+## 📚 Additional Resources
+
+- [README.md](../README.md) - Main documentation
+- [CATEGORIZATION.md](CATEGORIZATION.md) - Categorization system
+- [README-TOPICS-SCRIPT.md](README-TOPICS-SCRIPT.md) - Topics script documentation
+
+---
+
+**Remember**: When in doubt, use existing topics! Consistency is more valuable than creating new topics.

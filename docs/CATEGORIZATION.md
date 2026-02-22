@@ -17,7 +17,7 @@ npm run build:repos
 This script:
 1. Fetches all repositories from the DecisionsDev GitHub organization
 2. Analyzes each repository using the `topic-analyzer.js` logic
-3. Assigns categories based on keywords in the repository name and description
+3. Assigns categories based on keywords in the repository name, description, and existing topics
 4. Generates `src/data/repositories.json` with both original topics and new categories
 
 ### 2. Category Structure
@@ -115,7 +115,7 @@ To add a new category, edit `tools/topic-analyzer.js`:
 ```javascript
 const TOPIC_RULES = {
   products: {
-    'product-newproduct': {
+    'newproduct': {
       keywords: ['newproduct', 'new-product'],
       priority: 10
     }
@@ -129,7 +129,7 @@ const TOPIC_RULES = {
 To improve categorization accuracy, add keywords to existing categories in `topic-analyzer.js`:
 
 ```javascript
-'product-odm': {
+'odm': {
   keywords: ['odm', 'operational decision manager', 'new-keyword'],
   priority: 10
 }

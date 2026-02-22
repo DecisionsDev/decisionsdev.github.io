@@ -4,10 +4,10 @@ This script automatically adds structured topics to repositories in the Decision
 
 ## Overview
 
-The script analyzes repository metadata and suggests appropriate structured topics following the pattern:
-- **product-xxx**: Which IBM product (e.g., `product-odm`, `product-decision-intelligence`)
-- **comp-xxx**: Which component (e.g., `comp-decisioncenter`, `comp-container`, `comp-ai`)
-- **type-xxx**: Repository type (e.g., `type-sample`, `type-tool`, `type-integration`)
+The script analyzes repository metadata (name, description, and existing topics) and suggests appropriate structured topics following these categories:
+- **Products**: Which IBM product (e.g., `odm`, `decision-intelligence`)
+- **Components**: Which component (e.g., `decisioncenter`, `container`, `ai`)
+- **Types**: Repository type (e.g., `sample`, `tool`, `integration`)
 
 ## Prerequisites
 
@@ -74,40 +74,40 @@ node add-topics-to-repos.js --apply
 
 | Topic | Keywords | Description |
 |-------|----------|-------------|
-| `product-odm` | odm, operational decision manager, decision manager, ibm-odm, ibmodm | IBM Operational Decision Manager |
-| `product-decision-intelligence` | ads, automation decision services, ibm-ads, di, decision intelligence | IBM Decision Intelligence (formerly ADS) |
-| `product-bai` | bai, business automation insights, insights | IBM Business Automation Insights |
-| `product-cp4ba` | cp4ba, cloud pak, business automation | IBM Cloud Pak for Business Automation |
+| `odm` | odm, operational decision manager, decision manager, ibm-odm, ibmodm | IBM Operational Decision Manager |
+| `decision-intelligence` | ads, automation decision services, ibm-ads, di, decision intelligence | IBM Decision Intelligence (formerly ADS) |
+| `bai` | bai, business automation insights, insights | IBM Business Automation Insights |
+| `cp4ba` | cp4ba, cloud pak, business automation | IBM Cloud Pak for Business Automation |
 
 ### Components
 
 | Topic | Keywords | Description |
 |-------|----------|-------------|
-| `comp-decisioncenter` | decision center, decisioncenter, dc-, -dc-, decision-center | Decision Center |
-| `comp-ruleexecutionserver` | rule execution server, ruleapp, ruleset, execution, runtime, micro-decision, res- | Rule Execution Server / Runtime |
-| `comp-dsi` | dsi, decision server insights, insights, situation | Decision Server Insights |
-| `comp-container` | docker, dockerfile, container, ondocker, kubernetes, k8s, helm, openshift | Container/Kubernetes deployments |
-| `comp-ai` | ai, mcp, llm, artificial intelligence, machine learning, ml | AI/ML integrations |
-| `comp-designer` | designer, modeling, authoring | Design/authoring tools |
-| `comp-analytics` | analytics, dashboard, kibana, monitoring | Analytics and monitoring |
-| `comp-events` | event, kafka, messaging, stream | Event processing |
+| `decisioncenter` | decision center, decisioncenter, dc-, -dc-, decision-center | Decision Center |
+| `ruleexecutionserver` | rule execution server, ruleapp, ruleset, execution, runtime, micro-decision, res- | Rule Execution Server / Runtime |
+| `dsi` | dsi, decision server insights, insights, situation | Decision Server Insights |
+| `container` | docker, dockerfile, container, ondocker, kubernetes, k8s, helm, openshift | Container/Kubernetes deployments |
+| `ai` | ai, mcp, llm, artificial intelligence, machine learning, ml | AI/ML integrations |
+| `designer` | designer, modeling, authoring | Design/authoring tools |
+| `analytics` | analytics, dashboard, kibana, monitoring | Analytics and monitoring |
+| `events` | event, kafka, messaging, stream | Event processing |
 
 ### Types
 
 | Topic | Keywords | Description |
 |-------|----------|-------------|
-| `type-sample` | sample, example, demo, showcase | Code samples and examples |
-| `type-tool` | tool, utility, cli, extractor, loader, report | Utilities and tools |
-| `type-tutorial` | tutorial, getting-started, gettingstarted, step-by-step | Step-by-step tutorials |
-| `type-documentation` | documentation, docs, guide | Documentation repositories |
-| `type-deployment` | deployment, install, setup, configuration | Deployment configurations |
-| `type-integration` | integration, connector, adapter, bridge, mcp | Integration examples |
-| `type-library` | library, libs, sdk, api | Reusable libraries |
+| `sample` | sample, example, demo, showcase | Code samples and examples |
+| `tool` | tool, utility, cli, extractor, loader, report | Utilities and tools |
+| `tutorial` | tutorial, getting-started, gettingstarted, step-by-step | Step-by-step tutorials |
+| `documentation` | documentation, docs, guide | Documentation repositories |
+| `deployment` | deployment, install, setup, configuration | Deployment configurations |
+| `integration` | integration, connector, adapter, bridge, mcp | Integration examples |
+| `library` | library, libs, sdk, api | Reusable libraries |
 
 ## How It Works
 
 1. **Fetches** all repositories from the DecisionsDev organization
-2. **Analyzes** each repository's name and description
+2. **Analyzes** each repository's name, description, and existing topics
 3. **Matches** keywords against the topic rules
 4. **Calculates** confidence scores based on keyword matches
 5. **Suggests** structured topics (product, component, type)
@@ -125,11 +125,11 @@ $ node add-topics-to-repos.js --dry-run --repo=odm-ondocker
 Description: This repository allows to deploy an IBM Operational Decision Manager topology with Docker Compose
 
 📊 Suggested structured topics:
-   • product-odm (confidence: 6.0, matches: odm, operational decision manager, decision manager)
-   • comp-container (confidence: 1.8, matches: docker, ondocker)
+   • odm (confidence: 6.0, matches: odm, operational decision manager, decision manager)
+   • container (confidence: 1.8, matches: docker, ondocker)
 
 📋 Current topics: java, odm, docker, microservices, docker-compose, ...
-🎯 Proposed topics: product-odm, comp-container, java, odm, docker, microservices, ...
+🎯 Proposed topics: odm, container, java, docker, microservices, ...
 ```
 
 ### Example 2: AI Integration
@@ -141,12 +141,12 @@ $ node add-topics-to-repos.js --dry-run --repo=ibm-decision-intelligence-mcp-ser
 Description: MCP Server for IBM Decision Intelligence to extend AI experience with decisioning capabilities
 
 📊 Suggested structured topics:
-   • product-decision-intelligence (confidence: 3.3, matches: decision intelligence, decision-intelligence)
-   • comp-ai (confidence: 2.3, matches: ai, mcp)
-   • type-integration (confidence: 1.6, matches: mcp)
+   • decision-intelligence (confidence: 3.3, matches: decision intelligence, decision-intelligence)
+   • ai (confidence: 2.3, matches: ai, mcp)
+   • integration (confidence: 1.6, matches: mcp)
 
 📋 Current topics: decision, llm, mcp, rules, ai, ibm, ibm-watson
-🎯 Proposed topics: product-decision-intelligence, comp-ai, type-integration, decision, llm, mcp, ...
+🎯 Proposed topics: decision-intelligence, ai, integration, decision, llm, mcp, rules, ibm, ibm-watson
 ```
 
 ### Example 3: Sample Repository
@@ -158,12 +158,12 @@ $ node add-topics-to-repos.js --dry-run --repo=odm-dc-rest-api-sample
 Description: Web application to demonstrate usage of DC rest API for deployment
 
 📊 Suggested structured topics:
-   • product-odm (confidence: 2.0, matches: odm)
-   • comp-decisioncenter (confidence: 3.2, matches: dc-, -dc-)
-   • type-sample (confidence: 4.5, matches: sample, demo)
+   • odm (confidence: 2.0, matches: odm)
+   • decisioncenter (confidence: 3.2, matches: dc-, -dc-)
+   • sample (confidence: 4.5, matches: sample, demo)
 
 📋 Current topics: decisioncenter, odm, sample
-🎯 Proposed topics: product-odm, comp-decisioncenter, type-sample, decisioncenter, odm, sample
+🎯 Proposed topics: odm, decisioncenter, sample
 ```
 
 ## Features
@@ -206,12 +206,12 @@ If you hit GitHub's rate limit, the script will show an error. Wait a few minute
 
 ## Customization
 
-To modify the topic rules, edit the `TOPIC_RULES` object in `add-topics-to-repos.js`:
+To modify the topic rules, edit the `TOPIC_RULES` object in `topic-analyzer.js`:
 
 ```javascript
 const TOPIC_RULES = {
   products: {
-    'product-new': {
+    'new-product': {
       keywords: ['keyword1', 'keyword2'],
       priority: 10
     }
