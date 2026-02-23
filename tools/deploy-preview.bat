@@ -14,7 +14,7 @@ if not exist "package.json" (
 )
 
 REM Check if preview remote exists
-git remote | findstr /r "^preview$" >nul 2>&1
+git remote | findstr "preview" >nul 2>&1
 if errorlevel 1 (
     echo ❌ Error: 'preview' remote not configured.
     echo.
