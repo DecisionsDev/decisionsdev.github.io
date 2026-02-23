@@ -5,7 +5,7 @@ module.exports = {
     keywords: 'IBM, ODM, Decision Manager, Open Source, Automation, Rules Engine, ADS, Decision Intelligence, Automation Decision Service',
     lang: 'en',
   },
-  pathPrefix: '/',
+  pathPrefix: process.env.PATH_PREFIX || '/',
   plugins: [
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',

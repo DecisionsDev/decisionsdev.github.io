@@ -46,9 +46,10 @@ npm run build:repos
 echo "✅ Repositories updated"
 echo ""
 
-# Build the site
-echo "🔨 Building Gatsby site..."
-npm run build
+# Build the site with path prefix
+echo "🔨 Building Gatsby site with path prefix..."
+export PATH_PREFIX=/decisionsdev-preview
+gatsby build --prefix-paths
 echo "✅ Build complete"
 echo ""
 

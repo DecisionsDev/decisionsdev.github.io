@@ -57,9 +57,10 @@ if errorlevel 1 (
 echo ✅ Repositories updated
 echo.
 
-REM Build the site
-echo 🔨 Building Gatsby site...
-call npm run build
+REM Build the site with path prefix
+echo 🔨 Building Gatsby site with path prefix...
+set PATH_PREFIX=/decisionsdev-preview
+call gatsby build --prefix-paths
 if errorlevel 1 (
     echo ❌ Build failed
     exit /b 1
