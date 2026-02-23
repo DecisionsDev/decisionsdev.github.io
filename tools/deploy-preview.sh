@@ -48,7 +48,7 @@ echo ""
 
 # Build the site with path prefix
 echo "🔨 Building Gatsby site with path prefix..."
-export PATH_PREFIX=/decisionsdev-preview
+export PATH_PREFIX=/odm-l3-services/decisionsdev-preview
 npx gatsby build --prefix-paths
 echo "✅ Build complete"
 echo ""
@@ -61,7 +61,7 @@ echo ""
 echo "✅ Preview deployment complete!"
 echo ""
 echo "🔍 Your preview site will be available at:"
-echo "   https://your-ghe-instance.com/pages/DecisionsDev/decisionsdev-preview/"
+echo "   https://pages.github.ibm.com/odm-l3-services/decisionsdev-preview/"
 echo ""
 echo "⏱️  It may take a few minutes for changes to appear"
 echo "👥 Share this URL with reviewers who have been granted access"
