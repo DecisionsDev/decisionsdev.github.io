@@ -73,7 +73,11 @@
   {
     "name": "dc-lightweight-domain",
     "description": "Enables to use domains in Decision Center without importing the domains content into the BOM",
-    "topics": [],
+    "topics": [
+      "decision-center",
+      "sample",
+      "tools"
+    ],
     "categories": {
       "products": [
         "odm"
@@ -85,7 +89,7 @@
     "url": "https://github.com/DecisionsDev/dc-lightweight-domain",
     "stars": 0,
     "forks": 0,
-    "updated_at": "2022-02-15T15:47:40Z"
+    "updated_at": "2026-02-22T02:14:51Z"
   },
   {
     "name": "dc-query-extension",
@@ -172,19 +176,24 @@
   {
     "name": "decision-microservice",
     "description": "A devops chains that allow to generate a microservice docker image from a Rule Project",
-    "topics": [],
+    "topics": [
+      "integration",
+      "odm",
+      "rule-execution"
+    ],
     "categories": {
       "products": [
         "odm"
       ],
       "components": [
+        "ruleexecutionserver",
         "container"
       ]
     },
     "url": "https://github.com/DecisionsDev/decision-microservice",
     "stars": 1,
     "forks": 4,
-    "updated_at": "2021-12-13T10:12:18Z"
+    "updated_at": "2026-02-22T23:58:15Z"
   },
   {
     "name": "decisions-analytics",
@@ -1048,9 +1057,9 @@
       "components": []
     },
     "url": "https://github.com/DecisionsDev/policy-corpus",
-    "stars": 2,
+    "stars": 3,
     "forks": 4,
-    "updated_at": "2026-02-21T18:37:57Z"
+    "updated_at": "2026-02-22T23:56:29Z"
   },
   {
     "name": "rule-based-llms",
