@@ -54,7 +54,8 @@ echo ""
 
 # Deploy to preview repository
 echo "📤 Deploying to preview repository..."
-npx gh-pages -d public -r preview
+PREVIEW_URL=$(git remote get-url preview)
+npx gh-pages -d public -r "$PREVIEW_URL"
 echo ""
 echo "✅ Preview deployment complete!"
 echo ""

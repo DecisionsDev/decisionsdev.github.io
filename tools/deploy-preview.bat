@@ -69,7 +69,8 @@ echo.
 
 REM Deploy to preview repository
 echo 📤 Deploying to preview repository...
-call npx gh-pages -d public -r preview
+for /f "tokens=*" %%i in ('git remote get-url preview') do set PREVIEW_URL=%%i
+call npx gh-pages -d public -r %PREVIEW_URL%
 if errorlevel 1 (
     echo ❌ Deployment failed
     exit /b 1
