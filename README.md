@@ -82,8 +82,11 @@ npm run serve
 # Clean cache and build artifacts
 npm run clean
 
-# Deploy to GitHub Pages
+# Deploy to GitHub Pages (production)
 npm run deploy
+
+# Deploy to preview repository (for review)
+npm run deploy:preview
 ```
 
 ### Adding New Pages
@@ -256,7 +259,8 @@ The `tools/` directory contains utility scripts for managing the repository:
 - **generate-topics-report.js** - Generate a report of repository topics
 
 ### Deployment
-- **deploy.sh** / **deploy.bat** - Deployment scripts for Linux/Mac and Windows
+- **deploy.sh** / **deploy.bat** - Production deployment scripts for Linux/Mac and Windows
+- **deploy-preview.sh** / **deploy-preview.bat** - Preview deployment scripts for private review
 
 ### Using the Tools
 
@@ -320,7 +324,8 @@ Example output structure:
 The `docs/` directory contains detailed documentation:
 
 - **[SETUP.md](docs/SETUP.md)** - Complete setup guide
-- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Deployment instructions
+- **[DEPLOYMENT.md](docs/DEPLOYMENT.md)** - Production deployment instructions
+- **[PREVIEW-DEPLOYMENT.md](docs/PREVIEW-DEPLOYMENT.md)** - Preview deployment for private review
 - **[CATEGORIZATION.md](docs/CATEGORIZATION.md)** - Repository categorization system
 - **[TOPICS_GUIDE.md](docs/TOPICS_GUIDE.md)** - Guide for repository topics
 - **[README-TOPICS-SCRIPT.md](docs/README-TOPICS-SCRIPT.md)** - Topics script documentation

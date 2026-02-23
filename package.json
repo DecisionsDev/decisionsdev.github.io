@@ -10,7 +10,8 @@
     "build": "npm run build:repos && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "deploy": "gatsby build && gh-pages -d public"
+    "deploy": "gatsby build && gh-pages -d public",
+    "deploy:preview": "gatsby build && gh-pages -d public -r preview"
   },
   "keywords": [
     "gatsby",
