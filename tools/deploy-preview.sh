@@ -46,6 +46,12 @@ npm run build:repos
 echo "✅ Repositories updated"
 echo ""
 
+# Extract videos from repositories
+echo "🎥 Extracting videos from repositories..."
+npm run build:videos
+echo "✅ Videos extracted"
+echo ""
+
 # Build the site with path prefix
 echo "🔨 Building Gatsby site with path prefix..."
 export PATH_PREFIX=/odm-l3-services/decisionsdev-preview

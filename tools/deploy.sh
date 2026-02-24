@@ -35,6 +35,12 @@ npm run build:repos
 echo "✅ Repositories updated"
 echo ""
 
+# Extract videos from repositories
+echo "🎥 Extracting videos from repositories..."
+npm run build:videos
+echo "✅ Videos extracted"
+echo ""
+
 # Build the site
 echo "🔨 Building Gatsby site..."
 npm run build

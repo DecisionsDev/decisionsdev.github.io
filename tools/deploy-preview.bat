@@ -57,6 +57,16 @@ if errorlevel 1 (
 echo ✅ Repositories updated
 echo.
 
+REM Extract videos from repositories
+echo 🎥 Extracting videos from repositories...
+call npm run build:videos
+if errorlevel 1 (
+    echo ❌ Video extraction failed
+    exit /b 1
+)
+echo ✅ Videos extracted
+echo.
+
 REM Build the site with path prefix
 echo 🔨 Building Gatsby site with path prefix...
 set PATH_PREFIX=/odm-l3-services/decisionsdev-preview
