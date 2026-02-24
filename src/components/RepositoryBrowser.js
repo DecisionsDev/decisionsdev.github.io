@@ -621,11 +621,11 @@ const RepositoryBrowser = () => {
                       key={topic}
                       style={{
                         display: 'inline-block',
-                        padding: '0.25rem 0.75rem',
+                        padding: '0.15rem 0.5rem',
                         backgroundColor: isSelected ? '#24a148' : (isStructured ? '#0f62fe' : '#e0e0e0'),
                         color: (isSelected || isStructured) ? '#fff' : '#333',
-                        borderRadius: '12px',
-                        fontSize: '0.875rem',
+                        borderRadius: '10px',
+                        fontSize: '0.75rem',
                         fontWeight: (isSelected || isStructured) ? 'bold' : 'normal',
                         border: isSelected ? '2px solid #1e8e3e' : 'none'
                       }}
