@@ -1,5 +1,25 @@
 [
   {
+    "type": "file",
+    "id": "e7606079dea51d129cb7dd2541c0718326a4e81c",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/decision_assistant_personal_loan_approval.08.22.25.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/decision_assistant_personal_loan_approval.08.22.25.mp4",
+    "fileName": "decision_assistant_personal_loan_approval.08.22.25.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "94cce4657086add1618a08e89ac0c41bffa3362b",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/personal_loan_approval.08.20.25.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/personal_loan_approval.08.20.25.mp4",
+    "fileName": "personal_loan_approval.08.20.25.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
     "type": "youtube",
     "id": "GEgelNg4uaM",
     "url": "https://www.youtube.com/watch?v=GEgelNg4uaM",
@@ -23,23 +43,5 @@
     "embedUrl": "https://github.com/user-attachments/assets/26c038a2-d650-47c5-a09e-4c1da62c578e",
     "repository": "ibm-odm-management-mcp-server",
     "repositoryUrl": "https://github.com/DecisionsDev/ibm-odm-management-mcp-server"
-  },
-  {
-    "type": "youtube",
-    "id": "Z9QIBERy3k8",
-    "url": "https://www.youtube.com/watch?v=Z9QIBERy3k8",
-    "embedUrl": "https://www.youtube.com/embed/Z9QIBERy3k8",
-    "thumbnail": "https://img.youtube.com/vi/Z9QIBERy3k8/maxresdefault.jpg",
-    "repository": "odm-rpa-invoicing-sample",
-    "repositoryUrl": "https://github.com/DecisionsDev/odm-rpa-invoicing-sample"
-  },
-  {
-    "type": "youtube",
-    "id": "IgNfoQQ5Reg",
-    "url": "https://www.youtube.com/watch?v=IgNfoQQ5Reg",
-    "embedUrl": "https://www.youtube.com/embed/IgNfoQQ5Reg",
-    "thumbnail": "https://img.youtube.com/vi/IgNfoQQ5Reg/maxresdefault.jpg",
-    "repository": "sample-blockchain-vehicle-lifecycle",
-    "repositoryUrl": "https://github.com/DecisionsDev/sample-blockchain-vehicle-lifecycle"
   }
 ]

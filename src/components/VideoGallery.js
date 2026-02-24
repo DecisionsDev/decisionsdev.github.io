@@ -13,35 +13,40 @@ const VideoGallery = () => {
     if (video.type === 'youtube') {
       return (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1rem' }}>
-          <iframe 
+          <iframe
             src={video.embedUrl}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title={`Video from ${video.repository}`}
           />
         </div>
       );
-    } else if (video.type === 'github') {
+    } else if (video.type === 'github' || video.type === 'file') {
       return (
         <div style={{ marginBottom: '1rem' }}>
-          <video 
-            controls 
+          <video
+            controls
             style={{ width: '100%', maxHeight: '400px', borderRadius: '4px' }}
             preload="metadata"
           >
             <source src={video.url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          {video.fileName && (
+            <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem' }}>
+              {video.fileName}
+            </p>
+          )}
         </div>
       );
     } else if (video.type === 'vimeo') {
       return (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1rem' }}>
-          <iframe 
+          <iframe
             src={video.embedUrl}
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-            allow="autoplay; fullscreen; picture-in-picture" 
+            allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
             title={`Video from ${video.repository}`}
           />

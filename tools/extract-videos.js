@@ -68,6 +68,81 @@ function fetchReadme(repoName) {
 }
 
 /**
+ * Fetch contents of videos folder from GitHub
+ */
+function fetchVideosFolder(repoName) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: 'api.github.com',
+      path: `/repos/DecisionsDev/${repoName}/contents/videos`,
+      method: 'GET',
+      headers: {
+        'User-Agent': 'DecisionsDev-Video-Extractor',
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    };
+
+    if (GITHUB_TOKEN) {
+      options.headers['Authorization'] = `token ${GITHUB_TOKEN}`;
+    }
+
+    const req = https.request(options, (res) => {
+      let data = '';
+
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      res.on('end', () => {
+        if (res.statusCode === 200) {
+          resolve(JSON.parse(data));
+        } else if (res.statusCode === 404) {
+          resolve(null); // No videos folder
+        } else {
+          reject(new Error(`HTTP ${res.statusCode}: ${data}`));
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    req.end();
+  });
+}
+
+/**
+ * Extract videos from videos folder
+ */
+function extractVideosFromFolder(folderContents, repoName, repoUrl) {
+  const videos = [];
+  
+  if (!folderContents || !Array.isArray(folderContents)) return videos;
+
+  folderContents.forEach(file => {
+    const fileName = file.name.toLowerCase();
+    const fileUrl = file.download_url;
+    
+    // Check for video file extensions
+    if (fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.mov')) {
+      videos.push({
+        type: 'file',
+        id: file.sha,
+        url: fileUrl,
+        embedUrl: fileUrl,
+        fileName: file.name,
+        repository: repoName,
+        repositoryUrl: repoUrl,
+        source: 'videos-folder'
+      });
+    }
+  });
+
+  return videos;
+}
+
+/**
  * Extract video links from README content
  */
 function extractVideos(readmeContent, repoName, repoUrl) {
@@ -170,13 +245,30 @@ async function processRepositories() {
     try {
       process.stdout.write(`\rProcessing ${repo.name}... (${processedCount + 1}/${repositories.length})`);
       
+      // Check README for videos
       const readme = await fetchReadme(repo.name);
+      let readmeVideos = [];
       
       if (readme) {
-        const videos = extractVideos(readme, repo.name, repo.url);
-        if (videos.length > 0) {
-          console.log(`\n  ✓ Found ${videos.length} video(s) in ${repo.name}`);
-          allVideos.push(...videos);
+        readmeVideos = extractVideos(readme, repo.name, repo.url);
+        if (readmeVideos.length > 0) {
+          console.log(`\n  ✓ Found ${readmeVideos.length} video(s) in README of ${repo.name}`);
+          allVideos.push(...readmeVideos);
+        }
+      }
+      
+      // Rate limiting between requests
+      await new Promise(resolve => setTimeout(resolve, 100));
+      
+      // Check videos folder
+      const videosFolder = await fetchVideosFolder(repo.name);
+      let folderVideos = [];
+      
+      if (videosFolder) {
+        folderVideos = extractVideosFromFolder(videosFolder, repo.name, repo.url);
+        if (folderVideos.length > 0) {
+          console.log(`\n  ✓ Found ${folderVideos.length} video file(s) in /videos folder of ${repo.name}`);
+          allVideos.push(...folderVideos);
         }
       }
       
