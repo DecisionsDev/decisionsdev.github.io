@@ -15,6 +15,10 @@
     - title: Cloud Pak for Business Automation (CP4BA)
       path: /repositories#cp4ba
 
+- title: Videos
+  pages:
+    - path: /videos
+
 - title: Resources
   pages:
     - title: GitHub Organization

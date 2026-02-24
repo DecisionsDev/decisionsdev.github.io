@@ -7,6 +7,7 @@
     "dev": "gatsby develop",
     "start": "gatsby develop",
     "build:repos": "node tools/build-repositories.js",
+    "build:videos": "node tools/extract-videos.js",
     "build": "npm run build:repos && gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",

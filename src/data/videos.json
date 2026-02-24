@@ -1,0 +1,29 @@
+[
+  {
+    "type": "youtube",
+    "id": "GEgelNg4uaM",
+    "url": "https://www.youtube.com/watch?v=GEgelNg4uaM",
+    "embedUrl": "https://www.youtube.com/embed/GEgelNg4uaM",
+    "thumbnail": "https://img.youtube.com/vi/GEgelNg4uaM/maxresdefault.jpg",
+    "repository": "ibm-decision-intelligence-mcp-server",
+    "repositoryUrl": "https://github.com/DecisionsDev/ibm-decision-intelligence-mcp-server"
+  },
+  {
+    "type": "youtube",
+    "id": "Z9QIBERy3k8",
+    "url": "https://www.youtube.com/watch?v=Z9QIBERy3k8",
+    "embedUrl": "https://www.youtube.com/embed/Z9QIBERy3k8",
+    "thumbnail": "https://img.youtube.com/vi/Z9QIBERy3k8/maxresdefault.jpg",
+    "repository": "odm-rpa-invoicing-sample",
+    "repositoryUrl": "https://github.com/DecisionsDev/odm-rpa-invoicing-sample"
+  },
+  {
+    "type": "youtube",
+    "id": "IgNfoQQ5Reg",
+    "url": "https://www.youtube.com/watch?v=IgNfoQQ5Reg",
+    "embedUrl": "https://www.youtube.com/embed/IgNfoQQ5Reg",
+    "thumbnail": "https://img.youtube.com/vi/IgNfoQQ5Reg/maxresdefault.jpg",
+    "repository": "sample-blockchain-vehicle-lifecycle",
+    "repositoryUrl": "https://github.com/DecisionsDev/sample-blockchain-vehicle-lifecycle"
+  }
+]
