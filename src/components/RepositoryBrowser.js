@@ -376,7 +376,7 @@ const RepositoryBrowser = () => {
           <button
             onClick={() => setTopicFilter([])}
             style={{
-              padding: '0.35rem 0.75rem',
+              padding: '0.25rem 0.75rem',
               border: topicFilter.length === 0 ? '2px solid #0f62fe' : '1px solid #ccc',
               backgroundColor: topicFilter.length === 0 ? '#0f62fe' : '#fff',
               color: topicFilter.length === 0 ? '#fff' : '#333',
@@ -412,7 +412,7 @@ const RepositoryBrowser = () => {
                   }
                 }}
                 style={{
-                  padding: '0.35rem 0.75rem',
+                  padding: '0.25rem 0.75rem',
                   border: isSelected ? '2px solid #24a148' : '1px solid #ccc',
                   backgroundColor: isSelected ? '#24a148' : '#fff',
                   color: isSelected ? '#fff' : '#333',
@@ -443,7 +443,7 @@ const RepositoryBrowser = () => {
       {/* Results count and sort toggle */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <p style={{ margin: 0, color: '#666' }}>
-          Showing {filteredRepos.length} of {repositories.length} repositories
+          Showing {filteredRepos.length} of {productCounts[activeTab] || 0} repositories
         </p>
         <button
           onClick={() => setSortByStars(!sortByStars)}
