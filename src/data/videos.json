@@ -5,6 +5,7 @@
     "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/decision_assistant_personal_loan_approval.08.22.25.mp4",
     "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/decision_assistant_personal_loan_approval.08.22.25.mp4",
     "fileName": "decision_assistant_personal_loan_approval.08.22.25.mp4",
+    "filePath": "videos/decision_assistant_personal_loan_approval.08.22.25.mp4",
     "repository": "decision-assistant-hub",
     "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
     "source": "videos-folder"
@@ -15,6 +16,73 @@
     "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/personal_loan_approval.08.20.25.mp4",
     "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/personal_loan_approval.08.20.25.mp4",
     "fileName": "personal_loan_approval.08.20.25.mp4",
+    "filePath": "videos/personal_loan_approval.08.20.25.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "e9d91cec414fdf107cf7d029ab7e273fe5a9326b",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_1/tip_1.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_1/tip_1.mp4",
+    "fileName": "tip_1.mp4",
+    "filePath": "videos/syntax_errors_fixes/tip_1/tip_1.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "184b2404b2431371a552660e748a4203014b7e78",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_2/tip_2.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_2/tip_2.mp4",
+    "fileName": "tip_2.mp4",
+    "filePath": "videos/syntax_errors_fixes/tip_2/tip_2.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "bfceb79e8b64ee87cec070abbc8a624beb13f795",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_3/tip_3.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_3/tip_3.mp4",
+    "fileName": "tip_3.mp4",
+    "filePath": "videos/syntax_errors_fixes/tip_3/tip_3.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "72486cc5291110b6f5763e6abf75595de9ad311a",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_4/tip_4.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_4/tip_4.mp4",
+    "fileName": "tip_4.mp4",
+    "filePath": "videos/syntax_errors_fixes/tip_4/tip_4.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "850f163cda2cfb2e150ea171abf1411971a67fe0",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_5/tip_5.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_5/tip_5.mp4",
+    "fileName": "tip_5.mp4",
+    "filePath": "videos/syntax_errors_fixes/tip_5/tip_5.mp4",
+    "repository": "decision-assistant-hub",
+    "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
+    "source": "videos-folder"
+  },
+  {
+    "type": "file",
+    "id": "dbf7de3bc5742463780836c5a1322ef2cb01189f",
+    "url": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_7/tip_7.mp4",
+    "embedUrl": "https://raw.githubusercontent.com/DecisionsDev/decision-assistant-hub/main/videos/syntax_errors_fixes/tip_7/tip_7.mp4",
+    "fileName": "tip_7.mp4",
+    "filePath": "videos/syntax_errors_fixes/tip_7/tip_7.mp4",
     "repository": "decision-assistant-hub",
     "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
     "source": "videos-folder"

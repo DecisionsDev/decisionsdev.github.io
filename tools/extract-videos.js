@@ -68,13 +68,13 @@ function fetchReadme(repoName) {
 }
 
 /**
- * Fetch contents of videos folder from GitHub
+ * Fetch contents of a folder from GitHub
  */
-function fetchVideosFolder(repoName) {
+function fetchFolderContents(repoName, path) {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: 'api.github.com',
-      path: `/repos/DecisionsDev/${repoName}/contents/videos`,
+      path: `/repos/DecisionsDev/${repoName}/contents/${path}`,
       method: 'GET',
       headers: {
         'User-Agent': 'DecisionsDev-Video-Extractor',
@@ -97,7 +97,7 @@ function fetchVideosFolder(repoName) {
         if (res.statusCode === 200) {
           resolve(JSON.parse(data));
         } else if (res.statusCode === 404) {
-          resolve(null); // No videos folder
+          resolve(null); // Folder not found
         } else {
           reject(new Error(`HTTP ${res.statusCode}: ${data}`));
         }
@@ -113,34 +113,49 @@ function fetchVideosFolder(repoName) {
 }
 
 /**
- * Extract videos from videos folder
+ * Recursively fetch all video files from a folder and its subfolders
  */
-function extractVideosFromFolder(folderContents, repoName, repoUrl) {
+async function fetchVideosRecursively(repoName, folderPath, repoUrl) {
   const videos = [];
   
-  if (!folderContents || !Array.isArray(folderContents)) return videos;
-
-  folderContents.forEach(file => {
-    const fileName = file.name.toLowerCase();
-    const fileUrl = file.download_url;
+  try {
+    const contents = await fetchFolderContents(repoName, folderPath);
     
-    // Check for video file extensions
-    if (fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.mov')) {
-      videos.push({
-        type: 'file',
-        id: file.sha,
-        url: fileUrl,
-        embedUrl: fileUrl,
-        fileName: file.name,
-        repository: repoName,
-        repositoryUrl: repoUrl,
-        source: 'videos-folder'
-      });
+    if (!contents || !Array.isArray(contents)) return videos;
+
+    for (const item of contents) {
+      if (item.type === 'file') {
+        const fileName = item.name.toLowerCase();
+        
+        // Check for video file extensions
+        if (fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.mov')) {
+          videos.push({
+            type: 'file',
+            id: item.sha,
+            url: item.download_url,
+            embedUrl: item.download_url,
+            fileName: item.name,
+            filePath: item.path,
+            repository: repoName,
+            repositoryUrl: repoUrl,
+            source: 'videos-folder'
+          });
+        }
+      } else if (item.type === 'dir') {
+        // Recursively search subdirectories
+        await new Promise(resolve => setTimeout(resolve, 100)); // Rate limiting
+        const subVideos = await fetchVideosRecursively(repoName, item.path, repoUrl);
+        videos.push(...subVideos);
+      }
     }
-  });
+  } catch (error) {
+    // Silently handle errors for subfolders
+    console.error(`    Error fetching ${folderPath}:`, error.message);
+  }
 
   return videos;
 }
+
 
 /**
  * Extract video links from README content
@@ -260,16 +275,12 @@ async function processRepositories() {
       // Rate limiting between requests
       await new Promise(resolve => setTimeout(resolve, 100));
       
-      // Check videos folder
-      const videosFolder = await fetchVideosFolder(repo.name);
-      let folderVideos = [];
+      // Check videos folder recursively
+      const folderVideos = await fetchVideosRecursively(repo.name, 'videos', repo.url);
       
-      if (videosFolder) {
-        folderVideos = extractVideosFromFolder(videosFolder, repo.name, repo.url);
-        if (folderVideos.length > 0) {
-          console.log(`\n  ✓ Found ${folderVideos.length} video file(s) in /videos folder of ${repo.name}`);
-          allVideos.push(...folderVideos);
-        }
+      if (folderVideos.length > 0) {
+        console.log(`\n  ✓ Found ${folderVideos.length} video file(s) in /videos folder (including subfolders) of ${repo.name}`);
+        allVideos.push(...folderVideos);
       }
       
       processedCount++;

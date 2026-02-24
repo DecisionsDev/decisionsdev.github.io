@@ -33,9 +33,9 @@ const VideoGallery = () => {
             <source src={video.url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          {video.fileName && (
+          {(video.fileName || video.filePath) && (
             <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem' }}>
-              {video.fileName}
+              {video.filePath || video.fileName}
             </p>
           )}
         </div>
