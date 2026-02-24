@@ -3,7 +3,7 @@ title: Videos
 description: Video tutorials and demonstrations from DecisionsDev projects
 ---
 
-import { Row, Column } from 'gatsby-theme-carbon';
+import VideoGallery from '../components/VideoGallery';
 
 <PageDescription>
 
@@ -13,66 +13,11 @@ Explore video tutorials, demonstrations, and presentations from our open source 
 
 ## Featured Videos
 
-<Row className="video-gallery">
-<Column colMd={4} colLg={4}>
-
-### IBM Decision Intelligence MCP Server
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1rem' }}>
-  <iframe 
-    src="https://www.youtube.com/embed/GEgelNg4uaM" 
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowFullScreen
-  />
-</div>
-
-Learn how to integrate IBM Decision Intelligence with Model Context Protocol (MCP) servers for enhanced AI capabilities.
-
-[View Repository →](https://github.com/DecisionsDev/ibm-decision-intelligence-mcp-server)
-
-</Column>
-<Column colMd={4} colLg={4}>
-
-### ODM RPA Invoicing Sample
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1rem' }}>
-  <iframe 
-    src="https://www.youtube.com/embed/Z9QIBERy3k8" 
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowFullScreen
-  />
-</div>
-
-Discover how to automate invoice processing using IBM ODM with Robotic Process Automation (RPA) integration.
-
-[View Repository →](https://github.com/DecisionsDev/odm-rpa-invoicing-sample)
-
-</Column>
-<Column colMd={4} colLg={4}>
-
-### Blockchain Vehicle Lifecycle
-
-<div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1rem' }}>
-  <iframe 
-    src="https://www.youtube.com/embed/IgNfoQQ5Reg" 
-    style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-    allowFullScreen
-  />
-</div>
-
-See how IBM ODM integrates with blockchain technology to manage vehicle lifecycle events and decisions.
-
-[View Repository →](https://github.com/DecisionsDev/sample-blockchain-vehicle-lifecycle)
-
-</Column>
-</Row>
+<VideoGallery />
 
 ## About These Videos
 
-These videos are embedded from the README files of our open source repositories. They provide:
+These videos are automatically extracted from the README files of our open source repositories. They provide:
 
 - **Hands-on Demonstrations**: See the technologies in action
 - **Implementation Guidance**: Learn how to set up and use the projects
@@ -84,13 +29,17 @@ These videos are embedded from the README files of our open source repositories.
 If you have created video content for any DecisionsDev project:
 
 1. Add the video link to your repository's README file
-2. The video will automatically appear on this page
-3. Share your knowledge with the community!
+2. Run `npm run build:videos` to refresh the video list
+3. The video will automatically appear on this page
+4. Share your knowledge with the community!
+
+### Supported Video Platforms
+
+- **YouTube**: Direct links or embedded videos
+- **Vimeo**: Direct links or embedded videos
+- **GitHub**: User-attachments videos (uploaded directly to GitHub)
 
 ## More Resources
-
-<Row>
-<Column colMd={4} colLg={4}>
 
 ### Documentation
 
@@ -98,23 +47,14 @@ Explore detailed documentation and guides for all our projects.
 
 [Browse Repositories →](/repositories)
 
-</Column>
-<Column colMd={4} colLg={4}>
-
 ### GitHub Organization
 
 Visit our GitHub organization to see all available projects and contribute.
 
 [View on GitHub →](https://github.com/DecisionsDev)
 
-</Column>
-<Column colMd={4} colLg={4}>
-
 ### IBM Community
 
 Join discussions and connect with other developers in the IBM community.
 
 [Join Community →](https://community.ibm.com/)
-
-</Column>
-</Row>

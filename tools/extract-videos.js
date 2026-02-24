@@ -12,6 +12,8 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const VIDEO_PATTERNS = {
   youtube: /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/g,
   vimeo: /(?:https?:\/\/)?(?:www\.)?vimeo\.com\/(\d+)/g,
+  // GitHub user-attachments videos
+  githubVideo: /https:\/\/github\.com\/user-attachments\/assets\/([a-f0-9-]+)/g,
   // Markdown image with video link
   markdownVideo: /!\[([^\]]*)\]\(([^)]+\.(?:mp4|webm|ogg))\)/g,
   // HTML video tags
@@ -98,6 +100,21 @@ function extractVideos(readmeContent, repoName, repoUrl) {
       id: videoId,
       url: `https://vimeo.com/${videoId}`,
       embedUrl: `https://player.vimeo.com/video/${videoId}`,
+      repository: repoName,
+      repositoryUrl: repoUrl
+    });
+  }
+
+  // Extract GitHub user-attachments videos
+  const githubVideoPattern = new RegExp(VIDEO_PATTERNS.githubVideo.source, 'g');
+  while ((match = githubVideoPattern.exec(readmeContent)) !== null) {
+    const videoId = match[1];
+    const videoUrl = match[0];
+    videos.push({
+      type: 'github',
+      id: videoId,
+      url: videoUrl,
+      embedUrl: videoUrl, // GitHub videos can be embedded directly
       repository: repoName,
       repositoryUrl: repoUrl
     });
