@@ -376,12 +376,12 @@ const RepositoryBrowser = () => {
           <button
             onClick={() => setTopicFilter([])}
             style={{
-              padding: '0.5rem 1rem',
+              padding: '0.35rem 0.75rem',
               border: topicFilter.length === 0 ? '2px solid #0f62fe' : '1px solid #ccc',
               backgroundColor: topicFilter.length === 0 ? '#0f62fe' : '#fff',
               color: topicFilter.length === 0 ? '#fff' : '#333',
-              borderRadius: '20px',
-              fontSize: '0.875rem',
+              borderRadius: '16px',
+              fontSize: '0.8rem',
               fontWeight: topicFilter.length === 0 ? 'bold' : 'normal',
               cursor: 'pointer',
               transition: 'all 0.2s'
@@ -412,12 +412,12 @@ const RepositoryBrowser = () => {
                   }
                 }}
                 style={{
-                  padding: '0.5rem 1rem',
+                  padding: '0.35rem 0.75rem',
                   border: isSelected ? '2px solid #24a148' : '1px solid #ccc',
                   backgroundColor: isSelected ? '#24a148' : '#fff',
                   color: isSelected ? '#fff' : '#333',
-                  borderRadius: '20px',
-                  fontSize: '0.875rem',
+                  borderRadius: '16px',
+                  fontSize: '0.8rem',
                   fontWeight: isSelected ? 'bold' : 'normal',
                   cursor: 'pointer',
                   transition: 'all 0.2s'
