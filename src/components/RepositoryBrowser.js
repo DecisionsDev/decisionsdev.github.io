@@ -281,37 +281,39 @@ const RepositoryBrowser = () => {
         marginBottom: '2rem',
         overflowX: 'auto'
       }}>
-        {productTabs.map(tab => (
-          <button
-            key={tab.id}
-            title={tab.label}
-            onClick={() => handleTabChange(tab.id)}
-            style={{
-              padding: '1rem 2rem',
-              border: 'none',
-              backgroundColor: 'transparent',
-              borderBottom: activeTab === tab.id ? '3px solid #0f62fe' : '3px solid transparent',
-              color: activeTab === tab.id ? '#0f62fe' : '#666',
-              fontWeight: activeTab === tab.id ? 'bold' : 'normal',
-              fontSize: '1rem',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              whiteSpace: 'nowrap'
-            }}
-            onMouseEnter={(e) => {
-              if (activeTab !== tab.id) {
-                e.currentTarget.style.color = '#0f62fe';
-              }
-            }}
-            onMouseLeave={(e) => {
-              if (activeTab !== tab.id) {
-                e.currentTarget.style.color = '#666';
-              }
-            }}
-          >
-            {tab.shortLabel} ({productCounts[tab.id] || 0})
-          </button>
-        ))}
+        {productTabs
+          .filter(tab => (productCounts[tab.id] || 0) > 0)
+          .map(tab => (
+            <button
+              key={tab.id}
+              title={tab.label}
+              onClick={() => handleTabChange(tab.id)}
+              style={{
+                padding: '1rem 2rem',
+                border: 'none',
+                backgroundColor: 'transparent',
+                borderBottom: activeTab === tab.id ? '3px solid #0f62fe' : '3px solid transparent',
+                color: activeTab === tab.id ? '#0f62fe' : '#666',
+                fontWeight: activeTab === tab.id ? 'bold' : 'normal',
+                fontSize: '1rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                whiteSpace: 'nowrap'
+              }}
+              onMouseEnter={(e) => {
+                if (activeTab !== tab.id) {
+                  e.currentTarget.style.color = '#0f62fe';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (activeTab !== tab.id) {
+                  e.currentTarget.style.color = '#666';
+                }
+              }}
+            >
+              {tab.shortLabel} ({productCounts[tab.id] || 0})
+            </button>
+          ))}
       </div>
 
       {/* Filters */}
