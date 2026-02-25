@@ -103,13 +103,5 @@
     "embedUrl": "https://github.com/user-attachments/assets/53e9f887-6972-40d9-81c0-51dd4b31b165",
     "repository": "ibm-odm-decision-mcp-server",
     "repositoryUrl": "https://github.com/DecisionsDev/ibm-odm-decision-mcp-server"
-  },
-  {
-    "type": "github",
-    "id": "26c038a2-d650-47c5-a09e-4c1da62c578e",
-    "url": "https://github.com/user-attachments/assets/26c038a2-d650-47c5-a09e-4c1da62c578e",
-    "embedUrl": "https://github.com/user-attachments/assets/26c038a2-d650-47c5-a09e-4c1da62c578e",
-    "repository": "ibm-odm-management-mcp-server",
-    "repositoryUrl": "https://github.com/DecisionsDev/ibm-odm-management-mcp-server"
   }
 ]
