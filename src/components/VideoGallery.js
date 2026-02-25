@@ -12,12 +12,14 @@ const VideoGallery = () => {
   }, {});
 
   const formatRepoName = (repoName) => {
+    const acronyms = ['ibm', 'odm', 'di', 'bai', 'cp4ba'];
     const words = repoName.split('-');
     return words
       .map((word, index) => {
-        // Keep IBM uppercase
-        if (word.toLowerCase() === 'ibm') {
-          return 'IBM';
+        const lowerWord = word.toLowerCase();
+        // Keep acronyms uppercase
+        if (acronyms.includes(lowerWord)) {
+          return word.toUpperCase();
         }
         // Capitalize only the first word
         if (index === 0) {
