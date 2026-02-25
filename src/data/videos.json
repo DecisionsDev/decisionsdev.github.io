@@ -103,5 +103,75 @@
     "embedUrl": "https://github.com/user-attachments/assets/53e9f887-6972-40d9-81c0-51dd4b31b165",
     "repository": "ibm-odm-decision-mcp-server",
     "repositoryUrl": "https://github.com/DecisionsDev/ibm-odm-decision-mcp-server"
+  },
+  {
+    "type": "github",
+    "id": "26c038a2-d650-47c5-a09e-4c1da62c578e",
+    "url": "https://github.com/user-attachments/assets/26c038a2-d650-47c5-a09e-4c1da62c578e",
+    "embedUrl": "https://github.com/user-attachments/assets/26c038a2-d650-47c5-a09e-4c1da62c578e",
+    "repository": "ibm-odm-management-mcp-server",
+    "repositoryUrl": "https://github.com/DecisionsDev/ibm-odm-management-mcp-server"
+  },
+  {
+    "type": "file",
+    "id": "bcllmdemo.gif",
+    "url": "chat-with-businessconsole/images//bcllmdemo.gif",
+    "embedUrl": "chat-with-businessconsole/images//bcllmdemo.gif",
+    "fileName": "bcllmdemo.gif",
+    "filePath": "chat-with-businessconsole/images//bcllmdemo.gif",
+    "repository": "llm-odm",
+    "repositoryUrl": "https://github.com/DecisionsDev/llm-odm",
+    "source": "readme-html-img"
+  },
+  {
+    "type": "file",
+    "id": "demo_presentation.gif",
+    "url": "chat-with-loandecisionservice/images/demo_presentation.gif",
+    "embedUrl": "chat-with-loandecisionservice/images/demo_presentation.gif",
+    "fileName": "demo_presentation.gif",
+    "filePath": "chat-with-loandecisionservice/images/demo_presentation.gif",
+    "repository": "llm-odm",
+    "repositoryUrl": "https://github.com/DecisionsDev/llm-odm",
+    "source": "readme-html-img"
+  },
+  {
+    "type": "file",
+    "id": "data-query.gif",
+    "url": "chat-with-executions-data/images/data-query.gif",
+    "embedUrl": "chat-with-executions-data/images/data-query.gif",
+    "fileName": "data-query.gif",
+    "filePath": "chat-with-executions-data/images/data-query.gif",
+    "repository": "llm-odm",
+    "repositoryUrl": "https://github.com/DecisionsDev/llm-odm",
+    "source": "readme-html-img"
+  },
+  {
+    "type": "youtube",
+    "id": "Z9QIBERy3k8",
+    "url": "https://www.youtube.com/watch?v=Z9QIBERy3k8",
+    "embedUrl": "https://www.youtube.com/embed/Z9QIBERy3k8",
+    "thumbnail": "https://img.youtube.com/vi/Z9QIBERy3k8/maxresdefault.jpg",
+    "repository": "odm-rpa-invoicing-sample",
+    "repositoryUrl": "https://github.com/DecisionsDev/odm-rpa-invoicing-sample"
+  },
+  {
+    "type": "file",
+    "id": "demo_hr.gif",
+    "url": "doc/demo_hr.gif",
+    "embedUrl": "doc/demo_hr.gif",
+    "fileName": "demo_hr.gif",
+    "filePath": "doc/demo_hr.gif",
+    "repository": "rule-based-llms",
+    "repositoryUrl": "https://github.com/DecisionsDev/rule-based-llms",
+    "source": "readme-html-img"
+  },
+  {
+    "type": "youtube",
+    "id": "IgNfoQQ5Reg",
+    "url": "https://www.youtube.com/watch?v=IgNfoQQ5Reg",
+    "embedUrl": "https://www.youtube.com/embed/IgNfoQQ5Reg",
+    "thumbnail": "https://img.youtube.com/vi/IgNfoQQ5Reg/maxresdefault.jpg",
+    "repository": "sample-blockchain-vehicle-lifecycle",
+    "repositoryUrl": "https://github.com/DecisionsDev/sample-blockchain-vehicle-lifecycle"
   }
 ]

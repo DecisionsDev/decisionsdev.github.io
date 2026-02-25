@@ -37,21 +37,6 @@
     "updated_at": "2026-02-22T01:42:59Z"
   },
   {
-    "name": "aegis",
-    "description": "Democratize rule inference systems for academia researchers, students and AI learners.",
-    "topics": [
-      "tutorial"
-    ],
-    "categories": {
-      "products": [],
-      "components": []
-    },
-    "url": "https://github.com/DecisionsDev/aegis",
-    "stars": 0,
-    "forks": 0,
-    "updated_at": "2026-02-22T01:49:50Z"
-  },
-  {
     "name": "dba-gitops-catalog",
     "description": null,
     "topics": [
@@ -576,23 +561,6 @@
     "updated_at": "2026-02-25T00:06:06Z"
   },
   {
-    "name": "langchain-decisiontoolkit",
-    "description": "Librarry to integrate Decision Server Runtime ruleset as a langchain tools",
-    "topics": [],
-    "categories": {
-      "products": [
-        "odm"
-      ],
-      "components": [
-        "ruleexecutionserver"
-      ]
-    },
-    "url": "https://github.com/DecisionsDev/langchain-decisiontoolkit",
-    "stars": 0,
-    "forks": 0,
-    "updated_at": "2025-04-22T15:12:22Z"
-  },
-  {
     "name": "llm-odm",
     "description": "This repository explain how to integrate ODM with Large Language Model",
     "topics": [
@@ -737,30 +705,6 @@
     "stars": 26,
     "forks": 25,
     "updated_at": "2026-02-22T01:39:33Z"
-  },
-  {
-    "name": "odm-dsi-docker",
-    "description": "This repository allows to deploy an IBM Operational Decision Manager Insights Runtime on Docker.",
-    "topics": [
-      "docker",
-      "dsi",
-      "java",
-      "odm"
-    ],
-    "categories": {
-      "products": [
-        "odm"
-      ],
-      "components": [
-        "ruleexecutionserver",
-        "dsi",
-        "container"
-      ]
-    },
-    "url": "https://github.com/DecisionsDev/odm-dsi-docker",
-    "stars": 4,
-    "forks": 0,
-    "updated_at": "2026-02-22T01:27:35Z"
   },
   {
     "name": "odm-dsi-log-analyzer",
