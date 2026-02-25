@@ -12,9 +12,20 @@ const VideoGallery = () => {
   }, {});
 
   const formatRepoName = (repoName) => {
-    return repoName
-      .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    const words = repoName.split('-');
+    return words
+      .map((word, index) => {
+        // Keep IBM uppercase
+        if (word.toLowerCase() === 'ibm') {
+          return 'IBM';
+        }
+        // Capitalize only the first word
+        if (index === 0) {
+          return word.charAt(0).toUpperCase() + word.slice(1);
+        }
+        // All other words lowercase
+        return word.toLowerCase();
+      })
       .join(' ');
   };
 
@@ -284,9 +295,6 @@ const VideoGallery = () => {
               <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '1rem' }}>
                 {formatRepoName(repoName)}
               </h3>
-              <h4 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1rem', fontWeight: '500' }}>
-                {formatVideoTitle(videos[0])}
-              </h4>
               {renderVideo(videos[0], false)}
               <div style={{ marginTop: '1rem' }}>
                 <a
