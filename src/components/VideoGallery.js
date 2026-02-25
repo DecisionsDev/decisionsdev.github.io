@@ -41,7 +41,7 @@ const VideoGallery = () => {
             <img
               src={video.url}
               alt={video.fileName || 'Video'}
-              style={{ width: '100%', maxHeight: '400px', borderRadius: '4px', objectFit: 'contain' }}
+              style={{ width: '100%', maxHeight: '250px', borderRadius: '4px', objectFit: 'contain' }}
             />
             {(video.fileName || video.filePath) && (
               <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem', marginBottom: 0 }}>
@@ -55,7 +55,7 @@ const VideoGallery = () => {
           <div>
             <video
               controls
-              style={{ width: '100%', maxHeight: '400px', borderRadius: '4px' }}
+              style={{ width: '100%', maxHeight: '250px', borderRadius: '4px' }}
               preload="metadata"
             >
               <source src={video.url} type="video/mp4" />
@@ -101,12 +101,14 @@ const VideoGallery = () => {
     };
 
     return (
-      <div style={{ 
-        border: '1px solid #e0e0e0', 
-        borderRadius: '8px', 
-        padding: '1.5rem',
+      <div style={{
+        border: '1px solid #e0e0e0',
+        borderRadius: '8px',
+        padding: '1rem',
         backgroundColor: '#fff',
-        marginBottom: '2rem'
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column'
       }}>
         <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '1.25rem' }}>
           {formatRepoName(repoName)}
@@ -125,21 +127,22 @@ const VideoGallery = () => {
                 onClick={goToPrevious}
                 style={{
                   position: 'absolute',
-                  left: '10px',
+                  left: '5px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
+                  width: '32px',
+                  height: '32px',
                   cursor: 'pointer',
-                  fontSize: '20px',
+                  fontSize: '18px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  zIndex: 10
+                  zIndex: 10,
+                  padding: 0
                 }}
                 aria-label="Previous video"
               >
@@ -149,21 +152,22 @@ const VideoGallery = () => {
                 onClick={goToNext}
                 style={{
                   position: 'absolute',
-                  right: '10px',
+                  right: '5px',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '50%',
-                  width: '40px',
-                  height: '40px',
+                  width: '32px',
+                  height: '32px',
                   cursor: 'pointer',
-                  fontSize: '20px',
+                  fontSize: '18px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  zIndex: 10
+                  zIndex: 10,
+                  padding: 0
                 }}
                 aria-label="Next video"
               >
@@ -236,7 +240,12 @@ const VideoGallery = () => {
   };
 
   return (
-    <div>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+      gap: '1.5rem',
+      marginBottom: '2rem'
+    }}>
       {Object.entries(videosByRepo).map(([repoName, repoVideos]) => (
         <VideoCarousel
           key={repoName}
