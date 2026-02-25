@@ -23,12 +23,9 @@ const VideoGallery = () => {
     const fileName = video.fileName || video.filePath?.split('/').pop() || 'Video';
     const nameWithoutExt = fileName.replace(/\.(mp4|webm|mov|gif)$/i, '');
     
-    // Convert underscores and hyphens to spaces, capitalize words
-    return nameWithoutExt
-      .replace(/[_-]/g, ' ')
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    // Convert underscores and hyphens to spaces, capitalize only first letter
+    const formatted = nameWithoutExt.replace(/[_-]/g, ' ');
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
   };
 
   const renderVideo = (video, showFullPath = false) => {
@@ -159,12 +156,15 @@ const VideoGallery = () => {
             marginBottom: '1rem'
           }}>
             {currentVideos.map((video, index) => (
-              <div key={startIndex + index} style={{ 
-                border: '1px solid #e0e0e0', 
-                borderRadius: '8px', 
+              <div key={startIndex + index} style={{
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px',
                 padding: '1rem',
                 backgroundColor: '#fff'
               }}>
+                <h4 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1rem', fontWeight: '500' }}>
+                  {formatVideoTitle(video)}
+                </h4>
                 {renderVideo(video, videos.length === 1)}
               </div>
             ))}
