@@ -23,23 +23,43 @@ const VideoGallery = () => {
         </div>
       );
     } else if (video.type === 'github' || video.type === 'file') {
-      return (
-        <div style={{ marginBottom: '1rem' }}>
-          <video
-            controls
-            style={{ width: '100%', maxHeight: '400px', borderRadius: '4px' }}
-            preload="metadata"
-          >
-            <source src={video.url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          {(video.fileName || video.filePath) && (
-            <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem' }}>
-              {video.filePath || video.fileName}
-            </p>
-          )}
-        </div>
-      );
+      // Check if it's a GIF file
+      const isGif = video.fileName?.toLowerCase().endsWith('.gif') || video.filePath?.toLowerCase().endsWith('.gif');
+      
+      if (isGif) {
+        return (
+          <div style={{ marginBottom: '1rem' }}>
+            <img
+              src={video.url}
+              alt={video.fileName || 'Video'}
+              style={{ width: '100%', maxHeight: '400px', borderRadius: '4px', objectFit: 'contain' }}
+            />
+            {(video.fileName || video.filePath) && (
+              <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem' }}>
+                {video.filePath || video.fileName}
+              </p>
+            )}
+          </div>
+        );
+      } else {
+        return (
+          <div style={{ marginBottom: '1rem' }}>
+            <video
+              controls
+              style={{ width: '100%', maxHeight: '400px', borderRadius: '4px' }}
+              preload="metadata"
+            >
+              <source src={video.url} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            {(video.fileName || video.filePath) && (
+              <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem' }}>
+                {video.filePath || video.fileName}
+              </p>
+            )}
+          </div>
+        );
+      }
     } else if (video.type === 'vimeo') {
       return (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', marginBottom: '1rem' }}>

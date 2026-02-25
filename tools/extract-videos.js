@@ -15,7 +15,7 @@ const VIDEO_PATTERNS = {
   // GitHub user-attachments videos
   githubVideo: /https:\/\/github\.com\/user-attachments\/assets\/([a-f0-9-]+)/g,
   // Markdown image with video link
-  markdownVideo: /!\[([^\]]*)\]\(([^)]+\.(?:mp4|webm|ogg))\)/g,
+  markdownVideo: /!\[([^\]]*)\]\(([^)]+\.(?:mp4|webm|ogg|gif))\)/g,
   // HTML video tags
   htmlVideo: /<video[^>]*src=["']([^"']+)["'][^>]*>/g,
   // Embedded iframes
@@ -127,8 +127,8 @@ async function fetchVideosRecursively(repoName, folderPath, repoUrl) {
       if (item.type === 'file') {
         const fileName = item.name.toLowerCase();
         
-        // Check for video file extensions
-        if (fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.mov')) {
+        // Check for video file extensions (including animated GIFs)
+        if (fileName.endsWith('.mp4') || fileName.endsWith('.webm') || fileName.endsWith('.mov') || fileName.endsWith('.gif')) {
           videos.push({
             type: 'file',
             id: item.sha,
