@@ -242,6 +242,29 @@ function extractVideos(readmeContent, repoName, repoUrl) {
     }
   }
 
+  // Extract markdown images/videos (including GIFs)
+  const markdownPattern = new RegExp(VIDEO_PATTERNS.markdownVideo.source, 'g');
+  while ((match = markdownPattern.exec(readmeContent)) !== null) {
+    const altText = match[1];
+    const url = match[2];
+    
+    // Check if it's a GIF or video file
+    if (url.match(/\.(gif|mp4|webm|ogg)$/i)) {
+      const fileName = url.split('/').pop();
+      videos.push({
+        type: 'file',
+        id: fileName,
+        url: url,
+        embedUrl: url,
+        fileName: fileName,
+        filePath: url,
+        repository: repoName,
+        repositoryUrl: repoUrl,
+        source: 'readme-markdown'
+      });
+    }
+  }
+
   return videos;
 }
 
