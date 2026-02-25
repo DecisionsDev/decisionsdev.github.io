@@ -265,6 +265,32 @@ function extractVideos(readmeContent, repoName, repoUrl) {
     }
   }
 
+  // Extract HTML img tags with GIF/video sources
+  const imgTagPattern = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+  while ((match = imgTagPattern.exec(readmeContent)) !== null) {
+    const url = match[1];
+    
+    // Check if it's a GIF or video file
+    if (url.match(/\.(gif|mp4|webm|ogg)$/i)) {
+      const fileName = url.split('/').pop().split('?')[0]; // Remove query params
+      
+      // Avoid duplicates
+      if (!videos.find(v => v.url === url)) {
+        videos.push({
+          type: 'file',
+          id: fileName,
+          url: url,
+          embedUrl: url,
+          fileName: fileName,
+          filePath: url,
+          repository: repoName,
+          repositoryUrl: repoUrl,
+          source: 'readme-html-img'
+        });
+      }
+    }
+  }
+
   return videos;
 }
 
