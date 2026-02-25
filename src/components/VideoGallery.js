@@ -56,13 +56,21 @@ const VideoGallery = () => {
       );
     } else if (video.type === 'github' || video.type === 'file') {
       // Check if it's a GIF file
-      const isGif = video.fileName?.toLowerCase().endsWith('.gif') || video.filePath?.toLowerCase().endsWith('.gif');
+      const isGif = video.fileName?.toLowerCase().endsWith('.gif') || video.filePath?.toLowerCase().endsWith('.gif') || video.url?.toLowerCase().endsWith('.gif');
       
       if (isGif) {
+        // Convert relative URLs to full GitHub raw URLs
+        let gifUrl = video.url;
+        if (!gifUrl.startsWith('http')) {
+          // Relative path - construct full GitHub raw URL
+          const repoName = video.repository;
+          gifUrl = `https://raw.githubusercontent.com/DecisionsDev/${repoName}/main/${gifUrl}`;
+        }
+        
         return (
           <div>
             <img
-              src={video.url}
+              src={gifUrl}
               alt={video.fileName || 'Video'}
               style={{ width: '100%', maxHeight: '200px', borderRadius: '4px', objectFit: 'contain', backgroundColor: '#f5f5f5' }}
             />
