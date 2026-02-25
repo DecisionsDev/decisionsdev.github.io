@@ -41,10 +41,10 @@ const VideoGallery = () => {
             <img
               src={video.url}
               alt={video.fileName || 'Video'}
-              style={{ width: '100%', maxHeight: '250px', borderRadius: '4px', objectFit: 'contain' }}
+              style={{ width: '100%', maxHeight: '200px', borderRadius: '4px', objectFit: 'contain', backgroundColor: '#f5f5f5' }}
             />
             {(video.fileName || video.filePath) && (
-              <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem', marginBottom: 0 }}>
+              <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {video.filePath || video.fileName}
               </p>
             )}
@@ -55,14 +55,14 @@ const VideoGallery = () => {
           <div>
             <video
               controls
-              style={{ width: '100%', maxHeight: '250px', borderRadius: '4px' }}
+              style={{ width: '100%', maxHeight: '200px', borderRadius: '4px', backgroundColor: '#000' }}
               preload="metadata"
             >
               <source src={video.url} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             {(video.fileName || video.filePath) && (
-              <p style={{ fontSize: '0.875rem', color: '#666', marginTop: '0.5rem', marginBottom: 0 }}>
+              <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {video.filePath || video.fileName}
               </p>
             )}
@@ -86,138 +86,39 @@ const VideoGallery = () => {
   };
 
   const VideoCarousel = ({ videos, repoName, repoUrl }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentPage, setCurrentPage] = useState(0);
+    const videosPerPage = 3;
+    const totalPages = Math.ceil(videos.length / videosPerPage);
 
     const goToNext = () => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % videos.length);
+      setCurrentPage((prevPage) => (prevPage + 1) % totalPages);
     };
 
     const goToPrevious = () => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + videos.length) % videos.length);
+      setCurrentPage((prevPage) => (prevPage - 1 + totalPages) % totalPages);
     };
 
-    const goToSlide = (index) => {
-      setCurrentIndex(index);
+    const goToPage = (page) => {
+      setCurrentPage(page);
     };
+
+    // Get videos for current page
+    const startIndex = currentPage * videosPerPage;
+    const currentVideos = videos.slice(startIndex, startIndex + videosPerPage);
 
     return (
-      <div style={{
-        border: '1px solid #e0e0e0',
-        borderRadius: '8px',
-        padding: '1rem',
-        backgroundColor: '#fff',
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column'
+      <div style={{ 
+        marginBottom: '2rem'
       }}>
-        <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '1.25rem' }}>
-          {formatRepoName(repoName)}
-        </h3>
-        
-        <div style={{ position: 'relative' }}>
-          {/* Video Display */}
-          <div style={{ marginBottom: '1rem' }}>
-            {renderVideo(videos[currentIndex])}
-          </div>
-
-          {/* Navigation Arrows (only show if more than 1 video) */}
-          {videos.length > 1 && (
-            <>
-              <button
-                onClick={goToPrevious}
-                style={{
-                  position: 'absolute',
-                  left: '5px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '32px',
-                  height: '32px',
-                  cursor: 'pointer',
-                  fontSize: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 10,
-                  padding: 0
-                }}
-                aria-label="Previous video"
-              >
-                ‹
-              </button>
-              <button
-                onClick={goToNext}
-                style={{
-                  position: 'absolute',
-                  right: '5px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '32px',
-                  height: '32px',
-                  cursor: 'pointer',
-                  fontSize: '18px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  zIndex: 10,
-                  padding: 0
-                }}
-                aria-label="Next video"
-              >
-                ›
-              </button>
-            </>
-          )}
-
-          {/* Dots Indicator (only show if more than 1 video) */}
-          {videos.length > 1 && (
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'center', 
-              gap: '8px',
-              marginTop: '1rem'
-            }}>
-              {videos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToSlide(index)}
-                  style={{
-                    width: '10px',
-                    height: '10px',
-                    borderRadius: '50%',
-                    border: 'none',
-                    backgroundColor: currentIndex === index ? '#0f62fe' : '#d0d0d0',
-                    cursor: 'pointer',
-                    padding: 0
-                  }}
-                  aria-label={`Go to video ${index + 1}`}
-                />
-              ))}
-            </div>
-          )}
-
-          {/* Video Counter (only show if more than 1 video) */}
-          {videos.length > 1 && (
-            <p style={{ 
-              textAlign: 'center', 
-              fontSize: '0.875rem', 
-              color: '#666',
-              marginTop: '0.5rem',
-              marginBottom: '1rem'
-            }}>
-              {currentIndex + 1} / {videos.length}
-            </p>
-          )}
-        </div>
-        
-        <div style={{ marginTop: '1rem' }}>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          marginBottom: '1rem'
+        }}>
+          <h3 style={{ margin: 0, fontSize: '1.25rem' }}>
+            {formatRepoName(repoName)}
+          </h3>
           <a
             href={repoUrl}
             target="_blank"
@@ -235,17 +136,111 @@ const VideoGallery = () => {
             View Repository →
           </a>
         </div>
+        
+        <div style={{ position: 'relative' }}>
+          {/* Videos Grid */}
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
+            gap: '1rem',
+            marginBottom: '1rem'
+          }}>
+            {currentVideos.map((video, index) => (
+              <div key={startIndex + index} style={{ 
+                border: '1px solid #e0e0e0', 
+                borderRadius: '8px', 
+                padding: '1rem',
+                backgroundColor: '#fff'
+              }}>
+                {renderVideo(video)}
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation Controls (only show if more than 3 videos) */}
+          {totalPages > 1 && (
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center',
+              gap: '1rem',
+              marginTop: '1rem'
+            }}>
+              <button
+                onClick={goToPrevious}
+                style={{
+                  backgroundColor: '#0f62fe',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '0.5rem 1rem',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                  fontWeight: 'bold'
+                }}
+                aria-label="Previous page"
+              >
+                ← Previous
+              </button>
+
+              {/* Page Dots */}
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToPage(index)}
+                    style={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      border: 'none',
+                      backgroundColor: currentPage === index ? '#0f62fe' : '#d0d0d0',
+                      cursor: 'pointer',
+                      padding: 0
+                    }}
+                    aria-label={`Go to page ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={goToNext}
+                style={{
+                  backgroundColor: '#0f62fe',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '0.5rem 1rem',
+                  cursor: 'pointer',
+                  fontSize: '0.875rem',
+                  fontWeight: 'bold'
+                }}
+                aria-label="Next page"
+              >
+                Next →
+              </button>
+            </div>
+          )}
+
+          {/* Page Counter (only show if more than 3 videos) */}
+          {totalPages > 1 && (
+            <p style={{ 
+              textAlign: 'center', 
+              fontSize: '0.875rem', 
+              color: '#666',
+              marginTop: '0.5rem',
+              marginBottom: 0
+            }}>
+              Page {currentPage + 1} of {totalPages} ({videos.length} video{videos.length !== 1 ? 's' : ''} total)
+            </p>
+          )}
+        </div>
       </div>
     );
   };
 
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '1.5rem',
-      marginBottom: '2rem'
-    }}>
+    <div>
       {Object.entries(videosByRepo).map(([repoName, repoVideos]) => (
         <VideoCarousel
           key={repoName}
