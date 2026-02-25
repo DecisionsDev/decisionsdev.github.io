@@ -2,6 +2,15 @@ import React, { useState } from 'react';
 import videos from '../data/videos.json';
 
 const VideoGallery = () => {
+  const [fullscreenGif, setFullscreenGif] = useState(null);
+
+  const openFullscreen = (gifUrl, title) => {
+    setFullscreenGif({ url: gifUrl, title });
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenGif(null);
+  };
   // Group videos by repository
   const videosByRepo = videos.reduce((acc, video) => {
     if (!acc[video.repository]) {
@@ -68,12 +77,41 @@ const VideoGallery = () => {
         }
         
         return (
-          <div>
+          <div style={{ position: 'relative' }}>
             <img
               src={gifUrl}
               alt={video.fileName || 'Video'}
               style={{ width: '100%', maxHeight: '200px', borderRadius: '4px', objectFit: 'contain', backgroundColor: '#f5f5f5' }}
             />
+            <button
+              onClick={() => openFullscreen(gifUrl, video.fileName || 'Video')}
+              style={{
+                position: 'absolute',
+                top: '8px',
+                right: '8px',
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                padding: '8px 12px',
+                cursor: 'pointer',
+                fontSize: '0.875rem',
+                fontWeight: 'bold',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                transition: 'background-color 0.2s'
+              }}
+              onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'}
+              onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(0, 0, 0, 0.6)'}
+              aria-label="View fullscreen"
+              title="View fullscreen"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1h-4zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5zM.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5z"/>
+              </svg>
+              Fullscreen
+            </button>
           </div>
         );
       } else {
@@ -326,6 +364,84 @@ const VideoGallery = () => {
               </div>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Fullscreen Modal for GIFs */}
+      {fullscreenGif && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.95)',
+            zIndex: 9999,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '2rem'
+          }}
+          onClick={closeFullscreen}
+        >
+          <div style={{
+            position: 'relative',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+          onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              width: '100%',
+              marginBottom: '1rem',
+              color: 'white'
+            }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem' }}>{fullscreenGif.title}</h3>
+              <button
+                onClick={closeFullscreen}
+                style={{
+                  backgroundColor: 'transparent',
+                  color: 'white',
+                  border: '2px solid white',
+                  borderRadius: '4px',
+                  padding: '8px 16px',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  fontWeight: 'bold',
+                  transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = 'white';
+                  e.target.style.color = 'black';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.color = 'white';
+                }}
+                aria-label="Close fullscreen"
+              >
+                ✕ Close
+              </button>
+            </div>
+            <img
+              src={fullscreenGif.url}
+              alt={fullscreenGif.title}
+              style={{
+                maxWidth: '100%',
+                maxHeight: 'calc(90vh - 4rem)',
+                objectFit: 'contain',
+                borderRadius: '4px'
+              }}
+            />
+          </div>
         </div>
       )}
     </div>
