@@ -90,6 +90,7 @@ function fetchRepositories() {
 function processRepositories(repos) {
   return repos
     .filter(repo => !EXCLUDED_REPOS.includes(repo.name)) // Exclude repositories in EXCLUDED_REPOS list
+    .filter(repo => !repo.private) // Only include public repositories
     .map(repo => {
     // Analyze repository to get suggested categories
     const analysis = analyzeRepository(repo);
