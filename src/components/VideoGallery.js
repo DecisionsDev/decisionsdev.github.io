@@ -18,7 +18,20 @@ const VideoGallery = () => {
       .join(' ');
   };
 
-  const renderVideo = (video) => {
+  const formatVideoTitle = (video) => {
+    // Extract filename without extension
+    const fileName = video.fileName || video.filePath?.split('/').pop() || 'Video';
+    const nameWithoutExt = fileName.replace(/\.(mp4|webm|mov|gif)$/i, '');
+    
+    // Convert underscores and hyphens to spaces, capitalize words
+    return nameWithoutExt
+      .replace(/[_-]/g, ' ')
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  const renderVideo = (video, showFullPath = false) => {
     if (video.type === 'youtube') {
       return (
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden' }}>
@@ -44,8 +57,8 @@ const VideoGallery = () => {
               style={{ width: '100%', maxHeight: '200px', borderRadius: '4px', objectFit: 'contain', backgroundColor: '#f5f5f5' }}
             />
             {(video.fileName || video.filePath) && (
-              <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {video.filePath || video.fileName}
+              <p style={{ fontSize: '0.875rem', color: '#333', marginTop: '0.5rem', marginBottom: 0, fontWeight: '500' }}>
+                {showFullPath ? (video.filePath || video.fileName) : formatVideoTitle(video)}
               </p>
             )}
           </div>
@@ -62,8 +75,8 @@ const VideoGallery = () => {
               Your browser does not support the video tag.
             </video>
             {(video.fileName || video.filePath) && (
-              <p style={{ fontSize: '0.75rem', color: '#666', marginTop: '0.5rem', marginBottom: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {video.filePath || video.fileName}
+              <p style={{ fontSize: '0.875rem', color: '#333', marginTop: '0.5rem', marginBottom: 0, fontWeight: '500' }}>
+                {showFullPath ? (video.filePath || video.fileName) : formatVideoTitle(video)}
               </p>
             )}
           </div>
@@ -139,20 +152,20 @@ const VideoGallery = () => {
         
         <div style={{ position: 'relative' }}>
           {/* Videos Grid */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(3, 1fr)', 
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
             gap: '1rem',
             marginBottom: '1rem'
           }}>
             {currentVideos.map((video, index) => (
-              <div key={startIndex + index} style={{ 
-                border: '1px solid #e0e0e0', 
-                borderRadius: '8px', 
+              <div key={startIndex + index} style={{
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px',
                 padding: '1rem',
                 backgroundColor: '#fff'
               }}>
-                {renderVideo(video)}
+                {renderVideo(video, videos.length === 1)}
               </div>
             ))}
           </div>
