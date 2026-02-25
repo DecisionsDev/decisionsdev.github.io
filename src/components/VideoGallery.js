@@ -275,16 +275,19 @@ const VideoGallery = () => {
           marginBottom: '2rem'
         }}>
           {singleVideoRepos.map(({ repoName, videos }) => (
-            <div key={repoName} style={{ 
-              border: '1px solid #e0e0e0', 
-              borderRadius: '8px', 
+            <div key={repoName} style={{
+              border: '1px solid #e0e0e0',
+              borderRadius: '8px',
               padding: '1rem',
               backgroundColor: '#fff'
             }}>
               <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '1rem' }}>
                 {formatRepoName(repoName)}
               </h3>
-              {renderVideo(videos[0], true)}
+              <h4 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1rem', fontWeight: '500' }}>
+                {formatVideoTitle(videos[0])}
+              </h4>
+              {renderVideo(videos[0], false)}
               <div style={{ marginTop: '1rem' }}>
                 <a
                   href={videos[0].repositoryUrl}
