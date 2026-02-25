@@ -152,16 +152,16 @@ const VideoGallery = () => {
         
         <div style={{ position: 'relative' }}>
           {/* Videos Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(3, 1fr)', 
             gap: '1rem',
             marginBottom: '1rem'
           }}>
             {currentVideos.map((video, index) => (
-              <div key={startIndex + index} style={{
-                border: '1px solid #e0e0e0',
-                borderRadius: '8px',
+              <div key={startIndex + index} style={{ 
+                border: '1px solid #e0e0e0', 
+                borderRadius: '8px', 
                 padding: '1rem',
                 backgroundColor: '#fff'
               }}>
@@ -252,16 +252,71 @@ const VideoGallery = () => {
     );
   };
 
+  // Separate single-video repos from multi-video repos
+  const singleVideoRepos = [];
+  const multiVideoRepos = [];
+
+  Object.entries(videosByRepo).forEach(([repoName, repoVideos]) => {
+    if (repoVideos.length === 1) {
+      singleVideoRepos.push({ repoName, videos: repoVideos });
+    } else {
+      multiVideoRepos.push({ repoName, videos: repoVideos });
+    }
+  });
+
   return (
     <div>
-      {Object.entries(videosByRepo).map(([repoName, repoVideos]) => (
+      {/* Multi-video repositories with carousels */}
+      {multiVideoRepos.map(({ repoName, videos }) => (
         <VideoCarousel
           key={repoName}
-          videos={repoVideos}
+          videos={videos}
           repoName={repoName}
-          repoUrl={repoVideos[0].repositoryUrl}
+          repoUrl={videos[0].repositoryUrl}
         />
       ))}
+
+      {/* Single-video repositories in a 3-column grid */}
+      {singleVideoRepos.length > 0 && (
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(3, 1fr)', 
+          gap: '1.5rem',
+          marginBottom: '2rem'
+        }}>
+          {singleVideoRepos.map(({ repoName, videos }) => (
+            <div key={repoName} style={{ 
+              border: '1px solid #e0e0e0', 
+              borderRadius: '8px', 
+              padding: '1rem',
+              backgroundColor: '#fff'
+            }}>
+              <h3 style={{ marginTop: 0, marginBottom: '1rem', fontSize: '1rem' }}>
+                {formatRepoName(repoName)}
+              </h3>
+              {renderVideo(videos[0], true)}
+              <div style={{ marginTop: '1rem' }}>
+                <a
+                  href={videos[0].repositoryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    color: '#0f62fe',
+                    textDecoration: 'none',
+                    fontSize: '0.875rem',
+                    fontWeight: 'bold',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                >
+                  View Repository →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
