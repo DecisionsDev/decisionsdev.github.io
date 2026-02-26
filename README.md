@@ -4,7 +4,7 @@ This repository hosts the GitHub Pages website for the DecisionsDev organization
 
 ## 🌐 Live Site
 
-Once deployed, the site will be available at: `https://decisionsdevelopment.github.io/`
+Once deployed, the site will be available at: `https://decisionsdev.github.io/`
 
 ## 🚀 Quick Start
 
@@ -72,6 +72,9 @@ npm run dev
 
 # Fetch and categorize repositories from GitHub
 npm run build:repos
+
+# Fetch and categorize videos from GitHub
+npm run build:videos
 
 # Build for production (includes build:repos)
 npm run build
@@ -144,20 +147,13 @@ Content in a column
 
 ### Project Categories
 
-Projects are organized into these categories:
-
-- **Deployment Tools** (`/deployment-tools`) - Deployment utilities and automation
-- **REST API & Samples** (`/rest-api`) - API examples and integrations
-- **Docker & Containers** (`/docker`) - Container images and orchestration
-- **Documentation** - Guides and learning resources
-- **Development Tools** - Development utilities
-- **CI/CD & Automation** - Continuous integration resources
+Projects are organised by product in the Decisions family.
 
 ### Adding Projects
 
 To add a new project to a category page:
 
-1. Open the relevant `.mdx` file (e.g., `src/pages/deployment-tools.mdx`)
+1. Open the relevant `.mdx` file (e.g., `src/pages/index.mdx`)
 2. Add a new section with project details
 3. Include links to the GitHub repository
 4. Add relevant tags and descriptions
