@@ -1,0 +1,9 @@
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Blue background -->
+  <rect width="400" height="400" fill="#78a9ff"/>
+  
+  <!-- Product image at 80% scale, centered -->
+  <image href="ai_automation2_light.png" x="40" y="40" width="320" height="320"/>
+</svg>
+
+<!-- Made with Bob -->
