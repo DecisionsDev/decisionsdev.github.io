@@ -34,5 +34,21 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.0"
+  },
+  "overrides": {
+    "immutable": "^5.1.5",
+    "multer": "^2.1.1",
+    "minimatch": "^3.1.4",
+    "serialize-javascript": "^7.0.3",
+    "lodash": "^4.17.21",
+    "flatted": "^3.4.0",
+    "postcss": "^8.4.31",
+    "braces": "^3.0.3",
+    "micromatch": "^4.0.8",
+    "cookie": "^0.7.0",
+    "socket.io-parser": "^4.2.6",
+    "svgo": "^2.8.1",
+    "lodash.template": "^4.5.0",
+    "workbox-build": "^7.0.0"
   }
 }
