@@ -86,14 +86,5 @@
     "repository": "decision-assistant-hub",
     "repositoryUrl": "https://github.com/DecisionsDev/decision-assistant-hub",
     "source": "videos-folder"
-  },
-  {
-    "type": "youtube",
-    "id": "GEgelNg4uaM",
-    "url": "https://www.youtube.com/watch?v=GEgelNg4uaM",
-    "embedUrl": "https://www.youtube.com/embed/GEgelNg4uaM",
-    "thumbnail": "https://img.youtube.com/vi/GEgelNg4uaM/maxresdefault.jpg",
-    "repository": "ibm-decision-intelligence-mcp-server",
-    "repositoryUrl": "https://github.com/DecisionsDev/ibm-decision-intelligence-mcp-server"
   }
 ]
