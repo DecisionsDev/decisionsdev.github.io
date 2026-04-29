@@ -92,9 +92,14 @@ The site will be available at `http://localhost:8000`
 ## Step 5: Build for Production
 
 ```bash
+# Optional but recommended to avoid GitHub API rate limiting
+export GITHUB_TOKEN=your_github_token_here
+
 # Build the site
 npm run build
 ```
+
+On PowerShell, use [`$env:GITHUB_TOKEN="your_github_token_here"`](docs/README-TOPICS-SCRIPT.md:61) instead of [`export`](docs/SETUP.md:95).
 
 This creates optimized production files in the `public/` directory.
 

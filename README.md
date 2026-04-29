@@ -23,11 +23,38 @@ cd DecisionsDev.github.io
 # Install dependencies
 npm install
 
+# Optional: authenticate GitHub API requests to avoid rate limits
+# PowerShell
+$env:GITHUB_TOKEN="your_github_token_here"
+
+# Bash
+export GITHUB_TOKEN="your_github_token_here"
+
 # Start development server
 npm run dev
 ```
 
 The site will be available at `http://localhost:8000`
+
+### GitHub API Authentication
+
+Several repository tooling scripts call the GitHub REST API. Unauthenticated requests are heavily rate-limited and can fail with HTTP 403 responses such as “API rate limit exceeded”.
+
+Set [`GITHUB_TOKEN`](README.md:32) before running [`npm run build`](package.json:11), [`npm run build:repos`](package.json:9), [`npm run build:videos`](package.json:10), or direct tooling like [`tools/build-repositories.js`](tools/build-repositories.js), [`tools/extract-videos.js`](tools/extract-videos.js), and [`tools/generate-topics-report.js`](tools/generate-topics-report.js).
+
+Use a GitHub personal access token with at least public repository read access.
+
+```powershell
+# PowerShell
+$env:GITHUB_TOKEN="your_github_token_here"
+npm run build
+```
+
+```bash
+# Bash
+export GITHUB_TOKEN="your_github_token_here"
+npm run build
+```
 
 ## 📁 Project Structure
 
@@ -76,7 +103,7 @@ npm run build:repos
 # Fetch and categorize videos from GitHub
 npm run build:videos
 
-# Build for production (includes build:repos)
+# Build for production (includes GitHub API-backed data refresh)
 npm run build
 
 # Serve production build locally

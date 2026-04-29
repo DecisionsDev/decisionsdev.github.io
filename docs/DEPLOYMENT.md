@@ -143,13 +143,23 @@ jobs:
 
 ## Updating Repository Data
 
-Before deploying, you may want to update the repository list:
+Before deploying, you may want to update the repository list.
 
-```bash
-node fetch-repos.js > src/data/repositories.json
+Authenticated GitHub API access is recommended because unauthenticated requests can fail with HTTP 403 rate-limit errors.
+
+```powershell
+# PowerShell
+$env:GITHUB_TOKEN="your_github_token_here"
+npm run build:repos
 ```
 
-This fetches the latest repositories from the DecisionsDev organization.
+```bash
+# Bash
+export GITHUB_TOKEN="your_github_token_here"
+npm run build:repos
+```
+
+This runs [`tools/build-repositories.js`](tools/build-repositories.js), which fetches the latest repositories from the DecisionsDev organization and rebuilds [`src/data/repositories.json`](src/data/repositories.json).
 
 ## Support
 
