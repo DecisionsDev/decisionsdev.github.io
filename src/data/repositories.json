@@ -98,8 +98,29 @@
     "updated_at": "2026-02-25T00:00:07Z"
   },
   {
+    "name": "DC-Schema-Initializer-UI",
+    "description": "Tool to initialize a Decision Center database",
+    "topics": [
+      "decision-center",
+      "odm",
+      "tools"
+    ],
+    "categories": {
+      "products": [
+        "odm"
+      ],
+      "components": [
+        "decisioncenter"
+      ]
+    },
+    "url": "https://github.com/DecisionsDev/DC-Schema-Initializer-UI",
+    "stars": 0,
+    "forks": 1,
+    "updated_at": "2026-03-12T11:45:12Z"
+  },
+  {
     "name": "decision-assistant-hub",
-    "description": "Decision Assistant Hub",
+    "description": "The Decision Assistant Hub is the companion repository to the Decision Assistant, an AI-powered assistant that helps users turn business policies into structured decision models like rulesets and DMN diagrams.",
     "topics": [
       "decision-intelligence",
       "tutorial"
@@ -113,7 +134,7 @@
     "url": "https://github.com/DecisionsDev/decision-assistant-hub",
     "stars": 1,
     "forks": 2,
-    "updated_at": "2026-02-24T23:47:46Z"
+    "updated_at": "2026-03-12T12:32:07Z"
   },
   {
     "name": "Decision-Automation-Interchange-Format",
@@ -487,9 +508,9 @@
       ]
     },
     "url": "https://github.com/DecisionsDev/ibm-decision-intelligence-mcp-server",
-    "stars": 5,
-    "forks": 1,
-    "updated_at": "2026-02-22T01:53:39Z"
+    "stars": 6,
+    "forks": 2,
+    "updated_at": "2026-04-15T17:40:05Z"
   },
   {
     "name": "ibm-decision-intelligence-runtime-samples",
@@ -510,6 +531,21 @@
     "stars": 0,
     "forks": 0,
     "updated_at": "2026-02-25T00:02:44Z"
+  },
+  {
+    "name": "ibm-decision-intelligence-samples",
+    "description": null,
+    "topics": [],
+    "categories": {
+      "products": [
+        "decision-intelligence"
+      ],
+      "components": []
+    },
+    "url": "https://github.com/DecisionsDev/ibm-decision-intelligence-samples",
+    "stars": 0,
+    "forks": 0,
+    "updated_at": "2026-03-25T19:01:42Z"
   },
   {
     "name": "ibm-odm-decision-mcp-server",
@@ -533,8 +569,23 @@
     },
     "url": "https://github.com/DecisionsDev/ibm-odm-decision-mcp-server",
     "stars": 6,
-    "forks": 4,
-    "updated_at": "2026-02-25T00:05:25Z"
+    "forks": 7,
+    "updated_at": "2026-03-27T08:41:29Z"
+  },
+  {
+    "name": "ibm-odm-explanations",
+    "description": null,
+    "topics": [],
+    "categories": {
+      "products": [
+        "odm"
+      ],
+      "components": []
+    },
+    "url": "https://github.com/DecisionsDev/ibm-odm-explanations",
+    "stars": 0,
+    "forks": 0,
+    "updated_at": "2026-04-29T14:49:53Z"
   },
   {
     "name": "ibm-odm-management-mcp-server",
@@ -556,9 +607,9 @@
       ]
     },
     "url": "https://github.com/DecisionsDev/ibm-odm-management-mcp-server",
-    "stars": 0,
+    "stars": 1,
     "forks": 1,
-    "updated_at": "2026-02-25T00:06:06Z"
+    "updated_at": "2026-04-14T15:34:04Z"
   },
   {
     "name": "llm-odm",
@@ -621,7 +672,7 @@
     "url": "https://github.com/DecisionsDev/odm-container-samples",
     "stars": 1,
     "forks": 0,
-    "updated_at": "2025-12-03T10:12:33Z"
+    "updated_at": "2026-04-13T08:43:24Z"
   },
   {
     "name": "odm-database-export",
@@ -797,7 +848,7 @@
     },
     "url": "https://github.com/DecisionsDev/odm-for-container-getting-started",
     "stars": 7,
-    "forks": 18,
+    "forks": 19,
     "updated_at": "2026-02-22T01:53:29Z"
   },
   {
@@ -812,8 +863,8 @@
     },
     "url": "https://github.com/DecisionsDev/odm-for-developers",
     "stars": 5,
-    "forks": 5,
-    "updated_at": "2025-06-17T12:11:29Z"
+    "forks": 4,
+    "updated_at": "2026-04-08T06:43:13Z"
   },
   {
     "name": "odm-libs-in-maven",
@@ -871,7 +922,7 @@
     },
     "url": "https://github.com/DecisionsDev/odm-on-cloud-getting-started",
     "stars": 4,
-    "forks": 6,
+    "forks": 5,
     "updated_at": "2026-02-22T01:53:24Z"
   },
   {
@@ -920,9 +971,9 @@
       ]
     },
     "url": "https://github.com/DecisionsDev/odm-ondocker",
-    "stars": 53,
-    "forks": 41,
-    "updated_at": "2026-02-22T01:53:19Z"
+    "stars": 54,
+    "forks": 40,
+    "updated_at": "2026-04-06T00:52:59Z"
   },
   {
     "name": "odm-res-report",
@@ -1079,9 +1130,9 @@
       ]
     },
     "url": "https://github.com/DecisionsDev/rule-based-llms",
-    "stars": 49,
+    "stars": 52,
     "forks": 11,
-    "updated_at": "2026-02-21T18:22:48Z"
+    "updated_at": "2026-04-20T06:13:26Z"
   },
   {
     "name": "ruledesigner",
