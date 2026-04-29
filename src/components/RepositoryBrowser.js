@@ -23,11 +23,35 @@ const RepositoryBrowser = () => {
   const [expandedRepo, setExpandedRepo] = useState(null); // Track which repo is expanded
   const [readmeCache, setReadmeCache] = useState({}); // Cache README content
   const [loadingReadme, setLoadingReadme] = useState(null); // Track loading state
+  const [copiedRepo, setCopiedRepo] = useState(null); // Track which repo link was copied
 
-  // Handle URL hash changes for navigation
+  // Helper function to extract repository name from GitHub URL
+  const getRepoId = (url) => {
+    const match = url.match(/github\.com\/[^/]+\/([^/]+)/);
+    return match ? match[1] : null;
+  };
+
+  // Helper function to copy link to clipboard
+  const copyRepoLink = useCallback((repo, e) => {
+    e.stopPropagation();
+    const repoId = getRepoId(repo.url);
+    if (repoId) {
+      const url = `${window.location.origin}${window.location.pathname}#${repoId}`;
+      navigator.clipboard.writeText(url).then(() => {
+        setCopiedRepo(repoId);
+        setTimeout(() => setCopiedRepo(null), 2000);
+      }).catch(err => {
+        console.error('Failed to copy link:', err);
+      });
+    }
+  }, []);
+
+  // Handle URL hash changes for navigation (both product tabs and repository deep links)
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
+      
+      // Check if hash is a product tab
       if (hash && productTabs.find(tab => tab.id === hash)) {
         setActiveTab(hash);
         // Reset filters when changing tabs
@@ -40,10 +64,30 @@ const RepositoryBrowser = () => {
         setComponentFilter('all');
         setTopicFilter([]);
         setSearchTerm('');
+      } else if (hash) {
+        // Check if hash is a repository ID
+        const repo = repositories.find(r => getRepoId(r.url) === hash);
+        if (repo) {
+          // Expand the repository
+          setExpandedRepo(repo.name);
+          // Scroll to the repository after a short delay to ensure it's rendered
+          setTimeout(() => {
+            const element = document.getElementById(hash);
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // Add a temporary highlight effect
+              element.style.transition = 'background-color 0.5s';
+              element.style.backgroundColor = '#e8f4fd';
+              setTimeout(() => {
+                element.style.backgroundColor = '';
+              }, 2000);
+            }
+          }, 100);
+        }
       }
     };
 
-    // Set initial tab from hash
+    // Set initial tab/repo from hash
     handleHashChange();
 
     // Listen for hash changes
@@ -56,7 +100,7 @@ const RepositoryBrowser = () => {
     const pollInterval = setInterval(() => {
       const currentHash = window.location.hash.replace('#', '');
       const expectedHash = activeTab === 'all' ? '' : activeTab;
-      if (currentHash !== expectedHash) {
+      if (currentHash !== expectedHash && !repositories.find(r => getRepoId(r.url) === currentHash)) {
         handleHashChange();
       }
     }, 100);
@@ -251,24 +295,58 @@ const RepositoryBrowser = () => {
         return preview;
       } else {
         setLoadingReadme(null);
-        return '<p style="color: #666;">README not available</p>';
+        // Return null for failed fetches (403, 404, etc.) so we don't show empty section
+        setReadmeCache(prev => ({
+          ...prev,
+          [repoName]: null
+        }));
+        return null;
       }
     } catch (error) {
       console.error('Error fetching README:', error);
       setLoadingReadme(null);
-      return '<p style="color: #666;">Error loading README</p>';
+      // Return null for errors so we don't show empty section
+      setReadmeCache(prev => ({
+        ...prev,
+        [repoName]: null
+      }));
+      return null;
     }
   }, [readmeCache]);
 
-  // Toggle README preview
+  // Toggle README preview and update URL hash
   const toggleReadme = async (repoName) => {
+    const repo = repositories.find(r => r.name === repoName);
+    const repoId = repo ? getRepoId(repo.url) : null;
+    
     if (expandedRepo === repoName) {
       setExpandedRepo(null);
-    } else {
-      setExpandedRepo(repoName);
-      if (!readmeCache[repoName]) {
-        await fetchReadme(repoName);
+      // Remove hash when collapsing
+      if (window.location.hash) {
+        window.history.pushState(null, '', window.location.pathname);
       }
+    } else {
+      // Try to fetch README if not in cache
+      if (!readmeCache[repoName]) {
+        const readmeContent = await fetchReadme(repoName);
+        // Only expand if README was successfully fetched
+        if (readmeContent !== null) {
+          setExpandedRepo(repoName);
+          // Update hash when expanding
+          if (repoId) {
+            window.history.pushState(null, '', `#${repoId}`);
+          }
+        }
+        // If README fetch failed (null), don't expand
+      } else if (readmeCache[repoName] !== null) {
+        // Only expand if cached README is not null (meaning it was successful)
+        setExpandedRepo(repoName);
+        // Update hash when expanding
+        if (repoId) {
+          window.history.pushState(null, '', `#${repoId}`);
+        }
+      }
+      // If cached README is null, don't expand
     }
   };
 
@@ -480,23 +558,28 @@ const RepositoryBrowser = () => {
 
       {/* Repository list */}
       <div style={{ display: 'grid', gap: '1.5rem' }}>
-        {filteredRepos.map(repo => (
-          <div
-            key={repo.name}
-            style={{
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              padding: '1.5rem',
-              backgroundColor: '#fff',
-              transition: 'box-shadow 0.2s'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = 'none';
-            }}
-          >
+        {filteredRepos.map(repo => {
+          const repoId = getRepoId(repo.url);
+          const isCopied = copiedRepo === repoId;
+          
+          return (
+            <div
+              key={repo.name}
+              id={repoId}
+              style={{
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px',
+                padding: '1.5rem',
+                backgroundColor: '#fff',
+                transition: 'box-shadow 0.2s, background-color 0.5s'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem', cursor: 'pointer' }}
                  onClick={() => toggleReadme(repo.name)}>
               <h3 style={{ margin: 0, flex: 1 }}>
@@ -520,6 +603,33 @@ const RepositoryBrowser = () => {
                     <span>{repo.stars}</span>
                   </div>
                 )}
+                <button
+                  onClick={(e) => copyRepoLink(repo, e)}
+                  title="Copy link to this repository"
+                  style={{
+                    color: isCopied ? '#24a148' : '#0f62fe',
+                    backgroundColor: 'transparent',
+                    border: `1px solid ${isCopied ? '#24a148' : '#0f62fe'}`,
+                    borderRadius: '4px',
+                    padding: '0.25rem 0.5rem',
+                    fontSize: '0.875rem',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isCopied) {
+                      e.currentTarget.style.backgroundColor = '#f4f4f4';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
+                >
+                  {isCopied ? '✓ Copied!' : '📋 Share'}
+                </button>
                 <a
                   href={repo.url}
                   target="_blank"
@@ -639,7 +749,8 @@ const RepositoryBrowser = () => {
               </div>
             )}
           </div>
-        ))}
+        );
+        })}
       </div>
 
       {filteredRepos.length === 0 && (
